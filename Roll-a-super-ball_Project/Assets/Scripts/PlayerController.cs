@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     public float speed;
     public float speedInAir;
     public Text countText;
@@ -19,38 +18,33 @@ public class PlayerController : MonoBehaviour
     private bool canJump;
 
 
-    private void Start()
-    {        
+    private void Start() {
         rb = GetComponent<Rigidbody>();
         count = 0;
         countText.text = "COUNT: " + count.ToString();
     }
 
-    private void FixedUpdate()
-    {
-        if (canJump && isGrounded && Input.GetKey(KeyCode.Space))
-        {
+    private void FixedUpdate() {
+        if (canJump && isGrounded && Input.GetKey(KeyCode.Space)) {
             isGrounded = false;
             rb.AddForce(0f, JumpForce, 0f, ForceMode.Impulse);
         }
 
-            Vector3 forward = Vector3.Normalize(MainCamera.position - transform.position) * -10;
-            Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
-            Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
-            Vector3 moveVertical = Input.GetAxis("Vertical") * forward;
-            Vector3 temp = moveHorizontal + moveVertical;
+        Vector3 forward = Vector3.Normalize(MainCamera.position - transform.position) * -10;
+        Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
+        Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
+        Vector3 moveVertical = Input.GetAxis("Vertical") * forward;
+        Vector3 temp = moveHorizontal + moveVertical;
 
-            Vector3 movement = new Vector3(temp.x, 0f, temp.z);
-            if(isGrounded)
-                rb.AddForce(movement * speed, ForceMode.VelocityChange);
-            else
-                rb.AddForce(movement * speedInAir , ForceMode.VelocityChange);
+        Vector3 movement = new Vector3(temp.x, 0f, temp.z);
+        if (isGrounded)
+            rb.AddForce(movement * speed, ForceMode.VelocityChange);
+        else
+            rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("PickUp")) {
             other.gameObject.SetActive(false);
             count++;
             countText.text = "COUNT: " + count.ToString();
@@ -65,11 +59,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Ground") {
             isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision other) {
+        if (other.gameObject.tag == "Ground") {
+            isGrounded = false;
         }
     }
 
