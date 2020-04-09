@@ -1201,10 +1201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+  speedInAir: 0.05
   countText: {fileID: 108248230}
   winText: {fileID: 1538071975}
   bounceMaterial: {fileID: 2100000, guid: 850762e157a74da40b4a3244c9666bf3, type: 2}
   MainCamera: {fileID: 963194228}
+  JumpForce: 50
 --- !u!135 &1058597629
 SphereCollider:
   m_ObjectHideFlags: 0
