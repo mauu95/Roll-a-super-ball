@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1c6445fac0e17469004e92c0293c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 1
   countText: {fileID: 108248230}
   winText: {fileID: 1538071975}
   bounceMaterial: {fileID: 2100000, guid: 850762e157a74da40b4a3244c9666bf3, type: 2}
