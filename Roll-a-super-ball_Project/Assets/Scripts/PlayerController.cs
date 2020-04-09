@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public int speed;
+    public float speed;
     public Text countText;
     public Text winText;
     public Material bounceMaterial;
+    public Transform MainCamera;
 
     private Rigidbody rb;
     private int count;
@@ -17,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
 
     private void Start()
-    {        rb = GetComponent<Rigidbody>();
+    {        
+        rb = GetComponent<Rigidbody>();
         count = 0;
         countText.text = "COUNT: " + count.ToString();
     }
@@ -30,11 +32,15 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(0f, 50f, 0f, ForceMode.Impulse);
         }
 
+        Vector3 forward = Vector3.Normalize(MainCamera.position - transform.position) * -10;
+        Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
+        Vector3 moveVertical = Input.GetAxis("Vertical") * forward;
 
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        Vector3 temp = moveHorizontal + moveVertical;
+
+        Vector3 movement = new Vector3(temp.x, 0f, temp.z);
 
         rb.AddForce(movement * speed, ForceMode.VelocityChange);
     }
