@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpDash : PowerUp
 {
-    public float DashForce = 5f;
+    public float DashForce = 3f;
 
     private void FixedUpdate()
     {

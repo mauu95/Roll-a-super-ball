@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         count = 0;
         countText.text = "COUNT: " + count.ToString();
+        Screen.lockCursor = true;
     }
 
     private void FixedUpdate()
