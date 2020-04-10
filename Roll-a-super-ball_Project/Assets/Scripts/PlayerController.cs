@@ -8,14 +8,11 @@ public class PlayerController : MonoBehaviour {
     public float speedInAir;
     public Text countText;
     public Text winText;
-    public Material bounceMaterial;
     public Transform MainCamera;
-    public float JumpForce;
+    public bool isGrounded;
 
     private Rigidbody rb;
     private int count;
-    private bool isGrounded;
-    private bool canJump;
 
 
     private void Start() {
@@ -25,11 +22,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (canJump && isGrounded && Input.GetKey(KeyCode.Space)) {
-            isGrounded = false;
-            rb.AddForce(0f, JumpForce, 0f, ForceMode.Impulse);
-        }
-
         Vector3 forward = Vector3.Normalize(MainCamera.position - transform.position) * -10;
         Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
         Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
@@ -52,10 +44,7 @@ public class PlayerController : MonoBehaviour {
             if (count == 4)
                 winText.gameObject.SetActive(true);
 
-
-            MeshRenderer mr = GetComponent<MeshRenderer>();
-            mr.material = bounceMaterial;
-            canJump = true;
+            gameObject.AddComponent<PowerUpJump>();
         }
     }
 
