@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
     public float speed;
     public float speedInAir;
-    public float maxSpeed;
+    public float maxSpeedFromInput;
     public Text countText;
     public Text winText;
     public Transform MainCamera;
@@ -36,12 +36,12 @@ public class PlayerController : MonoBehaviour {
         Vector3 temp = moveHorizontal + moveVertical;
 
         movement = new Vector3(temp.x, 0f, temp.z);
-        if (isGrounded)
-            rb.AddForce(movement * speed, ForceMode.VelocityChange);
-        else
-            rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
-        if (rb.velocity.magnitude > maxSpeed) {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+
+        if (rb.velocity.magnitude < maxSpeedFromInput) {
+            if (isGrounded)
+                rb.AddForce(movement * speed, ForceMode.VelocityChange);
+            else
+                rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
         }
     }
 

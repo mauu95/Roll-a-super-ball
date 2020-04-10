@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.01
   speedInAir: 0.005
-  maxSpeed: 15
+  maxSpeedFromInput: 15
   countText: {fileID: 108248230}
   winText: {fileID: 1538071975}
   MainCamera: {fileID: 963194228}
