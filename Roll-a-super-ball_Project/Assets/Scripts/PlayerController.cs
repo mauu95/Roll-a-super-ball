@@ -21,8 +21,9 @@ public class PlayerController : MonoBehaviour {
         countText.text = "COUNT: " + count.ToString();
     }
 
-    private void FixedUpdate() {
-        Vector3 forward = Vector3.Normalize(MainCamera.position - transform.position) * -10;
+    private void FixedUpdate()
+    {
+        Vector3 forward = GetForwardDirection();
         Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
         Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
         Vector3 moveVertical = Input.GetAxis("Vertical") * forward;
@@ -35,6 +36,11 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
     }
 
+    public Vector3 GetForwardDirection()
+    {
+        return Vector3.Normalize(MainCamera.position - transform.position) * -10;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("PickUp")) {
             other.gameObject.SetActive(false);
@@ -44,7 +50,7 @@ public class PlayerController : MonoBehaviour {
             if (count == 4)
                 winText.gameObject.SetActive(true);
 
-            gameObject.AddComponent<PowerUpJump>();
+            gameObject.AddComponent<PowerUpDash>();
         }
     }
 
