@@ -10,7 +10,13 @@ public class PowerUpDash : PowerUp
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            player.GetComponent<Rigidbody>().AddForce(player.movement * DashForce , ForceMode.Impulse);
+            if(player.movement == Vector3.zero)
+            {
+                Vector3 forward = player.GetForwardDirection() * DashForce;
+                player.GetComponent<Rigidbody>().AddForce(forward.x, 0f, forward.z, ForceMode.Impulse);
+            }
+            else
+                player.GetComponent<Rigidbody>().AddForce(player.movement * DashForce , ForceMode.Impulse);
         }
     }
 }
