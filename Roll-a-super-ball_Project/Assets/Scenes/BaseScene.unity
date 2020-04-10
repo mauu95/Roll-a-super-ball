@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.01
   speedInAir: 0.005
-  maxSpeed: 10
+  maxSpeed: 15
   countText: {fileID: 108248230}
   winText: {fileID: 1538071975}
   MainCamera: {fileID: 963194228}
@@ -1443,6 +1443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d3f8494b5921d4f8d2eb654888f348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 1058597626}
 --- !u!4 &1328150289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6199505499926832304, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
