@@ -9,7 +9,12 @@ public class PlayerController : MonoBehaviour {
     public Text countText;
     public Text winText;
     public Transform MainCamera;
+
+    [HideInInspector]
     public bool isGrounded;
+
+    [HideInInspector]
+    public Vector3 movement;
 
     private Rigidbody rb;
     private int count;
@@ -30,7 +35,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 moveVertical = Input.GetAxis("Vertical") * forward;
         Vector3 temp = moveHorizontal + moveVertical;
 
-        Vector3 movement = new Vector3(temp.x, 0f, temp.z);
+        movement = new Vector3(temp.x, 0f, temp.z);
         if (isGrounded)
             rb.AddForce(movement * speed, ForceMode.VelocityChange);
         else
