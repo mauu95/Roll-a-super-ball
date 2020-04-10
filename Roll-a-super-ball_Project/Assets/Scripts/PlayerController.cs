@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
     public float speed;
     public float speedInAir;
+    public float maxSpeed;
     public Text countText;
     public Text winText;
     public Transform MainCamera;
@@ -27,8 +28,7 @@ public class PlayerController : MonoBehaviour {
         Screen.lockCursor = true;
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         Vector3 forward = GetForwardDirection();
         Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;
         Vector3 moveHorizontal = Input.GetAxis("Horizontal") * lateral;
@@ -40,10 +40,12 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(movement * speed, ForceMode.VelocityChange);
         else
             rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
+        if (rb.velocity.magnitude > maxSpeed) {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
     }
 
-    public Vector3 GetForwardDirection()
-    {
+    public Vector3 GetForwardDirection() {
         return Vector3.Normalize(MainCamera.position - transform.position) * -10;
     }
 
