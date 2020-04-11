@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour {
         countText.text = "COUNT: " + count.ToString();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     private void FixedUpdate() {
@@ -47,8 +46,7 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
         }
 
-        if (rb.velocity.magnitude > maxSpeed)
-        {
+        if (rb.velocity.magnitude > maxSpeed) {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
     }
@@ -65,8 +63,6 @@ public class PlayerController : MonoBehaviour {
 
             if (count == 4)
                 winText.gameObject.SetActive(true);
-
-            gameObject.AddComponent<PowerUpDash>();
         }
     }
 
@@ -80,6 +76,13 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.tag == "Ground") {
             isGrounded = false;
         }
+    }
+
+    public void AlterSpeeds(float value) {
+        speedInAir *= value;
+        maxSpeedFromInput *= value;
+        maxSpeed *= value;
+        speed *= value;
     }
 
 }
