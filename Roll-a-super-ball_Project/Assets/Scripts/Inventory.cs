@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void activatePowerUp(int i)
+    public void ActivatePowerUp(int i)
     {
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
@@ -41,14 +41,9 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            activatePowerUp(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            activatePowerUp(1);
-        }
+        for(int i = 1; i<10 ; i++)
+            if (Input.GetKeyDown(i.ToString()))
+                ActivatePowerUp(i - 1);
     }
 
 }
