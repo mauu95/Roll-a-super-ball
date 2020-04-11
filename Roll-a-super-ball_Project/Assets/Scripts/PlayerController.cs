@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float speedInAir;
     public float maxSpeedFromInput;
+    public float maxSpeed = 30f;
     public Text countText;
     public Text winText;
     public Transform MainCamera;
@@ -44,6 +45,11 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(movement * speed, ForceMode.VelocityChange);
             else
                 rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
+        }
+
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
         }
     }
 
