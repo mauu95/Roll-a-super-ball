@@ -16,8 +16,18 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void Add(PowerUp item)
+    public void Add(PowerUp item, string text)
     {
         GameObject temp = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, transform);
+        temp.GetComponent<InventorySlot>().SetText(text);
+    }
+
+    public void Highlight(int i)
+    {
+        foreach(InventorySlot slot in GetComponentsInChildren<InventorySlot>())
+        {
+            slot.DeHightlight();
+        }
+        GetComponentsInChildren<InventorySlot>()[i].Highlight();
     }
 }

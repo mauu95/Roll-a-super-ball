@@ -18,9 +18,9 @@ public class Inventory : MonoBehaviour
     public void UpdateUI()
     {
         inventoryUI.Clear();
-        foreach(PowerUp item in items)
+        for(int i = 0; i < items.Count; i++)
         {
-            inventoryUI.Add(item);
+            inventoryUI.Add(items[i], (i+1).ToString());
         }
     }
 
@@ -35,6 +35,7 @@ public class Inventory : MonoBehaviour
     public void activatePowerUp(int i)
     {
         DeactivatePowerUp();
+        inventoryUI.Highlight(i);
         items[i].enabled = true;
     }
 
