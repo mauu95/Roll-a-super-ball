@@ -34,6 +34,8 @@ public class Inventory : MonoBehaviour
 
     public void ActivatePowerUp(int i)
     {
+        if (i < 0 || i > items.Count -1 )
+            return;
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
         items[i].enabled = true;
