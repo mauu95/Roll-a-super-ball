@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour {
         countText.text = "COUNT: " + count.ToString();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     private void FixedUpdate() {
@@ -64,8 +63,6 @@ public class PlayerController : MonoBehaviour {
 
             if (count == 4)
                 winText.gameObject.SetActive(true);
-
-            gameObject.AddComponent<PowerUpDash>();
         }
     }
 
