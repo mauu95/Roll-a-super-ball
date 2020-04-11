@@ -11,9 +11,7 @@ public class InventoryUI : MonoBehaviour
     {
         InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
         foreach (InventorySlot slot in slots)
-        {
             Destroy(slot.gameObject);
-        }
     }
 
     public void Add(PowerUp item, string text)
@@ -25,9 +23,8 @@ public class InventoryUI : MonoBehaviour
     public void Highlight(int i)
     {
         foreach(InventorySlot slot in GetComponentsInChildren<InventorySlot>())
-        {
             slot.DeHightlight();
-        }
+
         GetComponentsInChildren<InventorySlot>()[i].Highlight();
     }
 }
