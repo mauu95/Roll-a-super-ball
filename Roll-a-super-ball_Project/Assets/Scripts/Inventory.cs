@@ -24,13 +24,30 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void DeactivatePowerUp()
     {
-        if (other.gameObject.CompareTag("PickUp"))
+        foreach(PowerUp item in items)
         {
-            gameObject.AddComponent<PowerUpDash>();
-            Add(GetComponent<PowerUpDash>());
+            item.enabled = false;
         }
-
     }
+
+    public void activatePowerUp(int i)
+    {
+        DeactivatePowerUp();
+        items[i].enabled = true;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            activatePowerUp(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            activatePowerUp(1);
+        }
+    }
+
 }
