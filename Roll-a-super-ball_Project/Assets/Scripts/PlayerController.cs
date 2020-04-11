@@ -47,8 +47,7 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
         }
 
-        if (rb.velocity.magnitude > maxSpeed)
-        {
+        if (rb.velocity.magnitude > maxSpeed) {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
     }
@@ -80,6 +79,13 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.tag == "Ground") {
             isGrounded = false;
         }
+    }
+
+    public void AlterSpeeds(float value) {
+        speedInAir *= value;
+        maxSpeedFromInput *= value;
+        maxSpeed *= value;
+        speed *= value;
     }
 
 }
