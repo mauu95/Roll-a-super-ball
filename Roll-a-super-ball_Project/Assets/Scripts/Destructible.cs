@@ -8,7 +8,8 @@ public class Destructible : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))  
         {
-            StartCoroutine(DestroyAfterSec(0.1f));
+            if(collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > collision.gameObject.GetComponent<PlayerController>().maxSpeedFromInput - 5)
+                StartCoroutine(DestroyAfterSec(0.1f));
         }
     }
 
