@@ -6,11 +6,10 @@ public class Destructible : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))  
-        {
-            if(collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > collision.gameObject.GetComponent<PlayerController>().maxSpeedFromInput - 5)
-                StartCoroutine(DestroyAfterSec(0.1f));
-        }
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        if (player && player.GetComponent<Rigidbody>().velocity.magnitude > player.maxSpeedFromInput - 5)  
+            StartCoroutine(DestroyAfterSec(0.1f));
     }
 
     IEnumerator DestroyAfterSec(float ttl)
