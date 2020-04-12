@@ -32,8 +32,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void activatePowerUp(int i)
+    public void ActivatePowerUp(int i)
     {
+        if (i < 0 || i > items.Count -1 )
+            return;
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
         items[i].enabled = true;
@@ -41,14 +43,9 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            activatePowerUp(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            activatePowerUp(1);
-        }
+        for(int i = 1; i<10 ; i++)
+            if (Input.GetKeyDown(i.ToString()))
+                ActivatePowerUp(i - 1);
     }
 
 }
