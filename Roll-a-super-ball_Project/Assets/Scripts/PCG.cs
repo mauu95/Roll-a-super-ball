@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PCG : MonoBehaviour {
     public int matrixSize = 100;
@@ -10,6 +11,17 @@ public class PCG : MonoBehaviour {
     int[,] matrix;
     int x = 7;
     int y = 0;
+
+
+    private void Start() {
+        Generate();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene("PCG");
+        }
+    }
 
 
     string facing = "up";
