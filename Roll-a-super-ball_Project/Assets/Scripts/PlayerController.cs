@@ -72,12 +72,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit(Collision other) {
-        if (other.gameObject.tag == "Ground") {
-            isGrounded = false;
-        }
-    }
-
     public void AlterSpeeds(float value) {
         speedInAir *= value;
         maxSpeedFromInput *= value;
