@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PCG : MonoBehaviour {
     public int matrixSize = 100;
+    public int minimumNumberOfPlatforms = 10;
     public GameObject box;
     public GameObject container;
     int[,] matrix;
     int x = 7;
     int y = 0;
+
 
     string facing = "up";
 
@@ -201,9 +203,9 @@ public class PCG : MonoBehaviour {
         matrix = new int[matrixSize, matrixSize];
         x = 7;
         y = 0;
-
         //bool canPutARoom = false, canPutABridge = false;
         string newFacing;
+        List<int[]> centers = new List<int[]>();
         int lastRoomSize = 0;
         string[] availableDirection = { "up", "down", "left", "right" };
         // put first room
@@ -212,21 +214,31 @@ public class PCG : MonoBehaviour {
             if (CanPutARoomOfSize(x, y, size, facing)) {
                 Debug.Log("yes, putting room of size " + size);
                 PutARoomOfSize(x, y, size, facing);
-                //const [newX, newY] = getXY(x, y, facing, newFacing, size)
 
                 //center of the platform
                 x = GetNewX(x, facing, size, false);
                 y = GetNewY(y, facing, size, false);
                 lastRoomSize = size;
-                //x = GetNewX(x, facing, size, true);
-                //y = GetNewY(y, facing, size, true);
                 Debug.Log("Moved to x" + x + " y " + y);
                 // console.log('moved agent to', x, y);
                 break;
             }
         }
-        bool didAMove = false;
+        centers.Add(new int[3] { x, y, lastRoomSize });
+        int currentCenterIndex = 0;
+        int generatedPlatforms = 0;
+        bool didAMove = true;
         do {
+            if (!didAMove) {
+                centers.RemoveAt(currentCenterIndex);
+                currentCenterIndex = (int)Mathf.Floor(Random.value * centers.Count);
+                if (centers.Count == 0) {
+                    Debug.Log("Centers stack finished, ending here");
+                    return;
+                } else {
+                    Debug.Log("Popped from centers stack");
+                }
+            }
             didAMove = false;
             Debug.Log("Starting from position x " + x + " y " + y + " and facing" + facing);
             ShuffleStrings(availableDirection, availableDirection.Length);
@@ -236,18 +248,16 @@ public class PCG : MonoBehaviour {
             }
             Debug.Log(str);
             foreach (string lookingAt in availableDirection) {
-                //newFacing = facing == "up" ? "right" : "up";
-                int tempX = GetNewX(x, lookingAt, lastRoomSize, true);
-                int tempY = GetNewY(y, lookingAt, lastRoomSize, true);
+                int[] center = centers[currentCenterIndex];
+                Debug.Log("USING CENTER:" + center[0] + " - " + center[1] + " room size: " + center[2]);
+                int tempX = GetNewX(center[0], lookingAt, center[2], true);
+                int tempY = GetNewY(center[1], lookingAt, center[2], true);
                 Debug.Log(lookingAt + " Moved to x" + tempX + " y " + tempY);
-                //facing = newFacing;
-
 
                 int[] sizes = LookAhead(tempX, tempY, lookingAt);
                 if (sizes == null) {
                     Debug.Log("Can't put a bridge and a room in this direction: continue! " + lookingAt);
                     continue;
-                    //return;
                 } else {
                     Debug.Log(sizes.ToString() + sizes[0] + sizes[1]);
                 }
@@ -266,85 +276,14 @@ public class PCG : MonoBehaviour {
                 y = GetNewY(y, lookingAt, sizes[1], false);
                 lastRoomSize = sizes[1];
                 didAMove = true;
+                generatedPlatforms++;
+                centers.Add(new int[3] { x, y, lastRoomSize });
+                currentCenterIndex = centers.Count - 1;
                 break;
             }
-
-            if (!didAMove) {
-                Debug.Log("Can't put a bridge and a room in every direction: finishing! ");
-                //break;
-            }
-
-            //for (int size = 7; size >= 3; size -= 2) {
-            //    Debug.Log("Can put room of size " + size + "?");
-            //    if (CanPutARoomOfSize(size, facing)) {
-            //        Debug.Log("yes, putting room of size " + size);
-            //        canPutARoom = true;
-            //        PutARoomOfSize(size, facing);
-            //        newFacing = facing == "up" ? "right" : "up";
-            //        //const [newX, newY] = getXY(x, y, facing, newFacing, size)
-            //        x = GetNewX(x, facing, newFacing, size);
-            //        y = GetNewY(y, facing, newFacing, size);
-            //        Debug.Log("Moved to x" + x + " y " + y);
-            //        facing = newFacing;
-            //        // console.log('moved agent to', x, y);
-            //        break;
-            //    }
-            //}
-            //for (int size = 7; size >= 3; size -= 2) {
-            //    Debug.Log("Can put BRIDGE of size " + size + "?");
-            //    if (CanPutABridgeOfSize(size, facing)) {
-            //        Debug.Log("yes, putting BRIDGE of size " + size);
-            //        // console.log('putting a bridge of size', size, 'in', x, y);
-            //        canPutABridge = true;
-
-            //        Debug.Log("Moved to x" + x + " y " + y);
-            //        break;
-            //    }
-            //}
-        } while (didAMove);
+        } while (didAMove || generatedPlatforms < minimumNumberOfPlatforms);
+        Debug.Log("Can't put a bridge and a room in every direction: finishing! ");
     }
 
 
-    //public void Generate() {
-    //    Debug.Log("Started");
-    //    bool canPutARoom = false, canPutABridge = false;
-    //    string newFacing;
-    //    do {
-    //        Debug.Log("Starting from position x " + x + " y " + y + " and facing" + facing);
-    //        canPutARoom = false;
-    //        canPutABridge = false;
-    //        for (int size = 7; size >= 3; size -= 2) {
-    //            Debug.Log("Can put room of size " + size + "?");
-    //            if (CanPutARoomOfSize(size, facing)) {
-    //                Debug.Log("yes, putting room of size " + size);
-    //                canPutARoom = true;
-    //                PutARoomOfSize(size, facing);
-    //                newFacing = facing == "up" ? "right" : "up";
-    //                //const [newX, newY] = getXY(x, y, facing, newFacing, size)
-    //                x = GetNewX(x, facing, newFacing, size);
-    //                y = GetNewY(y, facing, newFacing, size);
-    //                Debug.Log("Moved to x" + x + " y " + y);
-    //                facing = newFacing;
-    //                // console.log('moved agent to', x, y);
-    //                break;
-    //            }
-    //        }
-    //        for (int size = 7; size >= 3; size -= 2) {
-    //            Debug.Log("Can put BRIDGE of size " + size + "?");
-    //            if (CanPutABridgeOfSize(size, facing)) {
-    //                Debug.Log("yes, putting BRIDGE of size " + size);
-    //                // console.log('putting a bridge of size', size, 'in', x, y);
-    //                canPutABridge = true;
-    //                PutABridgeOfSize(size, facing);
-    //                if (facing == "up" || facing == "down") {
-    //                    y += facing == "up" ? size : -size;
-    //                } else {
-    //                    x += facing == "right" ? size : -size;
-    //                }
-    //                Debug.Log("Moved to x" + x + " y " + y);
-    //                break;
-    //            }
-    //        }
-    //    } while (canPutARoom || canPutABridge);
-    //}
 }

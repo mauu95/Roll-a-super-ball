@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matrixSize: 100
+  minimumNumberOfPlatforms: 30
   box: {fileID: 1856362202}
   container: {fileID: 1111649661}
 --- !u!4 &201262247
