@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PCG : MonoBehaviour {
+public class GridBasedPCG : MonoBehaviour {
     public int matrixSize = 100;
     public int minimumNumberOfPlatforms = 10;
     public GameObject box;
@@ -19,7 +19,7 @@ public class PCG : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene("PCG");
+            SceneManager.LoadScene("GridBasedPCG");
         }
     }
 
