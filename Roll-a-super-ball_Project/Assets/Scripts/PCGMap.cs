@@ -9,8 +9,10 @@ public class PCGMap : MonoBehaviour
     public int seed;
     public GameObject platformPrefab;
     public GameObject BrigdePrefab;
+    public GameObject carloPrefab;
     public int Dimension = 20;
     public int nFloor = 1;
+    public int nCarli;
 
     private IteratorSeed iseed;
     private List<Vector3> platforms;
@@ -44,6 +46,14 @@ public class PCGMap : MonoBehaviour
             CreateFloor();
         }
 
+        //Place Carli
+        for(int i = 0; i < nCarli; i++)
+        {
+            Vector3 platPos = platforms[iseed.Next(platforms.Count)];
+            Vector3 carloPos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
+            Create(carloPrefab, carloPos, Quaternion.identity);
+        }
+
     }
 
     private void CreateFloor()
@@ -51,15 +61,6 @@ public class PCGMap : MonoBehaviour
 
         for (int i = 0; i < Dimension; i++)
             PerformAction();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            PerformAction();
-
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(0);
     }
 
     private void PerformAction()
