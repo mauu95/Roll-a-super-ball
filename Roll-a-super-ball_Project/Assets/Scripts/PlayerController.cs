@@ -48,6 +48,12 @@ public class PlayerController : MonoBehaviour {
             isGrounded = true;
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+            isGrounded = true;
+    }
+
     void OnCollisionExit(Collision other) {
         if (other.gameObject.tag == "Ground") 
             isGrounded = false;
