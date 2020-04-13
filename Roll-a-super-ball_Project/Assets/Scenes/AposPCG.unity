@@ -1279,8 +1279,10 @@ MonoBehaviour:
     type: 3}
   carloPrefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
     type: 3}
+  portalPrefab: {fileID: 3296860610100036561, guid: 34090761d69f04591b449ba1caabc21a,
+    type: 3}
   Dimension: 20
-  nFloor: 1
+  nFloor: 2
   nCarli: 4
 --- !u!4 &1473236727
 Transform:
