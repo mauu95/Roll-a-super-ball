@@ -22,6 +22,12 @@ public class PickablePowerUp : MonoBehaviour
                 other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpJump>());
                 other.gameObject.GetComponent<PowerUpJump>().enabled = false;
             }
+            else if (type == "magnet")
+            {
+                other.gameObject.AddComponent<PowerUpMagnet>();
+                other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpMagnet>());
+                other.gameObject.GetComponent<PowerUpMagnet>().enabled = false;
+            }
 
             Destroy(gameObject);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpMagnet : PowerUp {
-    public float speed = 1;
+    public float speed = 10;
     public float range = 10;
 
     private void Update() {
