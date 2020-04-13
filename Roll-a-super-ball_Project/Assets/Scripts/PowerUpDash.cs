@@ -33,6 +33,6 @@ public class PowerUpDash : PowerUp
         player.GetComponent<Rigidbody>().AddForce(direction * DashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
 
-        p.SetVelocity(Vector3.zero);
+        p.SetVelocity(p.GetComponent<Rigidbody>().velocity * 0.8f);
     }
 }
