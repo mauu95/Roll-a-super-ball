@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpJump : PowerUp
 {
-    public float JumpForce = 25f;
+    public float JumpForce = 50f;
 
     private void FixedUpdate()
     {
