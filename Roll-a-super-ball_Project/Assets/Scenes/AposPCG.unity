@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669258336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -869,12 +869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1c6445fac0e17469004e92c0293c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
-  speedInAir: 0.005
-  maxSpeedFromInput: 15
+  speed: 5
+  controlInAir: 0.5
   maxSpeed: 30
-  countText: {fileID: 108248230}
-  winText: {fileID: 1538071975}
   MainCamera: {fileID: 963194228}
   isGrounded: 1
   movement: {x: 0, y: 0, z: 0}
@@ -946,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058597626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -964,9 +961,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4dad51c7ba001c4d914552b8bc6d497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  space: 9
-  items: []
+  powerUps: []
+  pickUps: 0
   inventoryUI: {fileID: 1387243498}
+  countText: {fileID: 108248230}
+  winText: {fileID: 1538071975}
 --- !u!1001 &1080676068
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour {
     [Range(0f, 1f)]
     public float controlInAir;
     public float maxSpeed = 30f;
-    public Text countText;
-    public Text winText;
     public Transform MainCamera;
 
     [HideInInspector]
@@ -19,13 +17,10 @@ public class PlayerController : MonoBehaviour {
     public Vector3 movement;
 
     private Rigidbody rb;
-    private int count;
 
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        count = 0;
-        countText.text = "COUNT: " + count.ToString();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -48,17 +43,6 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 GetForwardDirection() {
         return Vector3.Normalize(MainCamera.position - transform.position) * -10;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("PickUp")) {
-            other.gameObject.SetActive(false);
-            count++;
-            countText.text = "COUNT: " + count.ToString();
-
-            if (count == 4)
-                winText.gameObject.SetActive(true);
-        }
     }
 
     void OnCollisionEnter(Collision other) {

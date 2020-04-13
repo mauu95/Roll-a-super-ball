@@ -13,13 +13,13 @@ public class PickablePowerUp : MonoBehaviour
             if(type == "dash")
             {
                 other.gameObject.AddComponent<PowerUpDash>();
-                other.GetComponent<Inventory>().Add(other.gameObject.GetComponent<PowerUpDash>());
+                other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpDash>());
                 other.gameObject.GetComponent<PowerUpDash>().enabled = false;
             }
             else if(type == "jump")
             {
                 other.gameObject.AddComponent<PowerUpJump>();
-                other.GetComponent<Inventory>().Add(other.gameObject.GetComponent<PowerUpJump>());
+                other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpJump>());
                 other.gameObject.GetComponent<PowerUpJump>().enabled = false;
             }
 
