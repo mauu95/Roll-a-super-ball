@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     public float speed;
-    public float speedInAir;
-    public float maxSpeedFromInput;
+    [Range(0f, 1f)]
+    public float controlInAir;
     public float maxSpeed = 30f;
     public Text countText;
     public Text winText;
@@ -39,16 +39,11 @@ public class PlayerController : MonoBehaviour {
 
         movement = new Vector3(temp.x, 0f, temp.z);
 
-        if (rb.velocity.magnitude < maxSpeedFromInput) {
-            if (isGrounded)
-                rb.AddForce(movement * speed, ForceMode.VelocityChange);
-            else
-                rb.AddForce(movement * speedInAir, ForceMode.VelocityChange);
-        }
+        Vector3 force = movement * speed / 100;
+        if (!isGrounded)
+            force *= controlInAir;
 
-        if (rb.velocity.magnitude > maxSpeed) {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
+        rb.AddForce(force, ForceMode.VelocityChange);
     }
 
     public Vector3 GetForwardDirection() {
@@ -67,20 +62,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Ground") {
+        if (other.gameObject.tag == "Ground") 
             isGrounded = true;
-        }
     }
 
     void OnCollisionExit(Collision other) {
-        if (other.gameObject.tag == "Ground") {
+        if (other.gameObject.tag == "Ground") 
             isGrounded = false;
-        }
     }
 
     public void AlterSpeeds(float value) {
-        speedInAir *= value;
-        maxSpeedFromInput *= value;
+        controlInAir *= value;
         maxSpeed *= value;
         speed *= value;
     }
