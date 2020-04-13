@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-    public float speed;
+    public float speed = 5;
     [Range(0f, 1f)]
-    public float controlInAir;
+    public float playerControl = 0.5f;
     public float maxSpeed = 30f;
-    public Transform MainCamera;
-
-    [HideInInspector]
     public bool isGrounded;
 
+    public Transform MainCamera;
     [HideInInspector]
     public Vector3 movement;
 
@@ -36,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 force = movement * speed / 100;
         if (!isGrounded)
-            force *= controlInAir;
+            force *= playerControl;
 
         rb.AddForce(force, ForceMode.VelocityChange);
     }
@@ -56,9 +54,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void AlterSpeeds(float value) {
-        controlInAir *= value;
+        playerControl *= value;
         maxSpeed *= value;
         speed *= value;
+    }
+
+    public void SetVelocity(Vector3 vel)
+    {
+        rb.velocity = vel;
     }
 
 }

@@ -4,19 +4,35 @@ using UnityEngine;
 
 public class PowerUpDash : PowerUp
 {
-    public float DashForce = 3f;
+    public float DashForce = 4f;
+    public float dashDuration = 0.3f;
 
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if(player.movement == Vector3.zero)
+            Vector3 direction;
+            if (player.movement == Vector3.zero)
             {
-                Vector3 forward = player.GetForwardDirection() * DashForce;
-                player.GetComponent<Rigidbody>().AddForce(forward.x, 0f, forward.z, ForceMode.Impulse);
+                Vector3 forward = player.GetForwardDirection();
+                direction = new Vector3(forward.x, 0f, forward.z);
             }
             else
-                player.GetComponent<Rigidbody>().AddForce(player.movement * DashForce , ForceMode.Impulse);
+                direction = player.movement;
+
+            StartCoroutine(Dash(direction));
+            
         }
+    }
+
+
+    private IEnumerator Dash(Vector3 direction)
+    {
+        PlayerController p = player.GetComponent<PlayerController>();
+
+        player.GetComponent<Rigidbody>().AddForce(direction * DashForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(dashDuration);
+
+        p.SetVelocity(Vector3.zero);
     }
 }
