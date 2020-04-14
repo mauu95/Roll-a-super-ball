@@ -299,7 +299,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 850762e157a74da40b4a3244c9666bf3, type: 2}
+      objectReference: {fileID: 2100000, guid: a42f190c972934eaea3e41832b90184f, type: 2}
     - target: {fileID: 6866152105141178815, guid: ae1b9e520c7d654498b0e85d9b56897e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     type: 3}
   Dimension: 20
   nFloor: 2
-  nCarli: 4
+  nPickUps: 4
 --- !u!4 &1473236727
 Transform:
   m_ObjectHideFlags: 0

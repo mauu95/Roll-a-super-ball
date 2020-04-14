@@ -12,7 +12,7 @@ public class PCGMap : MonoBehaviour {
     public GameObject portalPrefab;
     public int Dimension = 20;
     public int nFloor = 1;
-    public int nCarli;
+    public int nPickUps;
 
     private IteratorSeed iseed;
     private List<Vector3> platforms;
@@ -29,18 +29,14 @@ public class PCGMap : MonoBehaviour {
         iseed = new IteratorSeed(seed);
         platforms = new List<Vector3>();
         portals = new List<TeleportPortal>();
+        map = CreateEmptyGameObject("Map");
 
-        GameObject temp = new GameObject();
-        map = Instantiate(temp);
-        Destroy(temp);
-        map.name = "Map";
+
+
         List<int> platformIndexes = new List<int>();
         for (int i = 0; i < nFloor; i++) {
-            temp = new GameObject();
-            currentFloor = Instantiate(temp, map.transform);
-            Destroy(temp);
-            currentFloor.name = "Floor" + i;
-
+            currentFloor = CreateEmptyGameObject("Floor" + i);
+            currentFloor.transform.SetParent(map.transform);
             transform.position = new Vector3(0f, 10f * i, 0f);
             CreateFloor();
             platformIndexes.Add(platforms.Count - 1);
@@ -60,17 +56,16 @@ public class PCGMap : MonoBehaviour {
             portal2.otherPortal = portal1;
         }
 
-        //Place Carli
-        for (int i = 0; i < nCarli; i++) {
+        //Place Pick Ups
+        for (int i = 0; i < nPickUps; i++) {
             Vector3 platPos = platforms[iseed.Next(platforms.Count)];
-            Vector3 carloPos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
-            Create(carloPrefab, carloPos, Quaternion.identity);
+            Vector3 pickUpPos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
+            Create(carloPrefab, pickUpPos, Quaternion.identity);
         }
 
     }
 
     private void CreateFloor() {
-
         for (int i = 0; i < Dimension; i++)
             PerformAction();
     }
@@ -78,20 +73,19 @@ public class PCGMap : MonoBehaviour {
     private void PerformAction() {
         int action = iseed.Next(3);
 
-        if (action == 0) {
+        if (action == 0) { // Place a platform
             if (!platforms.Contains(transform.position)) {
                 platforms.Add(transform.position);
                 Create(platformPrefab, transform.position, transform.rotation);
             }
-        } else if (action == 1) {
+        } else if (action == 1) { // Change direction
             int newdirection = iseed.Next(4);
             transform.Rotate(0f, newdirection * 90f, 0f);
-        } else if (action == 2) {
+        } else if (action == 2) { // Place a bridge
             Vector3 prev = transform.position;
             int distance = 5 + iseed.Next(2) * 10 + iseed.Next(9);
 
             transform.position += transform.forward * distance;
-            //place a bridge
             Vector3 curr = transform.position;
 
             Vector3 pos = (curr - prev) / 2 + prev;
@@ -106,5 +100,13 @@ public class PCGMap : MonoBehaviour {
         return Instantiate(obj, pos, rot, currentFloor.transform);
     }
 
+    private GameObject CreateEmptyGameObject(string name)
+    {
+        GameObject temp = new GameObject();
+        GameObject result = Instantiate(temp);
+        result.name = name;
+        Destroy(temp);
+        return result;
+    }
 
 }
