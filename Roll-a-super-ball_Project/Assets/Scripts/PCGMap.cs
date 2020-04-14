@@ -8,7 +8,7 @@ public class PCGMap : MonoBehaviour {
     public int seed;
     public GameObject platformPrefab;
     public GameObject BrigdePrefab;
-    public GameObject carloPrefab;
+    public GameObject pickUpPrefab;
     public GameObject portalPrefab;
     public int Dimension = 20;
     public int nFloor = 1;
@@ -56,12 +56,7 @@ public class PCGMap : MonoBehaviour {
             portal2.otherPortal = portal1;
         }
 
-        //Place Pick Ups
-        for (int i = 0; i < nPickUps; i++) {
-            Vector3 platPos = platforms[iseed.Next(platforms.Count)];
-            Vector3 pickUpPos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
-            Create(carloPrefab, pickUpPos, Quaternion.identity);
-        }
+        PlaceOnMap(pickUpPrefab, nPickUps);
 
     }
 
@@ -107,6 +102,16 @@ public class PCGMap : MonoBehaviour {
         result.name = name;
         Destroy(temp);
         return result;
+    }
+
+    private void PlaceOnMap(GameObject objPrefab, int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            Vector3 platPos = platforms[iseed.Next(platforms.Count)];
+            Vector3 pos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
+            Create(objPrefab, pos, Quaternion.identity);
+        }
     }
 
 }
