@@ -11,7 +11,7 @@ public class PCGMap : MonoBehaviour {
     public int nPickUps;
     public GameObject platformPrefab;
     public GameObject BrigdePrefab;
-    public GameObject pickUpPrefab;
+    public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
 
 
@@ -57,7 +57,8 @@ public class PCGMap : MonoBehaviour {
             portal2.otherPortal = portal1;
         }
 
-        PlaceOnMap(pickUpPrefab, nPickUps);
+        foreach(CoupleGameobjectInt el in elementToAddOnMap)
+            PlaceOnMap(el.prefab, el.quantity);
 
     }
 
@@ -113,6 +114,13 @@ public class PCGMap : MonoBehaviour {
             Vector3 pos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
             Create(objPrefab, pos, Quaternion.identity);
         }
+    }
+
+    [Serializable]
+    public struct CoupleGameobjectInt
+    {
+        public GameObject prefab;
+        public int quantity;
     }
 
 }

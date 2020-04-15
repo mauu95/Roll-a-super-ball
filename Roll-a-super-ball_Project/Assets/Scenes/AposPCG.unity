@@ -1352,17 +1352,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 4
+  Dimension: 20
+  nFloor: 2
+  nPickUps: 4
   platformPrefab: {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a,
     type: 3}
   BrigdePrefab: {fileID: 7634364700533989109, guid: 93de3b660eebbcd41a08ff2b49b724ef,
     type: 3}
-  pickUpPrefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
-    type: 3}
+  elementToAddOnMap:
+  - prefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
+      type: 3}
+    quantity: 4
   portalPrefab: {fileID: 3296860610100036561, guid: 34090761d69f04591b449ba1caabc21a,
     type: 3}
-  Dimension: 20
-  nFloor: 2
-  nPickUps: 4
 --- !u!4 &1473236727
 Transform:
   m_ObjectHideFlags: 0
