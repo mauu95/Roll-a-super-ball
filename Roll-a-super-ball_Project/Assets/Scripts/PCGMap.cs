@@ -17,8 +17,8 @@ public class PCGMap : MonoBehaviour {
 
     private IteratorSeed iseed;
     private List<Vector3> platforms;
-    private List<TeleportPortal> portals;
     private GameObject map;
+    private int[] platformsSize = new int[] { 5, 10, 15, 20 };
 
     private GameObject currentFloor;
 
@@ -29,7 +29,6 @@ public class PCGMap : MonoBehaviour {
     private void CreateMap() {
         iseed = new IteratorSeed(seed);
         platforms = new List<Vector3>();
-        portals = new List<TeleportPortal>();
         map = CreateEmptyGameObject("Map");
 
 
@@ -70,12 +69,11 @@ public class PCGMap : MonoBehaviour {
     private void PerformAction() {
         int action = iseed.Next(3);
 
-        if (action == 0) { // Place a platform
-            if (!platforms.Contains(transform.position)) {
-                platforms.Add(transform.position);
-                Create(platformPrefab, transform.position, transform.rotation);
-            }
-        } else if (action == 1) { // Change direction
+        if (action == 0)
+        { // Place a platform
+            CreatePlatform();
+        }
+        else if (action == 1) { // Change direction
             int newdirection = iseed.Next(4);
             transform.Rotate(0f, newdirection * 90f, 0f);
         } else if (action == 2) { // Place a bridge
@@ -90,6 +88,17 @@ public class PCGMap : MonoBehaviour {
 
             Vector3 scale = temp.transform.localScale;
             temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance);
+        }
+    }
+
+    private void CreatePlatform()
+    {
+        if (!platforms.Contains(transform.position))
+        {
+            platforms.Add(transform.position);
+            GameObject temp = Create(platformPrefab, transform.position, transform.rotation);
+            int newdim = platformsSize[iseed.Next(platformsSize.Length - 1)];
+            temp.transform.localScale = new Vector3(newdim, temp.transform.localScale.y, newdim);
         }
     }
 
