@@ -16,7 +16,7 @@ public class PCGMap : MonoBehaviour {
 
 
     private IteratorSeed iseed;
-    private List<Vector3> platforms;
+    private List<GameObject> platforms;
     private GameObject map;
     private int[] platformsSize = new int[] { 5, 10, 15, 20 };
 
@@ -28,7 +28,7 @@ public class PCGMap : MonoBehaviour {
 
     private void CreateMap() {
         iseed = new IteratorSeed(seed);
-        platforms = new List<Vector3>();
+        platforms = new List<GameObject>();
         map = CreateEmptyGameObject("Map");
 
 
@@ -46,10 +46,10 @@ public class PCGMap : MonoBehaviour {
         for (int i = 0; i < platformIndexes.Count - 1; i++) {
             int index = platformIndexes[i];
 
-            GameObject portalObject1 = Instantiate(portalPrefab, platforms[index] + Vector3.up, Quaternion.identity);
+            GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up, Quaternion.identity);
             TeleportPortal portal1 = portalObject1.GetComponent<TeleportPortal>();
 
-            GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1] + Vector3.up, Quaternion.identity);
+            GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1].transform.position + Vector3.up, Quaternion.identity);
             TeleportPortal portal2 = portalObject2.GetComponent<TeleportPortal>();
 
             portal1.otherPortal = portal2;
@@ -93,12 +93,17 @@ public class PCGMap : MonoBehaviour {
 
     private void CreatePlatform()
     {
-        if (!platforms.Contains(transform.position))
+        bool overlap = false;
+        foreach (GameObject plat in platforms)
+            if (plat.transform.position == transform.position)
+                overlap = true;
+
+        if (!overlap)
         {
-            platforms.Add(transform.position);
             GameObject temp = Create(platformPrefab, transform.position, transform.rotation);
             int newdim = platformsSize[iseed.Next(platformsSize.Length - 1)];
             temp.transform.localScale = new Vector3(newdim, temp.transform.localScale.y, newdim);
+            platforms.Add(temp);
         }
     }
 
@@ -119,8 +124,10 @@ public class PCGMap : MonoBehaviour {
     {
         for (int i = 0; i < quantity; i++)
         {
-            Vector3 platPos = platforms[iseed.Next(platforms.Count)];
-            Vector3 pos = new Vector3(platPos.x + iseed.Next(10) - 4, platPos.y + 1, platPos.z + iseed.Next(10) - 4);
+            GameObject plat = platforms[iseed.Next(platforms.Count)];
+            Vector3 platPos = plat.transform.position;
+            int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
+            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim/2, platPos.y + 1, platPos.z + iseed.Next(platDim) - platDim/2);
             Create(objPrefab, pos, Quaternion.identity);
         }
     }
