@@ -22,8 +22,9 @@ public class InventoryUI : MonoBehaviour
         temp.GetComponent<InventorySlot>().SetText(text);
 
         foreach (PowerUpIcon pow in list)
-            if (item.GetName() == pow.name)
+            if (item.id == pow.name)
                 temp.GetComponent<InventorySlot>().SetIcon(pow.icon);
+
     }
 
     public void Highlight(int i)

@@ -6,9 +6,9 @@ public class PowerUpJump : PowerUp
 {
     public float JumpForce = 50f;
 
-    public override string GetName()
+    private void Awake()
     {
-        return "jump";
+        id = "jump";
     }
 
     private void FixedUpdate()

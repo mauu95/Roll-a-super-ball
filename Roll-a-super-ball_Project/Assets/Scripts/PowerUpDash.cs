@@ -10,9 +10,9 @@ public class PowerUpDash : PowerUp
 
     public bool canDash = true;
 
-    public override string GetName()
+    private void Awake()
     {
-        return "dash";
+        id = "dash";
     }
 
     private void FixedUpdate()

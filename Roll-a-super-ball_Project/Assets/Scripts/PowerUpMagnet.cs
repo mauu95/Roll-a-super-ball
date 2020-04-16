@@ -9,8 +9,9 @@ public class PowerUpMagnet : PowerUp {
 
     private float elapsedTime = 0;
 
-    private void Start() {
+    private void Awake() {
         elapsedTime = activeTime;
+        id = "magnet";
     }
 
     private void Update() {
@@ -31,9 +32,5 @@ public class PowerUpMagnet : PowerUp {
             }
         }
 
-    }
-
-    public override string GetName() {
-        return "magnet";
     }
 }

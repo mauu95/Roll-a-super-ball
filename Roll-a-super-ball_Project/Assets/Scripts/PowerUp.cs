@@ -5,11 +5,10 @@ using UnityEngine;
 public abstract class PowerUp : MonoBehaviour
 {
     protected PlayerController player;
+    public string id;
 
     private void Start()
     {
         player = GetComponent<PlayerController>();
     }
-
-    public abstract string GetName();
 }
