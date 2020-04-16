@@ -10,4 +10,6 @@ public abstract class PowerUp : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
     }
+
+    public abstract string GetName();
 }

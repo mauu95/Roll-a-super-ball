@@ -6,6 +6,8 @@ public class PowerUpMagnet : PowerUp {
     public float speed = 10;
     public float range = 10;
 
+    
+
     private void Update() {
         if (Input.GetKey(KeyCode.Space)) {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward);
@@ -23,4 +25,8 @@ public class PowerUpMagnet : PowerUp {
 
     }
 
+    public override string GetName()
+    {
+        return "magnet";
+    }
 }

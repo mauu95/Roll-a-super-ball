@@ -10,6 +10,11 @@ public class PowerUpDash : PowerUp
 
     public bool canDash = true;
 
+    public override string GetName()
+    {
+        return "dash";
+    }
+
     private void FixedUpdate()
     {
         if (canDash & Input.GetKey(KeyCode.Space))

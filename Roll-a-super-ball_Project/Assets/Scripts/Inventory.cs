@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     public List<PowerUp> powerUps = new List<PowerUp>();
     public int pickUps;
     public InventoryUI inventoryUI;
+    public PowerUpIcons icons;
 
     public Text countText;
     public Text winText;

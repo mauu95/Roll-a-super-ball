@@ -6,6 +6,11 @@ public class PowerUpJump : PowerUp
 {
     public float JumpForce = 50f;
 
+    public override string GetName()
+    {
+        return "jump";
+    }
+
     private void FixedUpdate()
     {
         if (player.isGrounded && Input.GetKey(KeyCode.Space))
