@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
     public float speed = 5;
     [Range(0f, 1f)]
-    public float playerControl = 0.5f;
+    public float playerControlInAir = 0.5f;
     public float maxSpeed = 30f;
     public bool isGrounded;
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 force = movement * speed / 100;
         if (!isGrounded)
-            force *= playerControl;
+            force *= playerControlInAir;
 
         rb.AddForce(force, ForceMode.VelocityChange);
     }
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void AlterSpeeds(float value) {
-        playerControl *= value;
+        playerControlInAir *= value;
         maxSpeed *= value;
         speed *= value;
     }
