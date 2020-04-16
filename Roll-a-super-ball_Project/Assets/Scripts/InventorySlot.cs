@@ -17,11 +17,13 @@ public class InventorySlot : MonoBehaviour
 
     public void Highlight()
     {
-        GetComponent<Image>().color = Color.green;
+        var image = GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
     }
 
     public void DeHightlight()
     {
-        GetComponent<Image>().color = Color.white;
+        var image = GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 0.3f);
     }
 }

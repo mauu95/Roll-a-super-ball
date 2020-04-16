@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     public Text countText;
     public Text winText;
 
+    private int current;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class Inventory : MonoBehaviour
         inventoryUI.Clear();
         for(int i = 0; i < powerUps.Count; i++)
             inventoryUI.Add(powerUps[i], (i+1).ToString());
+        ActivatePowerUp(current);
     }
 
     public void DeactivatePowerUp()
@@ -68,6 +70,7 @@ public class Inventory : MonoBehaviour
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
         powerUps[i].enabled = true;
+        current = i;
     }
 
 }
