@@ -12,7 +12,10 @@ public class PowerUpMagnet : PowerUp {
     private void Awake() {
         elapsedTime = activeTime;
         id = "magnet";
+        cooldownTime = 5;
     }
+
+
 
     private void Update() {
         if (elapsedTime < activeTime) {
@@ -32,5 +35,10 @@ public class PowerUpMagnet : PowerUp {
             }
         }
 
+    }
+
+    public override void doStuff()
+    {
+        throw new System.NotImplementedException();
     }
 }

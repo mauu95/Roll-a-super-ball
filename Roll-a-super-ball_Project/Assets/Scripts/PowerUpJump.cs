@@ -6,17 +6,20 @@ public class PowerUpJump : PowerUp
 {
     public float JumpForce = 50f;
 
-    private void Awake()
+    public override void doStuff()
     {
-        id = "jump";
-    }
-
-    private void FixedUpdate()
-    {
-        if (player.isGrounded && Input.GetKey(KeyCode.Space))
+        if (player.isGrounded)
         {
             player.isGrounded = false;
             player.GetComponent<Rigidbody>().AddForce(0f, JumpForce, 0f, ForceMode.Impulse);
         }
     }
+
+    private void Awake()
+    {
+        id = "jump";
+        cooldownTime = 5f;
+    }
+
+
 }

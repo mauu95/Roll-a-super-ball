@@ -6,34 +6,26 @@ public class PowerUpDash : PowerUp
 {
     public float DashForce = 40f;
     public float dashDuration = 0.3f;
-    public float cooldownTime = 3;
-
-    public bool canDash = true;
 
     private void Awake()
     {
         id = "dash";
+        cooldownTime = 3;
     }
 
-    private void FixedUpdate()
+    public override void doStuff()
     {
-        if (canDash & Input.GetKey(KeyCode.Space))
+        Vector3 direction;
+        if (player.movement == Vector3.zero)
         {
-            Vector3 direction;
-            if (player.movement == Vector3.zero)
-            {
-                Vector3 forward = player.GetForwardDirection();
-                direction = new Vector3(forward.x, 0f, forward.z);
-            }
-            else
-                direction = player.movement;
-
-            StartCoroutine(Cooldown());
-            StartCoroutine(Dash(direction));
-            
+            Vector3 forward = player.GetForwardDirection();
+            direction = new Vector3(forward.x, 0f, forward.z);
         }
-    }
+        else
+            direction = player.movement;
 
+        StartCoroutine(Dash(direction));
+    }
 
     private IEnumerator Dash(Vector3 direction)
     {
@@ -47,10 +39,4 @@ public class PowerUpDash : PowerUp
         p.SetVelocity(newvel.normalized * 10);
     }
 
-    private IEnumerator Cooldown()
-    {
-        canDash = false;
-        yield return new WaitForSeconds(cooldownTime);
-        canDash = true;
-    }
 }
