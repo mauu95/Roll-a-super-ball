@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Image cooldownImage;
-    public float cooldown;
+
+    private PowerUp pow;
+    private float cooldown;
     private bool isCooldown;
 
     public void SetText(string newtext)
@@ -33,9 +35,6 @@ public class InventorySlot : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            isCooldown = true;
-
         if (isCooldown)
         {
             cooldownImage.fillAmount += 1 / cooldown * Time.deltaTime;
@@ -47,5 +46,17 @@ public class InventorySlot : MonoBehaviour
             }
 
         }
+    }
+
+    public void StartCooldown()
+    {
+        isCooldown = true;
+    }
+
+    public void SetPowerUp(PowerUp pow)
+    {
+        this.pow = pow;
+        cooldown = pow.cooldownTime;
+        pow.onActivatePowerUpCallback += StartCooldown;
     }
 }

@@ -19,11 +19,14 @@ public class InventoryUI : MonoBehaviour
     public void Add(PowerUp item, string text)
     {
         GameObject temp = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, transform);
-        temp.GetComponent<InventorySlot>().SetText(text);
+        InventorySlot slot = temp.GetComponent<InventorySlot>();
+        
+        slot.SetText(text);
+        slot.SetPowerUp(item);
 
         foreach (PowerUpIcon pow in list)
             if (item.id == pow.name)
-                temp.GetComponent<InventorySlot>().SetIcon(pow.icon);
+                slot.SetIcon(pow.icon);
 
     }
 

@@ -10,6 +10,9 @@ public abstract class PowerUp : MonoBehaviour
     public float cooldownTime;
     private bool isCooldown;
 
+    public delegate void onActivatePowerUp();
+    public onActivatePowerUp onActivatePowerUpCallback;
+
     private void Start()
     {
         player = GetComponent<PlayerController>();
@@ -20,6 +23,8 @@ public abstract class PowerUp : MonoBehaviour
         if (!isCooldown && Input.GetKeyDown(KeyCode.Space))
         {
             doStuff();
+            if (onActivatePowerUpCallback != null)
+                onActivatePowerUpCallback.Invoke();
             StartCoroutine(Cooldown());
         }
     }
