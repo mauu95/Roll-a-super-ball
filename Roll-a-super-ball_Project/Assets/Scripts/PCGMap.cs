@@ -8,7 +8,6 @@ public class PCGMap : MonoBehaviour {
     public int seed;
     public int Dimension = 20;
     public int nFloor = 1;
-    public int nPickUps;
     public GameObject platformPrefab;
     public GameObject BrigdePrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
@@ -23,6 +22,8 @@ public class PCGMap : MonoBehaviour {
     private GameObject currentFloor;
 
     private void Start() {
+        if (elementToAddOnMap[0].prefab.name == "PickUp")
+            elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         CreateMap();
     }
 

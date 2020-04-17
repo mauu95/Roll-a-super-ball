@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour {
 
     private void Start() {
         pickUps = 0;
-        countText.text = "COUNT: " + pickUps.ToString();
+        countText.text = "COUNT: " + pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
     }
 
     private void Update() {
@@ -29,9 +29,9 @@ public class Inventory : MonoBehaviour {
         if (other.gameObject.CompareTag("PickUp")) {
             other.gameObject.SetActive(false);
             pickUps++;
-            countText.text = "COUNT: " + pickUps.ToString();
+            countText.text = "COUNT: " + pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
 
-            if (pickUps == 4)
+            if (pickUps == GameManager.instance.nPickUp)
                 winText.gameObject.SetActive(true);
         }
     }

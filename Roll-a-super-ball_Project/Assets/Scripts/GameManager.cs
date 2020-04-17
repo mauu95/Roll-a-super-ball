@@ -5,9 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Player;
+    #region Singleton
+    public static GameManager instance;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("More than one instance of inventory found!");
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
+    public GameObject Player;
+    public int nPickUp = 4;
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
