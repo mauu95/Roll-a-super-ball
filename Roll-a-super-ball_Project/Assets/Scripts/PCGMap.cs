@@ -23,6 +23,8 @@ public class PCGMap : MonoBehaviour {
     private GameObject currentFloor;
 
     private void Start() {
+        if (elementToAddOnMap[0].prefab.name == "PickUp")
+            elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         CreateMap();
     }
 
