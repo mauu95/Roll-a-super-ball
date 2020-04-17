@@ -15,15 +15,12 @@ public class PowerUpMagnet : PowerUp {
         cooldownTime = 5;
     }
 
-
-
-    private void Update() {
+    protected new void Update() {
+        base.Update();
         if (elapsedTime < activeTime) {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward);
             AttractHitObjects(hits);
             elapsedTime += Time.deltaTime;
-        } else if (Input.GetKeyDown(KeyCode.Space)) {
-            elapsedTime = 0;
         }
     }
 
@@ -34,11 +31,12 @@ public class PowerUpMagnet : PowerUp {
                 hit.transform.position += distance.normalized * speed * Time.deltaTime;
             }
         }
-
     }
 
-    public override void doStuff()
-    {
-        throw new System.NotImplementedException();
+    public override void doStuff() {
+        if (elapsedTime >= activeTime)
+            elapsedTime = 0;
     }
+
+
 }

@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PowerUp : MonoBehaviour
-{
+public abstract class PowerUp : MonoBehaviour {
     protected PlayerController player;
     public string id;
     public float cooldownTime;
@@ -13,15 +12,12 @@ public abstract class PowerUp : MonoBehaviour
     public delegate void onActivatePowerUp();
     public onActivatePowerUp onActivatePowerUpCallback;
 
-    private void Start()
-    {
+    private void Start() {
         player = GetComponent<PlayerController>();
     }
 
-    private void Update()
-    {
-        if (!isCooldown && Input.GetKeyDown(KeyCode.Space))
-        {
+    protected void Update() {
+        if (!isCooldown && Input.GetKeyDown(KeyCode.Space)) {
             doStuff();
             if (onActivatePowerUpCallback != null)
                 onActivatePowerUpCallback.Invoke();
@@ -31,8 +27,7 @@ public abstract class PowerUp : MonoBehaviour
 
     public abstract void doStuff();
 
-    private IEnumerator Cooldown()
-    {
+    private IEnumerator Cooldown() {
         isCooldown = true;
         yield return new WaitForSeconds(cooldownTime);
         isCooldown = false;
