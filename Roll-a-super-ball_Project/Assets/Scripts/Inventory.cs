@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour {
     public Text countText;
     public Text winText;
 
-    private int current;
+    private int current = -1;
 
     private void Start() {
         pickUps = 0;
@@ -42,10 +42,11 @@ public class Inventory : MonoBehaviour {
         UpdateUI();
         return true;
     }
-
+        
     public void UpdateUI() {
         inventoryUI.Add(powerUps[powerUps.Count - 1], (powerUps.Count).ToString());
-        ActivatePowerUp(current);
+        if(current>=0)
+            ActivatePowerUp(current);
     }
 
     public void DeactivatePowerUp() {
