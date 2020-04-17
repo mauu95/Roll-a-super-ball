@@ -1074,12 +1074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba984c38f3358d4c9c4091eabeae2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 4
+  seed: 5
   Dimension: 20
   nFloor: 2
   nPickUps: 4
-  platformPrefab: {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a,
-    type: 3}
+  platformPrefabs:
+  - {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a, type: 3}
+  - {fileID: 835414953093068274, guid: 46a417f9a2a7a4e7190dce2dc36430d9, type: 3}
   BrigdePrefab: {fileID: 7634364700533989109, guid: 93de3b660eebbcd41a08ff2b49b724ef,
     type: 3}
   elementToAddOnMap:
