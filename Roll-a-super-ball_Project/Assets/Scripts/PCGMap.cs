@@ -8,7 +8,8 @@ public class PCGMap : MonoBehaviour {
     public int seed;
     public int Dimension = 20;
     public int nFloor = 1;
-    public GameObject platformPrefab;
+    public int nPickUps;
+    public GameObject[] platformPrefabs;
     public GameObject BrigdePrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
@@ -57,7 +58,7 @@ public class PCGMap : MonoBehaviour {
             portal2.otherPortal = portal1;
         }
 
-        foreach(CoupleGameobjectInt el in elementToAddOnMap)
+        foreach (CoupleGameobjectInt el in elementToAddOnMap)
             PlaceOnMap(el.prefab, el.quantity);
 
     }
@@ -70,11 +71,9 @@ public class PCGMap : MonoBehaviour {
     private void PerformAction() {
         int action = iseed.Next(3);
 
-        if (action == 0)
-        { // Place a platform
+        if (action == 0) { // Place a platform
             CreatePlatform();
-        }
-        else if (action == 1) { // Change direction
+        } else if (action == 1) { // Change direction
             int newdirection = iseed.Next(4);
             transform.Rotate(0f, newdirection * 90f, 0f);
         } else if (action == 2) { // Place a bridge
@@ -92,16 +91,15 @@ public class PCGMap : MonoBehaviour {
         }
     }
 
-    private void CreatePlatform()
-    {
+    private void CreatePlatform() {
         bool overlap = false;
         foreach (GameObject plat in platforms)
             if (plat.transform.position == transform.position)
                 overlap = true;
 
-        if (!overlap)
-        {
-            GameObject temp = Create(platformPrefab, transform.position, transform.rotation);
+        if (!overlap) {
+            int platformIndex = iseed.Next(100) < 80 ? 0 : 1;
+            GameObject temp = Create(platformPrefabs[platformIndex], transform.position, transform.rotation);
             int newdim = platformsSize[iseed.Next(platformsSize.Length - 1)];
             temp.transform.localScale = new Vector3(newdim, temp.transform.localScale.y, newdim);
             platforms.Add(temp);
@@ -112,8 +110,7 @@ public class PCGMap : MonoBehaviour {
         return Instantiate(obj, pos, rot, currentFloor.transform);
     }
 
-    private GameObject CreateEmptyGameObject(string name)
-    {
+    private GameObject CreateEmptyGameObject(string name) {
         GameObject temp = new GameObject();
         GameObject result = Instantiate(temp);
         result.name = name;
@@ -121,21 +118,18 @@ public class PCGMap : MonoBehaviour {
         return result;
     }
 
-    private void PlaceOnMap(GameObject objPrefab, int quantity)
-    {
-        for (int i = 0; i < quantity; i++)
-        {
+    private void PlaceOnMap(GameObject objPrefab, int quantity) {
+        for (int i = 0; i < quantity; i++) {
             GameObject plat = platforms[iseed.Next(platforms.Count)];
             Vector3 platPos = plat.transform.position;
             int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
-            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim/2, platPos.y + 1, platPos.z + iseed.Next(platDim) - platDim/2);
+            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim / 2, platPos.y + 1, platPos.z + iseed.Next(platDim) - platDim / 2);
             Create(objPrefab, pos, Quaternion.identity);
         }
     }
 
     [Serializable]
-    public struct CoupleGameobjectInt
-    {
+    public struct CoupleGameobjectInt {
         public GameObject prefab;
         public int quantity;
     }
