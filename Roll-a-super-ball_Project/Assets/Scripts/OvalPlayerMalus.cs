@@ -5,22 +5,28 @@ using UnityEngine;
 public class OvalPlayerMalus : MonoBehaviour {
     // Start is called before the first frame update
     public Vector3 size = new Vector3(1, 1.5f, 0.5f);
+    public float velocityNeeded = 3;
     public float duration = 20;
 
     private float elapsedTime = 0f;
     private Vector3 initialScale;
-    void Start() {
+    private void Start() {
+        elapsedTime = duration;
         initialScale = transform.localScale;
-        transform.localScale = new Vector3(1, 1.5f, 0.5f);
     }
-
     // Update is called once per frame
     void Update() {
-        elapsedTime += Time.deltaTime;
         if (elapsedTime >= duration) {
             transform.localScale = initialScale;
-            Destroy(this);
+        } else {
+            elapsedTime += Time.deltaTime;
         }
+    }
 
+    public void Activate() {
+        if (GetComponent<Rigidbody>().velocity.magnitude > velocityNeeded) {
+            elapsedTime = 0;
+            transform.localScale = size;
+        }
     }
 }
