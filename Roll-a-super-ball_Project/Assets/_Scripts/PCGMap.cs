@@ -17,26 +17,27 @@ public class PCGMap : MonoBehaviour {
 
     private IteratorSeed iseed;
     private List<GameObject> platforms;
+    private List<int> platformIndexes;
     private GameObject map;
     private int[] platformsSize = new int[] { 5, 10, 15, 20 };
 
     private GameObject currentFloor;
 
     private void Start() {
-        if (elementToAddOnMap[0].prefab.name == "PickUp")
-            elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
+        if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
+        platformIndexes = new List<int>();
+
         CreateMap();
     }
 
-    private void CreateMap() {
+    private void CreateMap()
+    {
         iseed = new IteratorSeed(seed);
         platforms = new List<GameObject>();
         map = CreateEmptyGameObject("Map");
 
-
-
-        List<int> platformIndexes = new List<int>();
-        for (int i = 0; i < nFloor; i++) {
+        for (int i = 0; i < nFloor; i++)
+        {
             currentFloor = CreateEmptyGameObject("Floor" + i);
             currentFloor.transform.SetParent(map.transform);
             transform.position = new Vector3(0f, 10f * i, 0f);
@@ -44,8 +45,45 @@ public class PCGMap : MonoBehaviour {
             platformIndexes.Add(platforms.Count - 1);
         }
 
-        // ignore last index
-        for (int i = 0; i < platformIndexes.Count - 1; i++) {
+        CreatePortals();
+
+        foreach (CoupleGameobjectInt el in elementToAddOnMap)
+            PlaceOnMap(el.prefab, el.quantity);
+
+    }
+
+
+
+    private void CreateFloor()
+    {
+        for (int i = 0; i < Dimension; i++)
+            PerformAction();
+    }
+
+    private void PerformAction() {
+        int action = iseed.Next(3);
+
+        if (action == 0) 
+            CreatePlatform();
+        else if (action == 1)
+            ChangeDirection();
+        else if (action == 2)
+            CreateBridge();
+    }
+
+
+
+
+
+
+
+
+
+
+    private void CreatePortals()
+    {
+        for (int i = 0; i < platformIndexes.Count - 1; i++)
+        {
             int index = platformIndexes[i];
 
             GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up, Quaternion.identity);
@@ -57,38 +95,21 @@ public class PCGMap : MonoBehaviour {
             portal1.otherPortal = portal2;
             portal2.otherPortal = portal1;
         }
-
-        foreach (CoupleGameobjectInt el in elementToAddOnMap)
-            PlaceOnMap(el.prefab, el.quantity);
-
     }
 
-    private void CreateFloor() {
-        for (int i = 0; i < Dimension; i++)
-            PerformAction();
-    }
+    private void CreateBridge()
+    {
+        Vector3 prev = transform.position;
+        int distance = 5 + iseed.Next(2) * 10 + iseed.Next(9);
 
-    private void PerformAction() {
-        int action = iseed.Next(3);
+        transform.position += transform.forward * distance;
+        Vector3 curr = transform.position;
 
-        if (action == 0) { // Place a platform
-            CreatePlatform();
-        } else if (action == 1) { // Change direction
-            int newdirection = iseed.Next(4);
-            transform.Rotate(0f, newdirection * 90f, 0f);
-        } else if (action == 2) { // Place a bridge
-            Vector3 prev = transform.position;
-            int distance = 5 + iseed.Next(2) * 10 + iseed.Next(9);
+        Vector3 pos = (curr - prev) / 2 + prev;
+        GameObject temp = Create(BrigdePrefab, pos, transform.rotation);
 
-            transform.position += transform.forward * distance;
-            Vector3 curr = transform.position;
-
-            Vector3 pos = (curr - prev) / 2 + prev;
-            GameObject temp = Create(BrigdePrefab, pos, transform.rotation);
-
-            Vector3 scale = temp.transform.localScale;
-            temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance);
-        }
+        Vector3 scale = temp.transform.localScale;
+        temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance);
     }
 
     private void CreatePlatform() {
@@ -104,6 +125,12 @@ public class PCGMap : MonoBehaviour {
             temp.transform.localScale = new Vector3(newdim, temp.transform.localScale.y, newdim);
             platforms.Add(temp);
         }
+    }
+
+    private void ChangeDirection()
+    {
+        int newdirection = iseed.Next(4);
+        transform.Rotate(0f, newdirection * 90f, 0f);
     }
 
     private GameObject Create(GameObject obj, Vector3 pos, Quaternion rot) {
