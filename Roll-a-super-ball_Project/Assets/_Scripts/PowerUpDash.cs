@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpDash : PowerUp
 {
-    public float DashForce = 40f;
+    public float DashForce = 60f;
     public float dashDuration = 0.3f;
 
     private void Awake()
@@ -30,10 +30,13 @@ public class PowerUpDash : PowerUp
     private IEnumerator Dash(Vector3 direction)
     {
         PlayerController p = player.GetComponent<PlayerController>();
+        Rigidbody p_rb = player.GetComponent<Rigidbody>();
 
-        player.GetComponent<Rigidbody>().AddForce(direction * DashForce, ForceMode.Impulse);
+        p_rb.constraints = RigidbodyConstraints.FreezePositionY;
+        p_rb.AddForce(direction * DashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
 
+        p_rb.constraints = RigidbodyConstraints.None;
         Vector3 newvel = p.GetComponent<Rigidbody>().velocity;
         newvel.y = 0;
         p.SetVelocity(newvel.normalized * 10);
