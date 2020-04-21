@@ -10,7 +10,7 @@ public class PCGMap : MonoBehaviour {
     public int nFloor = 1;
     public int nPickUps;
     public GameObject[] platformPrefabs;
-    public GameObject BrigdePrefab;
+    public GameObject[] BrigdePrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
 
@@ -26,7 +26,6 @@ public class PCGMap : MonoBehaviour {
     private void Start() {
         if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
-
         CreateMap();
     }
 
@@ -101,15 +100,11 @@ public class PCGMap : MonoBehaviour {
     {
         Vector3 prev = transform.position;
         int distance = 5 + iseed.Next(2) * 10 + iseed.Next(9);
-
         transform.position += transform.forward * distance;
         Vector3 curr = transform.position;
-
-        Vector3 pos = (curr - prev) / 2 + prev;
-        GameObject temp = Create(BrigdePrefab, pos, transform.rotation);
-
-        Vector3 scale = temp.transform.localScale;
-        temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance + 3f);
+        GameObject bridgeType = BrigdePrefab[iseed.Next(BrigdePrefab.Length)];
+        GameObject bridge = Create(bridgeType, transform.position, transform.rotation);
+        bridge.GetComponent<Bridge>().SetEndPoints(prev, curr);
     }
 
     private void CreatePlatform() {
