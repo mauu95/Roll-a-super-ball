@@ -19,7 +19,7 @@ public class PCGMap : MonoBehaviour {
     private List<GameObject> platforms;
     private List<int> platformIndexes;
     private GameObject map;
-    private int[] platformsSize = new int[] { 16, 24, 32 };
+    private int[] platformsSize = new int[] { 16, 20, 24 };
 
     private GameObject currentFloor;
 
