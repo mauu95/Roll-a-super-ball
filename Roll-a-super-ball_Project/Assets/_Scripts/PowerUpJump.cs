@@ -8,7 +8,10 @@ public class PowerUpJump : PowerUp
 
     public override void doStuff()
     {
-        if (player.isGrounded)
+        float howDistantFromTheGroundCanIBeInOrderToJumpAnywaEvenyIfImNotTouchingWithTheGround; //If you read this you win a Grattino :)
+        howDistantFromTheGroundCanIBeInOrderToJumpAnywaEvenyIfImNotTouchingWithTheGround = 0.2f + player.transform.localScale.y / 2;
+
+        if (player.isGrounded || Physics.Raycast(transform.position, Vector3.down, howDistantFromTheGroundCanIBeInOrderToJumpAnywaEvenyIfImNotTouchingWithTheGround))
         {
             player.isGrounded = false;
             player.GetComponent<Rigidbody>().AddForce(0f, JumpForce, 0f, ForceMode.Impulse);
