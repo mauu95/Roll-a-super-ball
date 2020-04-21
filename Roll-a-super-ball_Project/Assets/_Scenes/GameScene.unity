@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba984c38f3358d4c9c4091eabeae2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 12
+  seed: 11
   Dimension: 20
   nFloor: 2
   nPickUps: 4
@@ -1286,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 3925770107503839676, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3925770107503839676, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}

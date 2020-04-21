@@ -19,7 +19,7 @@ public class PCGMap : MonoBehaviour {
     private List<GameObject> platforms;
     private List<int> platformIndexes;
     private GameObject map;
-    private int[] platformsSize = new int[] { 15, 20, 25 };
+    private int[] platformsSize = new int[] { 16, 24, 32 };
 
     private GameObject currentFloor;
 
@@ -109,7 +109,7 @@ public class PCGMap : MonoBehaviour {
         GameObject temp = Create(BrigdePrefab, pos, transform.rotation);
 
         Vector3 scale = temp.transform.localScale;
-        temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance);
+        temp.transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance + 3f);
     }
 
     private void CreatePlatform() {
