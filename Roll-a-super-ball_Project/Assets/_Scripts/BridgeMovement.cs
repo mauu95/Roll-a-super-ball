@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class BridgeMovement : MonoBehaviour
 {
-    public int distance;
-    public float speed;
-    public bool horizontal = false;
+    public int distance = 2;
+    public float speed = 2;
+    public bool horizontal = true;
     private int flag = 0;
     private Vector3 targhet;
     private Vector3 start;
 
-    // Update is called once per frame
     void Start() {
         float x = transform.position.x;
         float y = transform.position.y;
         float z = transform.position.z;
         start = transform.position;
-        if( !horizontal ) 
+        if( horizontal ) 
             targhet = new Vector3( x + distance , y , z );    
         else
             targhet = new Vector3( x , y + distance , z );
