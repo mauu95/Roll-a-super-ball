@@ -10,19 +10,29 @@ public class BridgeMoving : Bridge
 
     void Update()
     {
-        if( transform.position == target)
-        {
-            Vector3 temp = target;
-            target = start;
-            start = temp;
-        }
-        if(target != null)
+        if( transform.position == target )
+            SwapDirection();
+
+        if (target != null)
             transform.position = moviment(target);
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            SetEndPoints(Vector3.zero, new Vector3(10f, 0f));
+            SetEndPoints(new Vector3(0f, 0f, -5f), new Vector3(0f, 0f, 5f));
         }
+    }
+
+    private void SwapDirection()
+    {
+        Vector3 temp = target;
+        target = start;
+        start = temp;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("a");
+        SwapDirection();
     }
 
     private Vector3 moviment( Vector3 pos ){
@@ -31,7 +41,7 @@ public class BridgeMoving : Bridge
 
     public override void SetEndPoints(Vector3 start, Vector3 end)
     {
-        transform.position = start;
+        transform.position = (end - start) / 2 + start;
         this.start = start;
         this.target = end;
     }

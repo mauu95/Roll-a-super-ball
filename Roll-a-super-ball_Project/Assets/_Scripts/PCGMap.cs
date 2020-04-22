@@ -13,6 +13,8 @@ public class PCGMap : MonoBehaviour {
     public GameObject[] BrigdePrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
+    [HideInInspector]
+    public List<int> history;
 
 
     private IteratorSeed iseed;
@@ -26,6 +28,8 @@ public class PCGMap : MonoBehaviour {
     private void Start() {
         if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
+        history = new List<int>();
+
         CreateMap();
     }
 
@@ -46,6 +50,10 @@ public class PCGMap : MonoBehaviour {
 
         CreatePortals();
 
+        //Brigdge stuff
+        //Se due ponti sono di fila girane uno di 180°
+        //Puoi modificare BridgeMoving in modo tale che quando collide cambia direzione
+
         foreach (CoupleGameobjectInt el in elementToAddOnMap)
             PlaceOnMap(el.prefab, el.quantity);
 
@@ -61,6 +69,7 @@ public class PCGMap : MonoBehaviour {
 
     private void PerformAction() {
         int action = iseed.Next(3);
+        history.Add(action);
 
         if (action == 0) 
             CreatePlatform();
