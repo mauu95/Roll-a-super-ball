@@ -7,20 +7,18 @@ public class PowerUpMagnet : PowerUp {
     public float speed = 10;
     public float range = 5;
 
-    private float elapsedTime = 0;
+    private float nextTimeToDeactivate = 0;
 
     private void Awake() {
-        elapsedTime = activeTime;
         id = "magnet";
         cooldownTime = 5;
     }
 
     protected new void Update() {
         base.Update();
-        if (elapsedTime < activeTime) {
+        if (Time.realtimeSinceStartup < nextTimeToDeactivate) {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward);
             AttractHitObjects(hits);
-            elapsedTime += Time.deltaTime;
         }
     }
 
@@ -34,8 +32,8 @@ public class PowerUpMagnet : PowerUp {
     }
 
     public override void doStuff() {
-        if (elapsedTime >= activeTime)
-            elapsedTime = 0;
+        if (Time.realtimeSinceStartup >= nextTimeToDeactivate)
+            nextTimeToDeactivate = Time.realtimeSinceStartup + activeTime;
     }
 
 
