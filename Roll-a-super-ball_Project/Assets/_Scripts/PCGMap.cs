@@ -8,6 +8,7 @@ public class PCGMap : MonoBehaviour {
     public int seed;
     public int Dimension = 20;
     public int nFloor = 1;
+    public int brigdeLength = 25;
     public int nPickUps;
     public GameObject[] platformPrefabs;
     public GameObject[] BrigdePrefab;
@@ -22,6 +23,7 @@ public class PCGMap : MonoBehaviour {
     private List<int> platformIndexes;
     private GameObject map;
     private int[] platformsSize = new int[] { 16, 20, 24 };
+    private int bridgeMinimumLength;
 
     private GameObject currentFloor;
 
@@ -108,7 +110,7 @@ public class PCGMap : MonoBehaviour {
     private void CreateBridge()
     {
         Vector3 prev = transform.position;
-        int distance = 5 + iseed.Next(2) * 10 + iseed.Next(9);
+        int distance = bridgeMinimumLength + iseed.Next(brigdeLength);
         transform.position += transform.forward * distance;
         Vector3 curr = transform.position;
         GameObject bridgeType = BrigdePrefab[iseed.Next(BrigdePrefab.Length)];
