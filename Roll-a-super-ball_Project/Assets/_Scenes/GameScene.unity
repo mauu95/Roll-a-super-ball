@@ -1004,9 +1004,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba984c38f3358d4c9c4091eabeae2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
+  seed: 1
   Dimension: 20
   nFloor: 2
+  brigdeLength: 30
   nPickUps: 4
   platformPrefabs:
   - {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a, type: 3}
@@ -1028,7 +1029,7 @@ MonoBehaviour:
     quantity: 1
   portalPrefab: {fileID: 3296860610100036561, guid: 34090761d69f04591b449ba1caabc21a,
     type: 3}
-  history: 
+  history: {fileID: 0}
 --- !u!4 &1473236727
 Transform:
   m_ObjectHideFlags: 0

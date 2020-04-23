@@ -15,7 +15,7 @@ public class PCGMap : MonoBehaviour {
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
     [HideInInspector]
-    public List<int> history;
+    public PCGHistory history;
 
 
     private IteratorSeed iseed;
@@ -30,7 +30,7 @@ public class PCGMap : MonoBehaviour {
     private void Start() {
         if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
-        history = new List<int>();
+        history = new PCGHistory();
 
         CreateMap();
     }
@@ -71,14 +71,16 @@ public class PCGMap : MonoBehaviour {
 
     private void PerformAction() {
         int action = iseed.Next(3);
-        history.Add(action);
 
-        if (action == 0) 
-            CreatePlatform();
+        if (action == 0)
+            history.Add(action, CreatePlatform());
         else if (action == 1)
+        {
+            history.Add(action);
             ChangeDirection();
+        }
         else if (action == 2)
-            CreateBridge();
+            history.Add(action, CreateBridge());
     }
 
 
@@ -107,7 +109,7 @@ public class PCGMap : MonoBehaviour {
         }
     }
 
-    private void CreateBridge()
+    private GameObject CreateBridge()
     {
         Vector3 prev = transform.position;
         int distance = bridgeMinimumLength + iseed.Next(brigdeLength);
@@ -116,21 +118,26 @@ public class PCGMap : MonoBehaviour {
         GameObject bridgeType = BrigdePrefab[iseed.Next(BrigdePrefab.Length)];
         GameObject bridge = Create(bridgeType, transform.position, transform.rotation);
         bridge.GetComponent<Bridge>().SetEndPoints(prev, curr);
+
+        return bridge;
     }
 
-    private void CreatePlatform() {
+    private GameObject CreatePlatform() {
         bool overlap = false;
-        foreach (GameObject plat in platforms)
-            if (plat.transform.position == transform.position)
+        foreach (GameObject platf in platforms)
+            if (platf.transform.position == transform.position)
                 overlap = true;
 
+        GameObject plat = null;
         if (!overlap) {
             int platformIndex = iseed.Next(100) < 80 ? 0 : 1;
-            GameObject temp = Create(platformPrefabs[platformIndex], transform.position, transform.rotation);
+            plat = Create(platformPrefabs[platformIndex], transform.position, transform.rotation);
             int newdim = platformsSize[iseed.Next(platformsSize.Length - 1)];
-            temp.transform.localScale = new Vector3(newdim, temp.transform.localScale.y, newdim);
-            platforms.Add(temp);
+            plat.transform.localScale = new Vector3(newdim, plat.transform.localScale.y, newdim);
+            platforms.Add(plat);
         }
+
+        return plat;
     }
 
     private void ChangeDirection()
