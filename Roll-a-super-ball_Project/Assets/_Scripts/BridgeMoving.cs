@@ -31,7 +31,6 @@ public class BridgeMoving : Bridge
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("a");
         SwapDirection();
     }
 
