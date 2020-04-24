@@ -8,25 +8,36 @@ public class BridgeMoving : Bridge
     private Vector3 target;
     private Vector3 start;
 
+    private void Start()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position, transform.up, 1F);
+
+        foreach(RaycastHit hit in hits)
+            if (hit.transform.GetComponent<BridgeNormal>())
+                hit.transform.gameObject.SetActive(false);
+    }
+
     void Update()
     {
         if( transform.position == target )
             SwapDirection();
 
-        if (target != null)
-            transform.position = moviment(target);
+        transform.position = moviment(target);
     }
 
     private void SwapDirection()
     {
         Vector3 temp = target;
+
         target = start;
         start = temp;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        SwapDirection();
+        if(collision.gameObject.name != "Player")
+            SwapDirection();
     }
 
     private Vector3 moviment( Vector3 pos ){
