@@ -27,10 +27,10 @@ public class PCGHistory : MonoBehaviour
         return result;
     }
 
-    public int[] SearchPattern(string pattern)
+    public SearchPatternResult[] SearchBrigde(string pattern)
     {
-        List<int> result = new List<int>();
-        string sHist = ToString();
+        List<SearchPatternResult> result = new List<SearchPatternResult>();
+        string sHist = ToStringWithNoSpaces();
         sHist = sHist.Replace(" ", "");
 
         Regex rx = new Regex(pattern);
@@ -38,20 +38,49 @@ public class PCGHistory : MonoBehaviour
 
         foreach(Match match in matches)
         {
-            GroupCollection groups = match.Groups;
-            result.Add(groups[0].Index);
+            SearchPatternResult temp = new SearchPatternResult();
+            temp.index = match.Index;
+            temp.match = match.Value;
+            temp.offset = match.Value.IndexOf("2");
+            temp.indexOfBridge = temp.index + temp.offset;
+            result.Add(temp);
         }
 
         return result.ToArray();
+    }
+
+    public PCGHistoryStep GetElement(int index)
+    {
+        return hist[index];
+    }
+
+    public string ToStringWithNoSpaces()
+    {
+        string result = "";
+
+        foreach(PCGHistoryStep step in hist)
+            result += step.action;
+
+        return result;
     }
 
     public override string ToString()
     {
         string result = "";
 
-        foreach(PCGHistoryStep step in hist)
-            result += " " + step.action;
+        for (int i =0; i < hist.Count; i++)
+        {
+            result += " " + i + ":" + hist[i].action;
+        }
 
         return result;
+    }
+
+    public struct SearchPatternResult
+    {
+        public int index;
+        public string match;
+        public int offset;
+        public int indexOfBridge;
     }
 }

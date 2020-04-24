@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba984c38f3358d4c9c4091eabeae2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 1
+  seed: 0
   Dimension: 20
   nFloor: 2
   brigdeLength: 30
@@ -1014,6 +1014,8 @@ MonoBehaviour:
   - {fileID: 835414953093068274, guid: 46a417f9a2a7a4e7190dce2dc36430d9, type: 3}
   BrigdePrefab:
   - {fileID: 7634364700533989109, guid: 93de3b660eebbcd41a08ff2b49b724ef, type: 3}
+  movingBrigdePrefab: {fileID: 5871951374542988705, guid: 12b0c0114ece638429999a977ff3d94b,
+    type: 3}
   elementToAddOnMap:
   - prefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
       type: 3}
@@ -1030,6 +1032,7 @@ MonoBehaviour:
   portalPrefab: {fileID: 3296860610100036561, guid: 34090761d69f04591b449ba1caabc21a,
     type: 3}
   history: {fileID: 0}
+  mat: {fileID: 2100000, guid: 1f54107d31374bb43a1536acad7c093c, type: 2}
 --- !u!4 &1473236727
 Transform:
   m_ObjectHideFlags: 0

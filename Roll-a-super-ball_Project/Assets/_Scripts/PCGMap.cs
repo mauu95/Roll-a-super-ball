@@ -12,10 +12,12 @@ public class PCGMap : MonoBehaviour {
     public int nPickUps;
     public GameObject[] platformPrefabs;
     public GameObject[] BrigdePrefab;
+    public GameObject movingBrigdePrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
     [HideInInspector]
     public PCGHistory history;
+    public Material mat;
 
 
     private IteratorSeed iseed;
@@ -23,7 +25,7 @@ public class PCGMap : MonoBehaviour {
     private List<int> platformIndexes;
     private GameObject map;
     private int[] platformsSize = new int[] { 16, 20, 24 };
-    private int bridgeMinimumLength;
+    private int bridgeMinimumLength = 5;
 
     private GameObject currentFloor;
 
@@ -52,9 +54,40 @@ public class PCGMap : MonoBehaviour {
 
         CreatePortals();
 
-        //Brigdge stuff
-        //Se due ponti sono di fila girane uno di 180°
-        //Puoi modificare BridgeMoving in modo tale che quando collide cambia direzione
+        PCGHistory.SearchPatternResult[] bridges = history.SearchBrigde("01*2+1*0");
+
+        for(int i = 0; i< bridges.Length; i++)
+        {
+            GameObject platform1 = history.GetElement(bridges[i].index).obj;
+            float scale1 = platform1.transform.localScale.x;
+
+            GameObject platform2 = history.GetElement(bridges[i].index + bridges[i].match.Length - 1 ).obj;
+            float scale2 = platform2.transform.localScale.x;
+
+            float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
+
+            if(distance > 8)
+            {
+                GameObject movingBridge = Instantiate(movingBrigdePrefab);
+                movingBridge.transform.rotation = history.GetElement(bridges[i].indexOfBridge).obj.transform.rotation;
+
+                Vector3 startPoint = history.GetElement(bridges[i].index).obj.transform.position;
+                Vector3 endPoint = history.GetElement(bridges[i].index + bridges[i].match.Length - 1).obj.transform.position;
+
+                movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
+
+
+                int nBridges = bridges[i].match.Split('2').Length - 1;
+                int iob = bridges[i].indexOfBridge;
+
+                for (int j = iob; j < iob + nBridges; j++)
+                    history.GetElement(j).obj.SetActive(false);
+
+                //history.GetElement(bridges[i].indexOfBridge).obj.GetComponent<MeshRenderer>().material = mat;
+                //history.GetElement(bridges[i].indexOfBridge).obj.transform.position += Vector3.up * 0.1f;
+            }
+
+        }
 
         foreach (CoupleGameobjectInt el in elementToAddOnMap)
             PlaceOnMap(el.prefab, el.quantity);
@@ -73,7 +106,11 @@ public class PCGMap : MonoBehaviour {
         int action = iseed.Next(3);
 
         if (action == 0)
-            history.Add(action, CreatePlatform());
+        {
+            GameObject plat = CreatePlatform();
+            if(plat)
+                history.Add(action, plat);
+        }
         else if (action == 1)
         {
             history.Add(action);
