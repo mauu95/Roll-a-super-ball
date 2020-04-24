@@ -31,7 +31,6 @@ public class PCGHistory : MonoBehaviour
     {
         List<SearchPatternResult> result = new List<SearchPatternResult>();
         string sHist = ToStringWithNoSpaces();
-        sHist = sHist.Replace(" ", "");
 
         Regex rx = new Regex(pattern);
         MatchCollection matches = rx.Matches(sHist);

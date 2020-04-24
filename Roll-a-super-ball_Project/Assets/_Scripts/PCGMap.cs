@@ -17,7 +17,6 @@ public class PCGMap : MonoBehaviour {
     public GameObject portalPrefab;
     [HideInInspector]
     public PCGHistory history;
-    public Material mat;
 
 
     private IteratorSeed iseed;
@@ -53,48 +52,12 @@ public class PCGMap : MonoBehaviour {
         }
 
         CreatePortals();
-
-        PCGHistory.SearchPatternResult[] bridges = history.SearchBrigde("01*2+1*0");
-
-        for(int i = 0; i< bridges.Length; i++)
-        {
-            GameObject platform1 = history.GetElement(bridges[i].index).obj;
-            float scale1 = platform1.transform.localScale.x;
-
-            GameObject platform2 = history.GetElement(bridges[i].index + bridges[i].match.Length - 1 ).obj;
-            float scale2 = platform2.transform.localScale.x;
-
-            float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
-
-            if(distance > 8)
-            {
-                GameObject movingBridge = Instantiate(movingBrigdePrefab);
-                movingBridge.transform.rotation = history.GetElement(bridges[i].indexOfBridge).obj.transform.rotation;
-
-                Vector3 startPoint = history.GetElement(bridges[i].index).obj.transform.position;
-                Vector3 endPoint = history.GetElement(bridges[i].index + bridges[i].match.Length - 1).obj.transform.position;
-
-                movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
-
-
-                int nBridges = bridges[i].match.Split('2').Length - 1;
-                int iob = bridges[i].indexOfBridge;
-
-                for (int j = iob; j < iob + nBridges; j++)
-                    history.GetElement(j).obj.SetActive(false);
-
-                //history.GetElement(bridges[i].indexOfBridge).obj.GetComponent<MeshRenderer>().material = mat;
-                //history.GetElement(bridges[i].indexOfBridge).obj.transform.position += Vector3.up * 0.1f;
-            }
-
-        }
+        CreateMovingBridges();
 
         foreach (CoupleGameobjectInt el in elementToAddOnMap)
             PlaceOnMap(el.prefab, el.quantity);
 
     }
-
-
 
     private void CreateFloor()
     {
@@ -127,6 +90,47 @@ public class PCGMap : MonoBehaviour {
 
 
 
+
+    private void ChangeDirection()
+    {
+        int newdirection = iseed.Next(4);
+        transform.Rotate(0f, newdirection * 90f, 0f);
+    }
+
+    private void CreateMovingBridges()
+    {
+        PCGHistory.SearchPatternResult[] bridges = history.SearchBrigde("01*2+1*0");
+
+        for (int i = 0; i < bridges.Length; i++)
+        {
+            PCGHistory.SearchPatternResult curr = bridges[i];
+
+            GameObject platform1 = history.GetElement(curr.index).obj;
+            float scale1 = platform1.transform.localScale.x;
+
+            GameObject platform2 = history.GetElement(curr.index + curr.match.Length - 1).obj;
+            float scale2 = platform2.transform.localScale.x;
+
+            float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
+
+            if (distance >= 4)
+            {
+                GameObject movingBridge = Instantiate(movingBrigdePrefab);
+                movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
+
+                Vector3 startPoint = history.GetElement(curr.index).obj.transform.position;
+                Vector3 endPoint = history.GetElement(curr.index + curr.match.Length - 1).obj.transform.position;
+
+                movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
+
+                int nBridges = curr.match.Split('2').Length - 1;
+                int iob = curr.indexOfBridge;
+
+                for (int j = iob; j < iob + nBridges; j++)
+                    history.GetElement(j).obj.SetActive(false);
+            }
+        }
+    }
 
 
     private void CreatePortals()
@@ -175,12 +179,6 @@ public class PCGMap : MonoBehaviour {
         }
 
         return plat;
-    }
-
-    private void ChangeDirection()
-    {
-        int newdirection = iseed.Next(4);
-        transform.Rotate(0f, newdirection * 90f, 0f);
     }
 
     private GameObject Create(GameObject obj, Vector3 pos, Quaternion rot) {

@@ -15,11 +15,6 @@ public class BridgeMoving : Bridge
 
         if (target != null)
             transform.position = moviment(target);
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            SetEndPoints(new Vector3(0f, 0f, -5f), new Vector3(0f, 0f, 5f));
-        }
     }
 
     private void SwapDirection()
