@@ -35,6 +35,16 @@ public class BridgeMoving : Bridge
             StartCoroutine(SwapDirection());
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        GameObject p = collision.gameObject;
+        if (p.name != "Player")
+            return;
+
+        p.GetComponent<Rigidbody>().AddForce((target-start).normalized *100);
+
+    }
+
     private Vector3 moviment( Vector3 pos ){
         return Vector3.MoveTowards( transform.position , pos , Time.deltaTime * speed );
     }
