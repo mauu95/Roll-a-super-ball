@@ -113,7 +113,7 @@ public class PCGMap : MonoBehaviour {
 
             float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
 
-            if (distance > 4)
+            if (distance > 5)
             {
                 Vector3 startPoint = history.GetElement(curr.index).obj.transform.position;
                 Vector3 endPoint = history.GetElement(curr.index + curr.match.Length - 1).obj.transform.position;

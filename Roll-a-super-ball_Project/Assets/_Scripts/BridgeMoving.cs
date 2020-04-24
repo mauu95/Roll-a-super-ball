@@ -9,26 +9,6 @@ public class BridgeMoving : Bridge
     private Vector3 start;
     private bool stop;
 
-    private void Start()
-    {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1f, transform.forward);
-
-        foreach (RaycastHit hit in hits)
-            if (hit.transform.GetComponent<BridgeNormal>())
-                hit.transform.gameObject.SetActive(false);
-
-        float temp = speed;
-        speed = 1000f;
-        StartCoroutine(SetSpeed(temp));
-
-    }
-
-    IEnumerator SetSpeed(float s)
-    {
-        yield return new WaitForSeconds(0.2f);
-        this.speed = s;
-    }
-
     void Update()
     {
         if( transform.position == target )
@@ -45,7 +25,7 @@ public class BridgeMoving : Bridge
         start = temp;
         stop = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         stop = false;
     }
 
