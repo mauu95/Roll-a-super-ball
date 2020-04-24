@@ -7,37 +7,52 @@ public class BridgeMoving : Bridge
     public float speed = 2;
     private Vector3 target;
     private Vector3 start;
+    private bool stop;
 
     private void Start()
     {
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, transform.up, 1F);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1f, transform.forward);
 
-        foreach(RaycastHit hit in hits)
+        foreach (RaycastHit hit in hits)
             if (hit.transform.GetComponent<BridgeNormal>())
                 hit.transform.gameObject.SetActive(false);
+
+        float temp = speed;
+        speed = 1000f;
+        StartCoroutine(SetSpeed(temp));
+
+    }
+
+    IEnumerator SetSpeed(float s)
+    {
+        yield return new WaitForSeconds(0.2f);
+        this.speed = s;
     }
 
     void Update()
     {
         if( transform.position == target )
-            SwapDirection();
+            StartCoroutine(SwapDirection());
 
-        transform.position = moviment(target);
+        if(!stop)
+            transform.position = moviment(target);
     }
 
-    private void SwapDirection()
+    IEnumerator SwapDirection()
     {
         Vector3 temp = target;
-
         target = start;
         start = temp;
+        stop = true;
+
+        yield return new WaitForSeconds(0.2f);
+        stop = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name != "Player")
-            SwapDirection();
+            StartCoroutine(SwapDirection());
     }
 
     private Vector3 moviment( Vector3 pos ){

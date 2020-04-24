@@ -113,13 +113,17 @@ public class PCGMap : MonoBehaviour {
 
             float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
 
-            if (distance >= 4)
+            if (distance > 4)
             {
-                GameObject movingBridge = Instantiate(movingBrigdePrefab);
-                movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
-
                 Vector3 startPoint = history.GetElement(curr.index).obj.transform.position;
                 Vector3 endPoint = history.GetElement(curr.index + curr.match.Length - 1).obj.transform.position;
+
+                if (startPoint.y != endPoint.y)
+                    return;
+
+                GameObject movingBridge = Instantiate(movingBrigdePrefab, platform1.transform.parent);
+
+                movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
 
                 movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
 
