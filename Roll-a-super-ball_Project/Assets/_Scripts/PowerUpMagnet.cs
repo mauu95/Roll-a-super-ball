@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpMagnet : PowerUp {
     public float activeTime = 5;
     public float speed = 10;
-    public float range = 5;
+    public float range = 10;
 
     private float nextTimeToDeactivate = 0;
 

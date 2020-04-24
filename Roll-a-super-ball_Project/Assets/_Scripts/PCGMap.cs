@@ -46,7 +46,7 @@ public class PCGMap : MonoBehaviour {
         {
             currentFloor = CreateEmptyGameObject("Floor" + i);
             currentFloor.transform.SetParent(map.transform);
-            transform.position = new Vector3(0f, 10f * i, 0f);
+            transform.position = new Vector3(0f, 15f * i, 0f);
             CreateFloor();
             platformIndexes.Add(platforms.Count - 1);
         }
