@@ -11,7 +11,8 @@ public class TeleportPortal : MonoBehaviour {
             if (!playerIsComing) {
                 otherPortal.TeleportingHere();
                 Rigidbody rb = other.GetComponent<Rigidbody>();
-                rb.velocity = otherPortal.gameObject.transform.forward * rb.velocity.magnitude;
+                //rb.velocity = otherPortal.gameObject.transform.forward * rb.velocity.magnitude;
+                rb.velocity = Vector3.zero;
                 other.gameObject.transform.position = otherPortal.gameObject.transform.position;
             } else {
                 playerIsComing = false;
