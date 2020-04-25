@@ -7,31 +7,42 @@ public class BridgeMoving : Bridge
     public float speed = 2;
     private Vector3 target;
     private Vector3 start;
+    private bool stop;
 
     void Update()
     {
         if( transform.position == target )
-            SwapDirection();
+            StartCoroutine(SwapDirection());
 
-        if (target != null)
+        if(!stop)
             transform.position = moviment(target);
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            SetEndPoints(new Vector3(0f, 0f, -5f), new Vector3(0f, 0f, 5f));
-        }
     }
 
-    private void SwapDirection()
+    IEnumerator SwapDirection()
     {
         Vector3 temp = target;
         target = start;
         start = temp;
+        stop = true;
+
+        yield return new WaitForSeconds(0.4f);
+        stop = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        SwapDirection();
+        if(collision.gameObject.name != "Player")
+            StartCoroutine(SwapDirection());
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        GameObject p = collision.gameObject;
+        if (p.name != "Player")
+            return;
+
+        p.GetComponent<Rigidbody>().AddForce((target-start).normalized *100);
+
     }
 
     private Vector3 moviment( Vector3 pos ){
