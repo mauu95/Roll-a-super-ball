@@ -6,6 +6,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public GameObject platform;
+    public GameObject GFX;
+    public Material enemySpottedMaterial;
+    public Material patrolingMaterial;
+
 
     private NavMeshAgent agent;
     private float platformScale;
@@ -32,6 +36,7 @@ public class Enemy : MonoBehaviour
         if (agent.destination.x == transform.position.x && agent.destination.z == transform.position.z)
         {
             agent.SetDestination(GetRandomPointOnThePlatform());
+            GFX.GetComponent<MeshRenderer>().material = patrolingMaterial;
             agent.isStopped = true;
             StartCoroutine(UnleashAfterDelay(1f));
         }
@@ -49,6 +54,15 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         agent.isStopped = false;
+    }
+
+    public void SomethingSpotted(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            GFX.GetComponent<MeshRenderer>().material = enemySpottedMaterial;
+            agent.SetDestination(other.transform.position);
+        }
     }
 
 }

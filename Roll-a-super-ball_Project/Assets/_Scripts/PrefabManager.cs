@@ -19,4 +19,5 @@ public class PrefabManager : MonoBehaviour
     #endregion
 
     public GameObject enemyPrefab;
+
 }
