@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PCGMap : MonoBehaviour {
     public int seed;
@@ -17,7 +18,7 @@ public class PCGMap : MonoBehaviour {
     public GameObject portalPrefab;
     [HideInInspector]
     public PCGHistory history;
-
+    public NavMeshSurface surface;
 
     private IteratorSeed iseed;
     private List<GameObject> platforms;
@@ -29,11 +30,15 @@ public class PCGMap : MonoBehaviour {
     private GameObject currentFloor;
 
     private void Start() {
-        if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
+        if(elementToAddOnMap.Length > 0)
+            if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
         history = new PCGHistory();
 
         CreateMap();
+
+        if (surface)
+            surface.BuildNavMesh();
     }
 
     private void CreateMap()
@@ -175,7 +180,10 @@ public class PCGMap : MonoBehaviour {
 
         GameObject plat = null;
         if (!overlap) {
-            int platformIndex = iseed.Next(100) < 80 ? 0 : 1;
+            int platformIndex = 0;
+            if (platformPrefabs.Length > 1)
+                platformIndex = iseed.Next(100) < 80 ? 0 : 1;
+
             plat = Create(platformPrefabs[platformIndex], transform.position, transform.rotation);
             int newdim = platformsSize[iseed.Next(platformsSize.Length - 1)];
             plat.transform.localScale = new Vector3(newdim, plat.transform.localScale.y, newdim);
