@@ -30,7 +30,12 @@ public class Enemy : MonoBehaviour
     private void Patrol()
     {
         if (agent.destination.x == transform.position.x && agent.destination.z == transform.position.z)
+        {
             agent.SetDestination(GetRandomPointOnThePlatform());
+            agent.isStopped = true;
+            StartCoroutine(UnleashAfterDelay(1f));
+        }
+
     }
 
     private Vector3 GetRandomPointOnThePlatform()
@@ -39,4 +44,11 @@ public class Enemy : MonoBehaviour
         float z = Random.Range(0f, platformScale) - platformScale / 2;
         return platform.transform.position + new Vector3(x, 0f, z);
     }
+
+    IEnumerator UnleashAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        agent.isStopped = false;
+    }
+
 }
