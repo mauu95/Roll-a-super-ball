@@ -18,8 +18,8 @@ public class PCGMap : MonoBehaviour {
     public GameObject portalPrefab;
     [HideInInspector]
     public PCGHistory history;
-    public NavMeshSurface surface;
 
+    private NavMeshSurface surface;
     private IteratorSeed iseed;
     private List<GameObject> platforms;
     private List<int> platformIndexes;
@@ -34,6 +34,7 @@ public class PCGMap : MonoBehaviour {
             if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
         history = new PCGHistory();
+        surface = FindObjectOfType<NavMeshSurface>();
 
         CreateMap();
 
