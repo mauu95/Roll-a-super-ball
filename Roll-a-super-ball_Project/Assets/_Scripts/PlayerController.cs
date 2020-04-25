@@ -15,21 +15,11 @@ public class PlayerController : MonoBehaviour {
     public Vector3 movement;
 
     private Rigidbody rb;
-    private int currentFloor = 0;
-    private bool activateMalus = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    private void Update() {
-        int floor = (int)Mathf.Floor(transform.position.y / 10);
-        if (floor < currentFloor) {
-            activateMalus = true;
-        }
-        currentFloor = floor;
     }
 
     private void FixedUpdate() {
@@ -54,10 +44,6 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Ground") {
-            if (activateMalus) {
-                GetComponent<OvalPlayerMalus>().Activate();
-                activateMalus = false;
-            }
             isGrounded = true;
         }
     }
@@ -70,16 +56,6 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionExit(Collision other) {
         if (other.gameObject.tag == "Ground")
             isGrounded = false;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Portal")
-            currentFloor = 0;
-    }
-
-    private void OnTriggerStay(Collider other) {
-        if (other.gameObject.tag == "Portal")
-            currentFloor = 0;
     }
 
     public void AlterSpeeds(float value) {

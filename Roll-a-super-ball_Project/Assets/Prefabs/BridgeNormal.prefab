@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3588761104376793497}
   - component: {fileID: 3831530749499062680}
   - component: {fileID: 2630678686030144894}
+  - component: {fileID: 343282691}
+  - component: {fileID: -2470485312135781645}
   m_Layer: 0
   m_Name: BridgeNormal
   m_TagString: Ground
@@ -106,3 +108,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0371a94b87988f4cb4fe0b53836ef50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chanceToThrow: 0.2
+  moveUpSpeed: 11.82
+  moveDownSpeed: 11
+  moveUpHeight: 5
+--- !u!95 &343282691
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634364700533989109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 074747ff8913c4349a61a51ab45834c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &-2470485312135781645
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634364700533989109}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
