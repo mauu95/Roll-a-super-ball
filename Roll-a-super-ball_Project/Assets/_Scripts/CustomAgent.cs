@@ -24,5 +24,7 @@ public class CustomAgent : MonoBehaviour
                 agent.SetDestination(hit.point);
             }
         }
+
+
     }
 }
