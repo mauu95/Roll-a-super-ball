@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public void CreateEnemy()
+    private void Start()
     {
-        Instantiate(PrefabManager.instance.enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>().SetPlatform(gameObject);
+        StartCoroutine(SpawnEnemy());
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
             CreateEnemy();
+    }
+
+    public void CreateEnemy()
+    {
+        Instantiate(PrefabManager.instance.enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>().SetPlatform(gameObject);
+    }
+
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(0.2f);
+        CreateEnemy();
     }
 }
