@@ -11,10 +11,14 @@ public class CameraPivotController : MonoBehaviour
 
     private float yaw = 0.0f;
     private float pitch = 0.0f;
+    private float smoothSpeed = 0.125f;
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        transform.position = player.transform.position;
+        Vector3 desiredPosition = player.transform.position;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        
+        transform.position = smoothedPosition;
 
         yaw += MouseHorizontalSpeed * Input.GetAxis("Mouse X");
         pitch -= MouseVerticalSpeed * Input.GetAxis("Mouse Y");
