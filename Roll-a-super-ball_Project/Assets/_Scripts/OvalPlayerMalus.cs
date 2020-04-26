@@ -1,38 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class OvalPlayerMalus : MonoBehaviour {
-    public Vector3 size = new Vector3(1, 1.5f, 0.5f);
-    public float duration = 20;
-    public float crashThreshold = 15.0f;
+    public Vector3 ovalSize = new Vector3(1, 1.5f, 0.5f);
+    public float malusDuration = 10f;
+    public float Treshold = 16f;
 
-    private Vector3 initialScale;
     private Rigidbody rb;
-    private float oldVelocity;
-    private float returnNormalAt;
+    private Vector3 oldVelocity;
 
-    private void Start() {
-        initialScale = transform.localScale;
+    //So che stai leggendo cosa ho fatto... non l'ho capito nemmeno io. Se capisci, spiegamelo.. Grazie. 
+
+    private void Start()
+    {
         rb = GetComponent<Rigidbody>();
-        oldVelocity = rb.velocity.y;
-        crashThreshold *= crashThreshold;
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (Time.realtimeSinceStartup >= returnNormalAt) {
-            transform.localScale = initialScale;
+    private void OnCollisionEnter(Collision collision)
+    {
+        Vector3 newVelocity = rb.velocity;
+        if ((oldVelocity - newVelocity).magnitude > Treshold)
+        {
+            rb.transform.localScale = ovalSize;
+            StartCoroutine(GetBackToNormalAfterSomeTime(malusDuration));
         }
     }
-
-    void FixedUpdate() {
-        if (oldVelocity - rb.velocity.sqrMagnitude > crashThreshold) {
-            Activate();
-        }
-        oldVelocity = rb.velocity.sqrMagnitude;
+    private void Update()
+    {
+        oldVelocity = rb.velocity;
     }
 
-    public void Activate() {
-        returnNormalAt = Time.realtimeSinceStartup + duration;
-        transform.localScale = size;
+
+    IEnumerator GetBackToNormalAfterSomeTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        rb.transform.localScale = new Vector3(1f, 1f, 1f);
     }
+
 }
