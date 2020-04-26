@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    void Update()
+    public int maxZoomIn = 9;
+    public int maxZoomOut = -3;
+
+    public int offset;
+    void FixedUpdate()
     {
-        transform.localPosition += new Vector3(0, 1, -1) * -Input.mouseScrollDelta.y;
+        if (offset < maxZoomIn  && (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadPlus)))
+        {
+            transform.localPosition += new Vector3(0, -1, 1);
+            offset++;
+
+        }
+        if (offset > maxZoomOut && (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)))
+        {
+            transform.localPosition += new Vector3(0, 1, -1);
+            offset--;
+        }
     }
 }
