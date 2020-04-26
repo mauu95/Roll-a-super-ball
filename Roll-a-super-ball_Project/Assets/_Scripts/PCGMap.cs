@@ -14,6 +14,7 @@ public class PCGMap : MonoBehaviour {
     public GameObject[] platformPrefabs;
     public GameObject[] BrigdePrefab;
     public GameObject movingBrigdePrefab;
+    public GameObject bridgeDestroyerPrefab;
     public CoupleGameobjectInt[] elementToAddOnMap;
     public GameObject portalPrefab;
     [HideInInspector]
@@ -127,17 +128,24 @@ public class PCGMap : MonoBehaviour {
                 if (startPoint.y != endPoint.y)
                     return;
 
+                GameObject bridgeDestroyer = Instantiate(bridgeDestroyerPrefab, platform1.transform.parent);
+                bridgeDestroyer.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
+                bridgeDestroyer.GetComponent<BridgeDestroyer>().SetEndPoints(startPoint, endPoint);
+
                 GameObject movingBridge = Instantiate(movingBrigdePrefab, platform1.transform.parent);
-
                 movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
-
                 movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
 
+
+
+
+                /*
                 int nBridges = curr.match.Split('2').Length - 1;
                 int iob = curr.indexOfBridge;
 
                 for (int j = iob; j < iob + nBridges; j++)
                     history.GetElement(j).obj.SetActive(false);
+                */
             }
         }
     }
