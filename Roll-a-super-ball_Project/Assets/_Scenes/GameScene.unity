@@ -1154,6 +1154,8 @@ MonoBehaviour:
   - {fileID: 7634364700533989109, guid: 93de3b660eebbcd41a08ff2b49b724ef, type: 3}
   movingBrigdePrefab: {fileID: 5871951374542988705, guid: 12b0c0114ece638429999a977ff3d94b,
     type: 3}
+  bridgeDestroyerPrefab: {fileID: 7976263262975569517, guid: 1e2d1997e65fee546bedb1cf8ebd5f15,
+    type: 3}
   elementToAddOnMap:
   - prefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
       type: 3}

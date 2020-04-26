@@ -132,11 +132,10 @@ public class PCGMap : MonoBehaviour {
                 bridgeDestroyer.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
                 bridgeDestroyer.GetComponent<BridgeDestroyer>().SetEndPoints(startPoint, endPoint);
 
-                GameObject movingBridge = Instantiate(movingBrigdePrefab, platform1.transform.parent);
-                movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
-                movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
+                CreateMovingBridge(curr, platform1, startPoint, endPoint);
 
-
+                if (distance > 20)
+                    CreateMovingBridge(curr, platform1, endPoint, startPoint);
 
 
                 /*
@@ -150,6 +149,14 @@ public class PCGMap : MonoBehaviour {
         }
     }
 
+    private GameObject CreateMovingBridge(PCGHistory.SearchPatternResult curr, GameObject parent, Vector3 startPoint, Vector3 endPoint)
+    {
+        GameObject movingBridge = Instantiate(movingBrigdePrefab, parent.transform.parent);
+        movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
+        movingBridge.transform.position = (startPoint + endPoint) / 2 + startPoint;
+        movingBridge.GetComponent<BridgeMoving>().SetEndPoints(startPoint, endPoint);
+        return movingBridge;
+    }
 
     private void CreatePortals()
     {
