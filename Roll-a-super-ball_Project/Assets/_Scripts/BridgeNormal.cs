@@ -41,6 +41,7 @@ public class BridgeNormal : Bridge {
     }
 
     private void OnCollisionEnter(Collision collision) {
+        return;
         if (collision.gameObject.CompareTag(PLAYER_TAG) && Random.value <= chanceToThrow && currentState == AnimationState.IDLE) {
             currentState = AnimationState.ANIMATING_PULSE_COLOR;
             GetComponent<Animator>().SetBool("throwUp", true);
