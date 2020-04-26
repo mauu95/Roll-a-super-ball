@@ -1113,6 +1113,8 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: d54098e402d914eb9bb3300dddcecf4b, type: 3}
   - name: magnet
     icon: {fileID: 21300000, guid: 477988481b2d3394993dd4a0cb86554c, type: 3}
+  - name: invisible
+    icon: {fileID: 21300000, guid: 44ba7f956b1827c4e9399963c5339402, type: 3}
 --- !u!1 &1473236725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1169,9 @@ MonoBehaviour:
       type: 3}
     quantity: 1
   - prefab: {fileID: 8614235011776224205, guid: 6d726b14a4b305647ae98bd4bf5781a7,
+      type: 3}
+    quantity: 1
+  - prefab: {fileID: 1694597253681835275, guid: c1e354b73de5e0f44b4ccd9a368d798c,
       type: 3}
     quantity: 1
   portalPrefab: {fileID: 3296860610100036561, guid: 34090761d69f04591b449ba1caabc21a,

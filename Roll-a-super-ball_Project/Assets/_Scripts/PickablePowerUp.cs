@@ -28,6 +28,12 @@ public class PickablePowerUp : MonoBehaviour
                 other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpMagnet>());
                 other.gameObject.GetComponent<PowerUpMagnet>().enabled = false;
             }
+            else if (type == "invisible")
+            {
+                other.gameObject.AddComponent<PowerUpInvisible>();
+                other.GetComponent<Inventory>().AddPowerUp(other.gameObject.GetComponent<PowerUpInvisible>());
+                other.gameObject.GetComponent<PowerUpInvisible>().enabled = false;
+            }
 
             Destroy(gameObject);
         }

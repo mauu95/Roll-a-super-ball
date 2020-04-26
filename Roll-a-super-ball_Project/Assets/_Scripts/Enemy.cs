@@ -58,10 +58,19 @@ public class Enemy : MonoBehaviour
 
     public void SomethingSpotted(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        GameObject p = other.gameObject;
+
+        if(p.CompareTag("Player"))
         {
-            GFX.GetComponent<MeshRenderer>().material = enemySpottedMaterial;
-            agent.SetDestination(other.transform.position);
+            PowerUpInvisible inv = p.GetComponent<PowerUpInvisible>();
+
+            if (inv && inv.isInvisible)
+                return;
+            else
+            {
+                GFX.GetComponent<MeshRenderer>().material = enemySpottedMaterial;
+                agent.SetDestination(other.transform.position);
+            }
         }
     }
 
