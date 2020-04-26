@@ -30,15 +30,21 @@ public class PCGMap : MonoBehaviour {
 
     private GameObject currentFloor;
 
-    private void Start() {
-        if(elementToAddOnMap.Length > 0)
+    private void Start()
+    {
+        if (elementToAddOnMap.Length > 0)
             if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
         platformIndexes = new List<int>();
         history = new PCGHistory();
         surface = FindObjectOfType<NavMeshSurface>();
 
         CreateMap();
+        StartCoroutine( BuildNavMesh() );
+    }
 
+    IEnumerator BuildNavMesh()
+    {
+        yield return new WaitForSeconds(0.2f);
         if (surface)
             surface.BuildNavMesh();
     }
