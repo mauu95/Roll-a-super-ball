@@ -42,13 +42,6 @@ public class PCGMap : MonoBehaviour {
         StartCoroutine( BuildNavMesh() );
     }
 
-    IEnumerator BuildNavMesh()
-    {
-        yield return new WaitForSeconds(0.2f);
-        if (surface)
-            surface.BuildNavMesh();
-    }
-
     private void CreateMap()
     {
         iseed = new IteratorSeed(seed);
@@ -104,6 +97,14 @@ public class PCGMap : MonoBehaviour {
 
 
 
+
+    IEnumerator BuildNavMesh()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (surface)
+            surface.BuildNavMesh();
+    }
+
     private void ChangeDirection()
     {
         int newdirection = iseed.Next(4);
@@ -142,15 +143,6 @@ public class PCGMap : MonoBehaviour {
 
                 if (distance > 20)
                     CreateMovingBridge(curr, platform1, endPoint, startPoint);
-
-
-                /*
-                int nBridges = curr.match.Split('2').Length - 1;
-                int iob = curr.indexOfBridge;
-
-                for (int j = iob; j < iob + nBridges; j++)
-                    history.GetElement(j).obj.SetActive(false);
-                */
             }
         }
     }
@@ -170,10 +162,10 @@ public class PCGMap : MonoBehaviour {
         {
             int index = platformIndexes[i];
 
-            GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation);
+            GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index].transform.parent);
             TeleportPortal portal1 = portalObject1.GetComponent<TeleportPortal>();
 
-            GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation);
+            GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index + 1].transform.parent);
             TeleportPortal portal2 = portalObject2.GetComponent<TeleportPortal>();
 
             portal1.otherPortal = portal2;
