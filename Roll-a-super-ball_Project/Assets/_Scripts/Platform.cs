@@ -6,7 +6,7 @@ public class Platform : MonoBehaviour
 {
     private void Start()
     {
-        StartCoroutine(SpawnEnemy());
+        //StartCoroutine(SpawnEnemy());
     }
 
     private void Update()

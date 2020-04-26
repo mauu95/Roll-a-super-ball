@@ -23,6 +23,10 @@ public class Inventory : MonoBehaviour {
         for (int i = 1; i < 10; i++)
             if (Input.GetKeyDown(i.ToString()))
                 ActivatePowerUp(i - 1);
+
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0)
+            ActivatePowerUp(current + (int)scroll);
     }
 
     private void OnTriggerEnter(Collider other) {
