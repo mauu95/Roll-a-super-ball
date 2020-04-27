@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpDash : PowerUp
 {
-    public float DashForce = 60f;
+    public float DashForce = 600f;
     public float dashDuration = 0.3f;
 
     private void Awake()
@@ -19,7 +19,7 @@ public class PowerUpDash : PowerUp
         if (player.movement == Vector3.zero)
         {
             Vector3 forward = player.GetForwardDirection();
-            direction = new Vector3(forward.x, 0f, forward.z);
+            direction = new Vector3(forward.x, 0f, forward.z).normalized;
         }
         else
             direction = player.movement;
