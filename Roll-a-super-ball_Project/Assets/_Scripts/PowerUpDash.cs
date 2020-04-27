@@ -22,7 +22,7 @@ public class PowerUpDash : PowerUp
             direction = new Vector3(forward.x, 0f, forward.z).normalized;
         }
         else
-            direction = player.movement;
+            direction = player.movement.normalized;
 
         StartCoroutine(Dash(direction));
     }
