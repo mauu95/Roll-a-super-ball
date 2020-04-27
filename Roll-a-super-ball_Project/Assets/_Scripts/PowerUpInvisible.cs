@@ -8,16 +8,21 @@ public class PowerUpInvisible : PowerUp
     public bool isInvisible;
     public float duration = 2f;
 
+    private Material mat;
+
     private void Awake()
     {
         id = "invisible";
         cooldownTime = 5f;
+        mat = GetComponent<MeshRenderer>().material;
     }
 
     public override void doStuff()
     {
         isInvisible = true;
-        GetComponent<MeshRenderer>().material.color = Color.white;
+        Color temp = mat.color;
+        temp.a = 0.4f;
+        mat.color = temp;
 
         StartCoroutine(ReturnNormalAfterTime(duration));
     }
@@ -27,6 +32,8 @@ public class PowerUpInvisible : PowerUp
         yield return new WaitForSeconds(duration);
 
         isInvisible = false;
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        Color temp = mat.color;
+        temp.a = 1f;
+        mat.color = temp;
     }
 }
