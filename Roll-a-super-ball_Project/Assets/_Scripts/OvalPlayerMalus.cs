@@ -10,11 +10,15 @@ public class OvalPlayerMalus : MonoBehaviour {
     private Rigidbody rb;
     private Vector3 oldVelocity;
 
+    private Vector3 target;
+    private Vector3 normalSize = new Vector3(1f, 1f, 1f);
+
     //So che stai leggendo cosa ho fatto... non l'ho capito nemmeno io. Se capisci, spiegamelo.. Grazie. 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        target = normalSize;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,20 +26,22 @@ public class OvalPlayerMalus : MonoBehaviour {
         Vector3 newVelocity = rb.velocity;
         if ((oldVelocity - newVelocity).magnitude > Treshold)
         {
-            rb.transform.localScale = ovalSize;
+            transform.localScale = ovalSize;
+            target = ovalSize;
+
             StartCoroutine(GetBackToNormalAfterSomeTime(malusDuration));
         }
     }
     private void Update()
     {
         oldVelocity = rb.velocity;
+        transform.localScale = Vector3.Lerp(transform.localScale, target, 0.125f);
     }
-
 
     IEnumerator GetBackToNormalAfterSomeTime(float time)
     {
         yield return new WaitForSeconds(time);
-        rb.transform.localScale = new Vector3(1f, 1f, 1f);
+        target = normalSize;
     }
 
 }
