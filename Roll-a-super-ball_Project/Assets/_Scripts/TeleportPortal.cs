@@ -1,30 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TeleportPortal : MonoBehaviour {
     public TeleportPortal otherPortal;
-    private bool playerIsComing = false;
+
+    private bool playerIsComing;
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player") && !playerIsComing) {
-            if (!playerIsComing) {
-                otherPortal.TeleportingHere();
-                Rigidbody rb = other.GetComponent<Rigidbody>();
-                //rb.velocity = otherPortal.gameObject.transform.forward * rb.velocity.magnitude;
-                rb.velocity = Vector3.zero;
-                other.gameObject.transform.position = otherPortal.gameObject.transform.position;
-            } else {
-                playerIsComing = false;
-            }
-        }
+        GameObject player = other.gameObject;
+
+        if (player.CompareTag("Player") && !playerIsComing)
+            Teleport(player, otherPortal);
+    }
+
+    private void Teleport(GameObject player, TeleportPortal portal)
+    {
+        portal.playerIsComing = true;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        player.transform.position = portal.transform.position;
     }
 
     private void OnTriggerExit(Collider other) {
         playerIsComing &= !other.gameObject.CompareTag("Player");
-    }
-
-    public void TeleportingHere() {
-        playerIsComing = true;
     }
 }
