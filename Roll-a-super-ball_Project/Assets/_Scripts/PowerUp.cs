@@ -33,4 +33,6 @@ public abstract class PowerUp : MonoBehaviour {
         isCooldown = false;
     }
 
+    public abstract void ReturnToNormal();
+
 }

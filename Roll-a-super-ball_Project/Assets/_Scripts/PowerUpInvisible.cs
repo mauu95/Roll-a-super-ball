@@ -22,7 +22,7 @@ public class PowerUpInvisible : PowerUp
 
         visible = mat.color;
         invisible = mat.color;
-        invisible.a = 0.4f;
+        invisible.a = 0.1f;
         SetColor(visible);
     }
 
@@ -49,5 +49,11 @@ public class PowerUpInvisible : PowerUp
     {
         if(mat.color != target)
             mat.color = Color.Lerp(mat.color, target, 1/transitionDurationSpeed);
+    }
+
+    public override void ReturnToNormal()
+    {
+        isInvisible = false;
+        mat.color = visible;
     }
 }

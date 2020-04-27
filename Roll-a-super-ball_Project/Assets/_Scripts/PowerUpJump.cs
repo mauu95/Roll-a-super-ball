@@ -18,6 +18,11 @@ public class PowerUpJump : PowerUp
         }
     }
 
+    public override void ReturnToNormal()
+    {
+
+    }
+
     private void Awake()
     {
         id = "jump";

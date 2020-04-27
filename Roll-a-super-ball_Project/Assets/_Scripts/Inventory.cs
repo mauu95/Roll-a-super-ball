@@ -55,7 +55,10 @@ public class Inventory : MonoBehaviour {
 
     public void DeactivatePowerUp() {
         foreach (PowerUp item in powerUps)
+        {
+            item.ReturnToNormal();
             item.enabled = false;
+        }
     }
 
     public void ActivatePowerUp(int i) {

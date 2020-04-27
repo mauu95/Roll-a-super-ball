@@ -42,4 +42,8 @@ public class PowerUpDash : PowerUp
         p.SetVelocity(newvel.normalized * 10);
     }
 
+    public override void ReturnToNormal()
+    {
+
+    }
 }

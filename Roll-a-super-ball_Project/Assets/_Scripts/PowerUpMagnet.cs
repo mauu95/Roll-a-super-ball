@@ -36,5 +36,8 @@ public class PowerUpMagnet : PowerUp {
             nextTimeToDeactivate = Time.realtimeSinceStartup + activeTime;
     }
 
+    public override void ReturnToNormal()
+    {
 
+    }
 }
