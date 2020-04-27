@@ -7,33 +7,47 @@ public class PowerUpInvisible : PowerUp
 {
     public bool isInvisible;
     public float duration = 2f;
+    public float transitionDurationSpeed = 32;
 
     private Material mat;
+    private Color invisible;
+    private Color visible;
+    private Color target;
 
     private void Awake()
     {
         id = "invisible";
         cooldownTime = 5f;
         mat = GetComponent<MeshRenderer>().material;
+
+        visible = mat.color;
+        invisible = mat.color;
+        invisible.a = 0.4f;
+        SetColor(visible);
     }
 
     public override void doStuff()
     {
         isInvisible = true;
-        Color temp = mat.color;
-        temp.a = 0.4f;
-        mat.color = temp;
-
+        SetColor(invisible);
         StartCoroutine(ReturnNormalAfterTime(duration));
     }
 
     IEnumerator ReturnNormalAfterTime(float duration)
     {
         yield return new WaitForSeconds(duration);
-
         isInvisible = false;
-        Color temp = mat.color;
-        temp.a = 1f;
-        mat.color = temp;
+        SetColor(visible);
+    }
+
+    private void SetColor(Color c)
+    {
+        target = c;
+    }
+
+    private void LateUpdate()
+    {
+        if(mat.color != target)
+            mat.color = Color.Lerp(mat.color, target, 1/transitionDurationSpeed);
     }
 }
