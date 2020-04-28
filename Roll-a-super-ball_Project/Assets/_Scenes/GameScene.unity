@@ -1341,6 +1341,11 @@ PrefabInstance:
       propertyPath: speed
       value: 7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3925770107503839298, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f54107d31374bb43a1536acad7c093c, type: 2}
     - target: {fileID: 3925770107503839302, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
       propertyPath: m_Name
