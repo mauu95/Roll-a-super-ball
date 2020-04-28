@@ -170,6 +170,8 @@ public class PCGMap : MonoBehaviour {
 
             portal1.otherPortal = portal2;
             portal2.otherPortal = portal1;
+            portal2.IsGoingDown();
+            
         }
     }
 
