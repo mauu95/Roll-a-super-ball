@@ -163,10 +163,10 @@ public class PCGMap : MonoBehaviour {
             int index = platformIndexes[i];
 
             GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index].transform.parent);
-            TeleportPortal portal1 = portalObject1.GetComponent<TeleportPortal>();
+            Teleportal portal1 = portalObject1.GetComponent<Teleportal>();
 
             GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index + 1].transform.parent);
-            TeleportPortal portal2 = portalObject2.GetComponent<TeleportPortal>();
+            Teleportal portal2 = portalObject2.GetComponent<Teleportal>();
 
             portal1.otherPortal = portal2;
             portal2.otherPortal = portal1;

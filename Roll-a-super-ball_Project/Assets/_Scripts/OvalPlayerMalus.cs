@@ -35,7 +35,7 @@ public class OvalPlayerMalus : MonoBehaviour {
     private void Update()
     {
         oldVelocity = rb.velocity;
-        transform.localScale = Vector3.Lerp(transform.localScale, target, 0.125f);
+        transform.localScale = Vector3.Lerp(transform.localScale, target, 0.0750f);
     }
 
     IEnumerator GetBackToNormalAfterSomeTime(float time)
