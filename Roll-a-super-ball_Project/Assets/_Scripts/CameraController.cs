@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public int maxZoomOut = -3;
 
     public int offset;
-    void FixedUpdate()
+    void Update()
     {
         if (offset < maxZoomIn  && (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadPlus)))
         {
