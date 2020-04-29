@@ -7,7 +7,7 @@ public class PowerUpInvisible : PowerUp
 {
     public bool isInvisible;
     public float duration = 2f;
-    public float transitionDurationSpeed = 32;
+    public float transitionDuration = 1;
     public Material invisibleMat;
 
     private Material defaultMat;
@@ -35,7 +35,7 @@ public class PowerUpInvisible : PowerUp
     private void LateUpdate()
     {
         if (invisibleMat.color != target)
-            invisibleMat.color = Color.Lerp(invisibleMat.color, target, 1 / transitionDurationSpeed);
+            invisibleMat.color = Color.Lerp(invisibleMat.color, target, (Time.deltaTime) / transitionDuration * 2 );
 
         if (target == visible && invisibleMat.color.a > 0.9f)
             rend.material = defaultMat;
