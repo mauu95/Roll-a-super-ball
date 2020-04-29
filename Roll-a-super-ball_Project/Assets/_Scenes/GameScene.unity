@@ -313,7 +313,7 @@ PrefabInstance:
         type: 3}
       propertyPath: invisibleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 1f54107d31374bb43a1536acad7c093c, type: 2}
+      objectReference: {fileID: 2100000, guid: 7733ca85172348f4b90316bf8ad7b40b, type: 2}
     - target: {fileID: 550170448341449047, guid: 7d70273306db38f4798e2e03894e52de,
         type: 3}
       propertyPath: m_Name
@@ -883,6 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibility: 0
   fadeTime: 1
+  isFading: 0
 --- !u!1 &1115739389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 0
-  Dimension: 20
+  Dimension: 10
   nFloor: 2
   brigdeLength: 30
   nPickUps: 4
