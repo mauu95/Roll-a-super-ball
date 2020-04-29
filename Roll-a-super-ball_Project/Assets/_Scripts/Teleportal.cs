@@ -13,8 +13,28 @@ public class Teleportal : MonoBehaviour {
     public void Teleport(GameObject player, Teleportal portal)
     {
         portal.playerIsComing = true;
+
+        Smaterializator smat = player.GetComponent<Smaterializator>();
+
+        if(smat == null)
+        {
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            player.transform.position = portal.transform.position;
+        }
+        else
+            StartCoroutine(ChagePositionAfterSmaterialization(player, smat, portal));
+    }
+
+    IEnumerator ChagePositionAfterSmaterialization(GameObject player, Smaterializator smat, Teleportal portal)
+    {
+        smat.FadeOut();
+
+        while (smat.isFading)
+            yield return 0;
+
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.transform.position = portal.transform.position;
+        smat.FadeIn();
     }
 
     public void IsGoingUp()
