@@ -14,7 +14,11 @@ public class Smaterializator : MonoBehaviour
     void Start()
     {
         mat = GetComponent<MeshRenderer>().material;
-        visibility = 1;
+
+        if (!mat.HasProperty(visibilityName))
+            enabled = false;
+
+        FadeIn();
     }
     void Update()
     {

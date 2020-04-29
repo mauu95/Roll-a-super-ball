@@ -8,8 +8,10 @@ public class PowerUpInvisible : PowerUp
     public bool isInvisible;
     public float duration = 2f;
     public float transitionDurationSpeed = 32;
+    public Material invisibleMat;
 
-    private Material mat;
+    private Material defaultMat;
+    private MeshRenderer rend;
     private Color invisible;
     private Color visible;
     private Color target;
@@ -18,18 +20,31 @@ public class PowerUpInvisible : PowerUp
     {
         id = "invisible";
         cooldownTime = 5f;
-        mat = GetComponent<MeshRenderer>().material;
 
-        visible = mat.color;
-        invisible = mat.color;
+        rend = GetComponent<MeshRenderer>();
+        invisibleMat = PrefabManager.instance.invisibleMaterial;
+        defaultMat = rend.material;
+
+        visible = invisibleMat.color;
+        invisible = invisibleMat.color;
         invisible.a = 0.1f;
-        SetColor(visible);
+
+        target = visible;
+    }
+
+    private void LateUpdate()
+    {
+        if (invisibleMat.color != target)
+            invisibleMat.color = Color.Lerp(invisibleMat.color, target, 1 / transitionDurationSpeed);
+
+        if (target == visible && invisibleMat.color.a > 0.9f)
+            rend.material = defaultMat;
     }
 
     public override void doStuff()
     {
         isInvisible = true;
-        SetColor(invisible);
+        SetInvisible();
         StartCoroutine(ReturnNormalAfterTime(duration));
     }
 
@@ -37,23 +52,24 @@ public class PowerUpInvisible : PowerUp
     {
         yield return new WaitForSeconds(duration);
         isInvisible = false;
-        SetColor(visible);
+        SetVisible();
     }
 
-    private void SetColor(Color c)
+    private void SetVisible()
     {
-        target = c;
+        target = visible;
     }
 
-    private void LateUpdate()
+    private void SetInvisible()
     {
-        if(mat.color != target)
-            mat.color = Color.Lerp(mat.color, target, 1/transitionDurationSpeed);
+        rend.material = invisibleMat;
+        target = invisible;
     }
 
     public override void ReturnToNormal()
     {
         isInvisible = false;
-        mat.color = visible;
+        invisibleMat.color = visible;
+        rend.material = defaultMat;
     }
 }
