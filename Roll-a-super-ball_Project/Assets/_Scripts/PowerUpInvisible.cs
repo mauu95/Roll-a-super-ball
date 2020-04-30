@@ -26,6 +26,7 @@ public class PowerUpInvisible : PowerUp
         defaultMat = rend.material;
 
         visible = invisibleMat.color;
+        visible.a = 1f;
         invisible = invisibleMat.color;
         invisible.a = 0.1f;
 
