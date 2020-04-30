@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour {
     public void UpdateUI() {
         inventoryUI.Add(powerUps[powerUps.Count - 1], (powerUps.Count).ToString());
         if(current>=0)
-            ActivatePowerUp(current);
+            inventoryUI.Highlight(current);
     }
 
     public void DeactivatePowerUp() {
