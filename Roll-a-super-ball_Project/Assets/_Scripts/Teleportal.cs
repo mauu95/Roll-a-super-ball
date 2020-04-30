@@ -10,6 +10,17 @@ public class Teleportal : MonoBehaviour {
     [HideInInspector]
     public bool playerIsComing;
 
+    public ParticleSystem particle;
+    public Material ActivePortalDirectionMat;
+
+    public MeshRenderer[] cones;
+    private Material defaultMat;
+
+    private void Start()
+    {
+        defaultMat = cones[0].material;
+    }
+
     public void Teleport(GameObject player, Teleportal portal)
     {
         portal.playerIsComing = true;
@@ -27,10 +38,29 @@ public class Teleportal : MonoBehaviour {
 
     IEnumerator ChagePositionAfterSmaterialization(GameObject player, Smaterializator smat, Teleportal portal)
     {
+        var emission = particle.emission;
+        var vel = particle.velocityOverLifetime;
+
+
+        foreach (MeshRenderer rend in cones)
+            rend.material = ActivePortalDirectionMat;
+        emission.rateOverTime = 15;
+        vel.y = 30;
+
         smat.FadeOut();
+
+
 
         while (smat.isFading)
             yield return 0;
+
+
+
+
+        foreach (MeshRenderer rend in cones)
+            rend.material = defaultMat;
+        emission.rateOverTime = 2;
+        vel.y = 3;
 
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.transform.position = portal.transform.position;
