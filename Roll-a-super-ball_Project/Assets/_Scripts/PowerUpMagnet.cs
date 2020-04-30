@@ -8,10 +8,17 @@ public class PowerUpMagnet : PowerUp {
     public float range = 10;
 
     private float nextTimeToDeactivate = 0;
+    private GameObject forceFieldPrefab;
+    private ForceField forceField;
 
     private void Awake() {
         id = "magnet";
         cooldownTime = 5;
+        forceFieldPrefab = PrefabManager.instance.forceField;
+
+        forceField = Instantiate(forceFieldPrefab).GetComponent<ForceField>();
+        forceField.transform.localScale = Vector3.zero;
+        forceField.follow = transform;
     }
 
     protected new void Update() {
@@ -20,6 +27,8 @@ public class PowerUpMagnet : PowerUp {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward);
             AttractHitObjects(hits);
         }
+
+        //forceField.FadeOut(); to deactivate the force field
     }
 
     private void AttractHitObjects(RaycastHit[] hits) {
@@ -34,10 +43,11 @@ public class PowerUpMagnet : PowerUp {
     public override void doStuff() {
         if (Time.realtimeSinceStartup >= nextTimeToDeactivate)
             nextTimeToDeactivate = Time.realtimeSinceStartup + activeTime;
+        forceField.fadeIn(Vector3.one * range);
     }
 
     public override void ReturnToNormal()
     {
-
+        forceField.fadeOut();
     }
 }
