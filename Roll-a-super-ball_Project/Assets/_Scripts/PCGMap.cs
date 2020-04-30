@@ -27,29 +27,30 @@ public class PCGMap : MonoBehaviour {
     private GameObject map;
     private int[] platformsSize = new int[] { 16, 20, 24 };
     private int bridgeMinimumLength = 5;
-
+    private GameObject normalPlatformPrefab;
     private GameObject currentFloor;
 
-    private void Start()
-    {
+    private void Start() {
         if (elementToAddOnMap.Length > 0)
             if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
+        foreach (GameObject obj in platformPrefabs) {
+            if (!obj.name.StartsWith("HoledPlatform", StringComparison.Ordinal)) {
+                normalPlatformPrefab = obj;
+            }
+        }
         platformIndexes = new List<int>();
         history = new PCGHistory();
         surface = FindObjectOfType<NavMeshSurface>();
-
         CreateMap();
-        StartCoroutine( BuildNavMesh() );
+        StartCoroutine(BuildNavMesh());
     }
 
-    private void CreateMap()
-    {
+    private void CreateMap() {
         iseed = new IteratorSeed(seed);
         platforms = new List<GameObject>();
         map = CreateEmptyGameObject("Map");
 
-        for (int i = 0; i < nFloor; i++)
-        {
+        for (int i = 0; i < nFloor; i++) {
             currentFloor = CreateEmptyGameObject("Floor" + i);
             currentFloor.transform.SetParent(map.transform);
             transform.position = new Vector3(0f, 20f * i, 0f);
@@ -65,8 +66,7 @@ public class PCGMap : MonoBehaviour {
 
     }
 
-    private void CreateFloor()
-    {
+    private void CreateFloor() {
         for (int i = 0; i < Dimension; i++)
             PerformAction();
     }
@@ -74,18 +74,14 @@ public class PCGMap : MonoBehaviour {
     private void PerformAction() {
         int action = iseed.Next(3);
 
-        if (action == 0)
-        {
+        if (action == 0) {
             GameObject plat = CreatePlatform();
-            if(plat)
+            if (plat)
                 history.Add(action, plat);
-        }
-        else if (action == 1)
-        {
+        } else if (action == 1) {
             history.Add(action);
             ChangeDirection();
-        }
-        else if (action == 2)
+        } else if (action == 2)
             history.Add(action, CreateBridge());
     }
 
@@ -98,25 +94,21 @@ public class PCGMap : MonoBehaviour {
 
 
 
-    IEnumerator BuildNavMesh()
-    {
+    IEnumerator BuildNavMesh() {
         yield return new WaitForSeconds(0.2f);
         if (surface)
             surface.BuildNavMesh();
     }
 
-    private void ChangeDirection()
-    {
+    private void ChangeDirection() {
         int newdirection = iseed.Next(4);
         transform.Rotate(0f, newdirection * 90f, 0f);
     }
 
-    private void CreateMovingBridges()
-    {
+    private void CreateMovingBridges() {
         PCGHistory.SearchPatternResult[] bridges = history.SearchBrigde("01*2+1*0");
 
-        for (int i = 0; i < bridges.Length; i++)
-        {
+        for (int i = 0; i < bridges.Length; i++) {
             PCGHistory.SearchPatternResult curr = bridges[i];
 
             GameObject platform1 = history.GetElement(curr.index).obj;
@@ -127,12 +119,11 @@ public class PCGMap : MonoBehaviour {
 
             float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
 
-            if (distance > 5)
-            {
+            if (distance > 5) {
                 Vector3 startPoint = history.GetElement(curr.index).obj.transform.position;
                 Vector3 endPoint = history.GetElement(curr.index + curr.match.Length - 1).obj.transform.position;
 
-                if (startPoint.y != endPoint.y)
+                if (Math.Abs(startPoint.y - endPoint.y) > Mathf.Epsilon)
                     return;
 
                 GameObject bridgeDestroyer = Instantiate(bridgeDestroyerPrefab, platform1.transform.parent);
@@ -147,8 +138,7 @@ public class PCGMap : MonoBehaviour {
         }
     }
 
-    private GameObject CreateMovingBridge(PCGHistory.SearchPatternResult curr, GameObject parent, Vector3 startPoint, Vector3 endPoint)
-    {
+    private GameObject CreateMovingBridge(PCGHistory.SearchPatternResult curr, GameObject parent, Vector3 startPoint, Vector3 endPoint) {
         GameObject movingBridge = Instantiate(movingBrigdePrefab, parent.transform.parent);
         movingBridge.transform.rotation = history.GetElement(curr.indexOfBridge).obj.transform.rotation;
         movingBridge.transform.position = (startPoint + endPoint) / 2 + startPoint;
@@ -156,27 +146,37 @@ public class PCGMap : MonoBehaviour {
         return movingBridge;
     }
 
-    private void CreatePortals()
-    {
-        for (int i = 0; i < platformIndexes.Count - 1; i++)
-        {
+    private void CreatePortals() {
+        for (int i = 0; i < platformIndexes.Count - 1; i++) {
             int index = platformIndexes[i];
-
+            platforms[index] = ReplaceHoledPlatformIfNeeded(platforms[index]);
             GameObject portalObject1 = Instantiate(portalPrefab, platforms[index].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index].transform.parent);
             Teleportal portal1 = portalObject1.GetComponent<Teleportal>();
 
+            platforms[index + 1] = ReplaceHoledPlatformIfNeeded(platforms[index + 1]);
             GameObject portalObject2 = Instantiate(portalPrefab, platforms[index + 1].transform.position + Vector3.up * 0.2f, portalPrefab.transform.rotation, platforms[index + 1].transform.parent);
             Teleportal portal2 = portalObject2.GetComponent<Teleportal>();
 
             portal1.otherPortal = portal2;
             portal2.otherPortal = portal1;
             portal2.IsGoingDown();
-            
+
         }
     }
 
-    private GameObject CreateBridge()
-    {
+    private GameObject ReplaceHoledPlatformIfNeeded(GameObject platform) {
+        if (platform.name.StartsWith("HoledPlatform", StringComparison.Ordinal)) {
+            GameObject newPlatform = Create(normalPlatformPrefab, platform.transform.position, platform.transform.rotation);
+            Vector3 scale = platform.transform.localScale;
+            scale.y = 0.1f;
+            newPlatform.transform.localScale = scale;
+            Destroy(platform);
+            return newPlatform;
+        }
+        return platform;
+    }
+
+    private GameObject CreateBridge() {
         Vector3 prev = transform.position;
         int distance = bridgeMinimumLength + iseed.Next(brigdeLength);
         transform.position += transform.forward * distance;
