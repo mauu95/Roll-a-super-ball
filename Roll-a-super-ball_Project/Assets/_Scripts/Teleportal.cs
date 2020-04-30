@@ -15,29 +15,24 @@ public class Teleportal : MonoBehaviour {
 
     public MeshRenderer[] cones;
     private Material defaultMat;
-
-    private void Start()
-    {
+    private bool downward;
+    private void Start() {
         defaultMat = cones[0].material;
     }
 
-    public void Teleport(GameObject player, Teleportal portal)
-    {
+    public void Teleport(GameObject player, Teleportal portal) {
         portal.playerIsComing = true;
 
         Smaterializator smat = player.GetComponent<Smaterializator>();
 
-        if(smat == null)
-        {
+        if (smat == null) {
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.transform.position = portal.transform.position;
-        }
-        else
+        } else
             StartCoroutine(ChagePositionAfterSmaterialization(player, smat, portal));
     }
 
-    IEnumerator ChagePositionAfterSmaterialization(GameObject player, Smaterializator smat, Teleportal portal)
-    {
+    IEnumerator ChagePositionAfterSmaterialization(GameObject player, Smaterializator smat, Teleportal portal) {
         var emission = particle.emission;
         var vel = particle.velocityOverLifetime;
 
@@ -45,7 +40,7 @@ public class Teleportal : MonoBehaviour {
         foreach (MeshRenderer rend in cones)
             rend.material = ActivePortalDirectionMat;
         emission.rateOverTime = 15;
-        vel.y = 30;
+        vel.y = downward ? -30 : 30;
 
         smat.FadeOut();
 
@@ -60,20 +55,21 @@ public class Teleportal : MonoBehaviour {
         foreach (MeshRenderer rend in cones)
             rend.material = defaultMat;
         emission.rateOverTime = 2;
-        vel.y = 3;
+        vel.y = downward ? -3 : 3;
 
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.transform.position = portal.transform.position;
         smat.FadeIn();
     }
 
-    public void IsGoingUp()
-    {
+    public void IsGoingUp() {
         MyUtility.SetRotationZ(direction, 0f);
     }
 
-    public void IsGoingDown()
-    {
+    public void IsGoingDown() {
         MyUtility.SetRotationZ(direction, 180f);
+        var vel = particle.velocityOverLifetime;
+        vel.y = -3;
+        downward = true;
     }
 }
