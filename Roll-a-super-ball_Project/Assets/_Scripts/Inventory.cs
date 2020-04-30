@@ -26,12 +26,7 @@ public class Inventory : MonoBehaviour {
 
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
-        {
-            if (current + (int)scroll < 0)
-                ActivatePowerUp(powerUps.Count - 1);
-            else
-                ActivatePowerUp((current + (int)scroll) % powerUps.Count);
-        }
+             ActivatePowerUp(current + (int)scroll);
     }
 
     private void OnTriggerEnter(Collider other) {
