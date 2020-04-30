@@ -6,6 +6,7 @@ public class PowerUpMagnet : PowerUp {
     public float activeTime = 5;
     public float speed = 10;
     public float range = 10;
+    public bool isAttracting;
 
     private float nextTimeToDeactivate = 0;
     private GameObject forceFieldPrefab;
@@ -19,35 +20,36 @@ public class PowerUpMagnet : PowerUp {
         forceField = Instantiate(forceFieldPrefab).GetComponent<ForceField>();
         forceField.transform.localScale = Vector3.zero;
         forceField.follow = transform;
-    }
-
-    protected new void Update() {
-        base.Update();
-        if (Time.realtimeSinceStartup < nextTimeToDeactivate) {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward);
-            AttractHitObjects(hits);
-        }
-
-        //forceField.FadeOut(); to deactivate the force field
-    }
-
-    private void AttractHitObjects(RaycastHit[] hits) {
-        foreach (RaycastHit hit in hits) {
-            if (hit.transform.CompareTag("PickUp")) {
-                Vector3 distance = transform.position - hit.transform.position;
-                hit.transform.position += distance.normalized * speed * Time.deltaTime;
-            }
-        }
+        forceField.magnet = this;
     }
 
     public override void doStuff() {
-        if (Time.realtimeSinceStartup >= nextTimeToDeactivate)
-            nextTimeToDeactivate = Time.realtimeSinceStartup + activeTime;
+        isAttracting = true;
         forceField.fadeIn(Vector3.one * range);
+
+        StartCoroutine(ReturnToNormalAfterTime(activeTime));
+    }
+
+    public void Attract(GameObject hit)
+    {
+        if (hit.transform.CompareTag("PickUp"))
+        {
+            Vector3 distance = transform.position - hit.transform.position;
+            hit.transform.position += distance.normalized * speed * Time.deltaTime;
+        }
+    }
+
+    IEnumerator ReturnToNormalAfterTime(float t)
+    {
+        yield return new WaitForSeconds(t);
+        ReturnToNormal();
     }
 
     public override void ReturnToNormal()
     {
+        isAttracting = false;
         forceField.fadeOut();
     }
+
+
 }

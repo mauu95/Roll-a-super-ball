@@ -6,6 +6,7 @@ public class ForceField : MonoBehaviour
 {
     public float transitionSpeed = 1;
     public Transform follow;
+    public PowerUpMagnet magnet;
 
     private Vector3 targetDim;
 
@@ -25,5 +26,10 @@ public class ForceField : MonoBehaviour
     public void fadeOut()
     {
         targetDim = Vector3.zero;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        magnet.Attract(other.gameObject);
     }
 }
