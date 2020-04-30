@@ -18,6 +18,7 @@ public class PowerUpMagnet : PowerUp {
         forceFieldPrefab = PrefabManager.instance.forceField;
 
         forceField = Instantiate(forceFieldPrefab).GetComponent<ForceField>();
+        forceField.targetDim = Vector3.zero;
         forceField.transform.localScale = Vector3.zero;
         forceField.follow = transform;
         forceField.magnet = this;

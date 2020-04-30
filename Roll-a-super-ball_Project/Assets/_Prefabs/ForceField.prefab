@@ -93,9 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db91a46fc38a3248b9c79539c4c1e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSpeed: 1
+  transitionSpeed: 2
   follow: {fileID: 0}
   magnet: {fileID: 0}
+  flickeringSpeed: 20
+  targetDim: {x: 10, y: 10, z: 10}
 --- !u!135 &-2629228854653368824
 SphereCollider:
   m_ObjectHideFlags: 0

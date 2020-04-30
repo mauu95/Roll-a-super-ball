@@ -7,12 +7,14 @@ public class ForceField : MonoBehaviour
     public float transitionSpeed = 1;
     public Transform follow;
     public PowerUpMagnet magnet;
+    public float flickeringSpeed = 20;
 
-    private Vector3 targetDim;
+    public Vector3 targetDim;
 
     private void Update()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, targetDim, Time.deltaTime * transitionSpeed);
+        Vector3 noise = Vector3.one * Mathf.Round(Mathf.Sin(Time.time * flickeringSpeed));
+        transform.localScale = Vector3.Lerp(transform.localScale, targetDim + noise, Time.deltaTime * transitionSpeed);
 
         if (follow)
             transform.position = follow.position;
@@ -30,6 +32,7 @@ public class ForceField : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        magnet.Attract(other.gameObject);
+        if(magnet && magnet.enabled)
+            magnet.Attract(other.gameObject);
     }
 }
