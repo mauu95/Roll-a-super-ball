@@ -12,7 +12,6 @@ public class Teleportal : MonoBehaviour {
 
     public ParticleSystem particle;
     public Material ActivePortalDirectionMat;
-
     public MeshRenderer[] cones;
     private Material defaultMat;
     private bool downward;
@@ -33,9 +32,9 @@ public class Teleportal : MonoBehaviour {
     }
 
     IEnumerator ChagePositionAfterSmaterialization(GameObject player, Smaterializator smat, Teleportal portal) {
+        //Graphic Effect 
         var emission = particle.emission;
         var vel = particle.velocityOverLifetime;
-
 
         foreach (MeshRenderer rend in cones)
             rend.material = ActivePortalDirectionMat;
@@ -51,15 +50,17 @@ public class Teleportal : MonoBehaviour {
 
 
 
-
+        //Revert Graphic Effect
         foreach (MeshRenderer rend in cones)
             rend.material = defaultMat;
         emission.rateOverTime = 2;
         vel.y = downward ? -3 : 3;
 
+        smat.FadeIn();
+
+        //Logic
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.transform.position = portal.transform.position;
-        smat.FadeIn();
     }
 
     public void IsGoingUp() {
