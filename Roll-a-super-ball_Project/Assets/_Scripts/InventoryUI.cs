@@ -44,4 +44,13 @@ public class InventoryUI : MonoBehaviour
         public string name;
         public Sprite icon;
     }
+
+    public void ChangeSlotsPosWithPrevious(int pos)
+    {
+        InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
+        slots[pos].transform.SetSiblingIndex(pos - 1);
+
+        foreach (InventorySlot slot in slots)
+            slot.SetText((slot.transform.GetSiblingIndex() + 1).ToString());
+    }
 }

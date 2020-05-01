@@ -27,6 +27,21 @@ public class Inventory : MonoBehaviour {
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
              ActivatePowerUp(current + (int)scroll);
+
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (current - 1 < 0)
+                return;
+            PowerUp temp = powerUps[current];
+            powerUps[current] = powerUps[current - 1];
+            powerUps[current - 1] = temp;
+
+            inventoryUI.ChangeSlotsPosWithPrevious(current);
+            current--;
+        }
+
+
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -43,11 +58,11 @@ public class Inventory : MonoBehaviour {
 
     public bool AddPowerUp(PowerUp item) {
         powerUps.Add(item);
-        UpdateUI();
+        UpdateUIAfterAdd();
         return true;
     }
         
-    public void UpdateUI() {
+    public void UpdateUIAfterAdd() {
         inventoryUI.Add(powerUps[powerUps.Count - 1], (powerUps.Count).ToString());
         if(current>=0)
             inventoryUI.Highlight(current);
