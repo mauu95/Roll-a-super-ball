@@ -50,6 +50,7 @@ public class Inventory : MonoBehaviour {
             other.gameObject.SetActive(false);
             pickUps++;
             countText.text = pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
+            countText.GetComponent<Animator>().Play("BigToSmall");
 
             if (pickUps == GameManager.instance.nPickUp)
                 winText.gameObject.SetActive(true);
