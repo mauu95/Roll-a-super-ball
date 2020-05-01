@@ -13,7 +13,11 @@ public class ForceField : MonoBehaviour
 
     private void Update()
     {
-        Vector3 noise = Vector3.one * Mathf.Round(Mathf.Sin(Time.time * flickeringSpeed));
+        Vector3 noise = Vector3.zero;
+
+        if(transform.localScale.x > 0.1f)
+            noise = Vector3.one * Mathf.Round(Mathf.Sin(Time.time * flickeringSpeed));
+
         transform.localScale = Vector3.Lerp(transform.localScale, targetDim + noise, Time.deltaTime * transitionSpeed);
 
         if (follow)
