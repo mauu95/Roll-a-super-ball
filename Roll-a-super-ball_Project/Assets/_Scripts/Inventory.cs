@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +10,14 @@ public class Inventory : MonoBehaviour {
     public InventoryUI inventoryUI;
     public PowerUpIcons icons;
 
-    public Text countText;
+    public TextMeshProUGUI countText;
     public Text winText;
 
     private int current = -1;
 
     private void Start() {
         pickUps = 0;
-        countText.text = "COUNT: " + pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
+        countText.text = pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
     }
 
     private void Update() {
@@ -48,7 +49,7 @@ public class Inventory : MonoBehaviour {
         if (other.gameObject.CompareTag("PickUp")) {
             other.gameObject.SetActive(false);
             pickUps++;
-            countText.text = "COUNT: " + pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
+            countText.text = pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
 
             if (pickUps == GameManager.instance.nPickUp)
                 winText.gameObject.SetActive(true);
