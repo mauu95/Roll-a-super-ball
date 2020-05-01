@@ -320,6 +320,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 794035588896062555, guid: 286c01c6f9e14af40952db5a128d4d55,
         type: 3}
+    - target: {fileID: 550170448341449046, guid: 7d70273306db38f4798e2e03894e52de,
+        type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 331390741, guid: 43d2e742146fdd8449f3d8a41283acde,
+        type: 3}
     - target: {fileID: 550170448341449047, guid: 7d70273306db38f4798e2e03894e52de,
         type: 3}
       propertyPath: m_Name
@@ -560,7 +566,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -7,10 +7,15 @@ public class PowerUpDash : PowerUp
     public float DashForce = 600f;
     public float dashDuration = 0.3f;
 
+    public Projectile projectile;
+
     private void Awake()
     {
         id = "dash";
         cooldownTime = 3;
+
+        projectile = Instantiate(PrefabManager.instance.projectile);
+        projectile.player = transform;
     }
 
     public override void doStuff()
@@ -34,7 +39,13 @@ public class PowerUpDash : PowerUp
 
         p_rb.constraints = RigidbodyConstraints.FreezePositionY;
         p_rb.AddForce(direction * DashForce, ForceMode.Impulse);
+
+
+        projectile.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(dashDuration);
+
+        projectile.gameObject.SetActive(false);
 
         p_rb.constraints = RigidbodyConstraints.None;
         Vector3 newvel = p.GetComponent<Rigidbody>().velocity;

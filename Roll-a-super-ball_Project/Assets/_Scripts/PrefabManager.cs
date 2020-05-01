@@ -21,4 +21,5 @@ public class PrefabManager : MonoBehaviour
     public GameObject enemyPrefab;
     public Material invisibleMaterial;
     public GameObject forceField;
+    public Projectile projectile;
 }
