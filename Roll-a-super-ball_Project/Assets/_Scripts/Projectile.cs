@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [HideInInspector]
     public Transform player;
+    public ParticleSystem fire;
+
+    public Color color;
+
+    private void Start()
+    {
+        fire.startColor = color;
+    }
 
     private void Update()
     {

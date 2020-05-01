@@ -9553,4 +9553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742341c73b8a9d642a3345716423abb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p: {fileID: 0}
+  player: {fileID: 0}
+  fire: {fileID: 2680309014427034954}
+  color: {r: 0, g: 1, b: 0.022883177, a: 1}
