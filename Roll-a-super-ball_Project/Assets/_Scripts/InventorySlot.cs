@@ -11,6 +11,11 @@ public class InventorySlot : MonoBehaviour
     private float cooldown;
     private bool isCooldown;
 
+    private void Start()
+    {
+        GetComponent<Animator>().Play("Bump");
+    }
+
     public void SetText(string newtext)
     {
         GetComponentInChildren<Text>().text = newtext;

@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 7057280024263525650}
   - component: {fileID: 4998802223742777836}
   - component: {fileID: 1216491356}
+  - component: {fileID: 7315978534877085507}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -239,3 +240,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownImage: {fileID: 2075791183}
+--- !u!95 &7315978534877085507
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4781895275303753934}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e24c779063149be4d8d537bd2e77e103, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
