@@ -454,7 +454,13 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 0
-  sounds: []
+  sounds:
+  - name: PickUpPicked
+    clip: {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
 --- !u!4 &613567661
 Transform:
   m_ObjectHideFlags: 0

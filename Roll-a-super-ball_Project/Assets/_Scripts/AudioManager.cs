@@ -22,16 +22,22 @@ public class AudioManager : MonoBehaviour
         defaultSound.source = gameObject.AddComponent<AudioSource>();
         defaultSound.source.clip = defaultSound.clip;
         defaultSound.source.volume = defaultSound.volume;
-        defaultSound.source.pitch = defaultSound.pitch;
         defaultSound.source.loop = defaultSound.loop;
 
         foreach (Sound s in sounds){
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+    }
+
+    private void Start()
+    {
+        Sound theme = AudioManager.instance.GetSound("Theme");
+
+        if (theme != null)
+            theme.Play();
     }
 
     public void Play(string name)
@@ -44,5 +50,10 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public Sound GetSound(string name)
+    {
+        return Array.Find(sounds, sound => sound.name == name);
     }
 }

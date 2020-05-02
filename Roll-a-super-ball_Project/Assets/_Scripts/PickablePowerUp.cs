@@ -35,6 +35,7 @@ public class PickablePowerUp : MonoBehaviour
                 other.gameObject.GetComponent<PowerUpInvisible>().enabled = false;
             }
 
+            AudioManager.instance.Play("PowerUpPicked");
             Destroy(gameObject);
         }
     }

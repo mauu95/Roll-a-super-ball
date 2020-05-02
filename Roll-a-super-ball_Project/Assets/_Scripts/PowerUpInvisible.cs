@@ -6,7 +6,7 @@ using UnityEngine;
 public class PowerUpInvisible : PowerUp
 {
     public bool isInvisible;
-    public float duration = 2f;
+    public float duration = 3f;
     public float transitionDuration = 1;
     public Material invisibleMat;
 
@@ -46,6 +46,9 @@ public class PowerUpInvisible : PowerUp
     {
         isInvisible = true;
         SetInvisible();
+
+        AudioManager.instance.Play("PUInvisibility");
+
         StartCoroutine(ReturnNormalAfterTime(duration));
     }
 
