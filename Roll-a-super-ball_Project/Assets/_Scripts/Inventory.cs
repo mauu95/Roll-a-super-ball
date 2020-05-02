@@ -42,7 +42,6 @@ public class Inventory : MonoBehaviour {
             current--;
         }
 
-
     }
 
     private void OnTriggerEnter(Collider other) {
