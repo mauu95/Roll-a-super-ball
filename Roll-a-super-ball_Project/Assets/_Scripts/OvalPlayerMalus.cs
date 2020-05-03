@@ -7,6 +7,9 @@ public class OvalPlayerMalus : MonoBehaviour {
     public float malusDuration = 10f;
     public float Treshold = 16f;
 
+    public float soundTreshold = 8f;
+    public string impactSound = "impactSound";
+
     private Rigidbody rb;
     private Vector3 oldVelocity;
 
@@ -31,6 +34,12 @@ public class OvalPlayerMalus : MonoBehaviour {
 
             StartCoroutine(GetBackToNormalAfterSomeTime(malusDuration));
         }
+
+
+        if ((oldVelocity - newVelocity).magnitude > soundTreshold)
+            AudioManager.instance.Play(impactSound);
+
+
     }
     private void Update()
     {

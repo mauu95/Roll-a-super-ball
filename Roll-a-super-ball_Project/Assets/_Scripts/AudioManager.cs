@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour
         if(s == null)
         {
             defaultSound.source.Play();
-            Debug.LogError("Sound '" + name + "' not found." + " Played DefaultSound instead");
+            Debug.LogError("Sound '" + name + "' not found." + " Played DefaultSound instead. Add a sound named '" + name + "' to the AudioManager to FIX THIS ERROR.");
             return;
         }
         s.source.Play();

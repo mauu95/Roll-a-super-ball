@@ -485,6 +485,11 @@ MonoBehaviour:
     volume: 0
     source: {fileID: 0}
     loop: 1
+  - name: impactSound
+    clip: {fileID: 8300000, guid: 53287a0949003eb44a10fb1075fb906c, type: 3}
+    volume: 0.55
+    source: {fileID: 0}
+    loop: 0
   - name: PUDash
     clip: {fileID: 8300000, guid: 83ea4cba509c263469258689266c66c9, type: 3}
     volume: 0.55
