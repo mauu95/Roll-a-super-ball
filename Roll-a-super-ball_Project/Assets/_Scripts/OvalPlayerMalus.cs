@@ -27,17 +27,21 @@ public class OvalPlayerMalus : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 newVelocity = rb.velocity;
-        if ((oldVelocity - newVelocity).magnitude > Treshold)
+        float delta = (oldVelocity - newVelocity).magnitude;
+
+        if (delta > soundTreshold)
         {
-            transform.localScale = ovalSize;
-            target = ovalSize;
+            if (delta > Treshold)
+            {
+                transform.localScale = ovalSize;
+                target = ovalSize;
 
-            StartCoroutine(GetBackToNormalAfterSomeTime(malusDuration));
+                AudioManager.instance.Play("ovalMalus");
+                StartCoroutine(GetBackToNormalAfterSomeTime(malusDuration));
+            }
+            else
+                AudioManager.instance.Play(impactSound);
         }
-
-
-        if ((oldVelocity - newVelocity).magnitude > soundTreshold)
-            AudioManager.instance.Play(impactSound);
 
 
     }

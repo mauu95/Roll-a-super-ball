@@ -495,6 +495,11 @@ MonoBehaviour:
     volume: 0.55
     source: {fileID: 0}
     loop: 0
+  - name: ovalMalus
+    clip: {fileID: 8300000, guid: cb09135da9c35c84ba09721c50c0a2dc, type: 3}
+    volume: 0.55
+    source: {fileID: 0}
+    loop: 0
 --- !u!4 &613567661
 Transform:
   m_ObjectHideFlags: 0
