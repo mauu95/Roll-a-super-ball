@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e2f8039dfbf124094e726c43d836d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playTheme: 0
+  playTheme: 1
   defaultSound:
     name: default
     clip: {fileID: 8300000, guid: d923860589a0748e981a2145fbc32489, type: 3}

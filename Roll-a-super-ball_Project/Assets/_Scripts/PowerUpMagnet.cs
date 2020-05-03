@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpMagnet : PowerUp {
-    public float activeTime = 5;
+    public float activeTime = 4;
     public float speed = 10;
-    public float range = 10;
+    public float range = 15;
     public bool isAttracting;
     public string soundName = "PUMagnet";
 
@@ -15,7 +15,7 @@ public class PowerUpMagnet : PowerUp {
 
     private void Awake() {
         id = "magnet";
-        cooldownTime = 5;
+        cooldownTime = 8;
         forceFieldPrefab = PrefabManager.instance.forceField;
 
         forceField = Instantiate(forceFieldPrefab).GetComponent<ForceField>();
