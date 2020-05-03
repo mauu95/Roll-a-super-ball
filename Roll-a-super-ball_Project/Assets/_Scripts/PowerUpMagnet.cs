@@ -7,6 +7,7 @@ public class PowerUpMagnet : PowerUp {
     public float speed = 10;
     public float range = 10;
     public bool isAttracting;
+    public string soundName = "PUMagnet";
 
     private float nextTimeToDeactivate = 0;
     private GameObject forceFieldPrefab;
@@ -22,12 +23,18 @@ public class PowerUpMagnet : PowerUp {
         forceField.transform.localScale = Vector3.zero;
         forceField.follow = transform;
         forceField.magnet = this;
+
+        AudioManager.instance.Play(soundName);
+    }
+
+    private void LateUpdate()
+    {
+        AudioManager.instance.GetSound(soundName).source.volume = ( forceField.transform.localScale.x/range ) * 0.2f;
     }
 
     public override void doStuff() {
         isAttracting = true;
         forceField.fadeIn(Vector3.one * range);
-
         StartCoroutine(ReturnToNormalAfterTime(activeTime));
     }
 
@@ -50,6 +57,7 @@ public class PowerUpMagnet : PowerUp {
     {
         isAttracting = false;
         forceField.fadeOut();
+        AudioManager.instance.GetSound(soundName).source.volume = 0f;
     }
 
 

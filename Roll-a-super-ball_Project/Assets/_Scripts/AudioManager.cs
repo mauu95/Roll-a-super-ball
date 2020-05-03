@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public bool playTheme;
     public Sound defaultSound;
     public Sound[] sounds;
     public static AudioManager instance;
@@ -36,7 +37,7 @@ public class AudioManager : MonoBehaviour
     {
         Sound theme = AudioManager.instance.GetSound("Theme");
 
-        if (theme != null)
+        if (playTheme && theme != null)
             theme.Play();
     }
 
@@ -50,6 +51,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+
+        s.source.Stop();
     }
 
     public Sound GetSound(string name)

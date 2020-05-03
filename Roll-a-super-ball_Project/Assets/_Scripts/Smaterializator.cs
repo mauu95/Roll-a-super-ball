@@ -39,6 +39,7 @@ public class Smaterializator : MonoBehaviour
 
     public void FadeOut()
     {
+        AudioManager.instance.Play("Smaterialization");
         visibility = 0;
         isFading = true;
     }

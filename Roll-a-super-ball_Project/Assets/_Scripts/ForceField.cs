@@ -7,7 +7,7 @@ public class ForceField : MonoBehaviour
     public float transitionSpeed = 1;
     public Transform follow;
     public PowerUpMagnet magnet;
-    public float flickeringSpeed = 20;
+    public float flickeringSpeed = 30;
 
     public Vector3 targetDim;
 
@@ -22,6 +22,8 @@ public class ForceField : MonoBehaviour
 
         if (follow)
             transform.position = follow.position;
+
+
     }
 
     public void fadeIn(Vector3 dim)
