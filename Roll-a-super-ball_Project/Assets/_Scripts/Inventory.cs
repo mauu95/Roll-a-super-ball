@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour {
              ActivatePowerUp(current + (int)scroll);
 
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             if (current - 1 < 0)
                 return;
@@ -40,6 +40,17 @@ public class Inventory : MonoBehaviour {
 
             inventoryUI.ChangeSlotsPosWithPrevious(current);
             current--;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (current + 1 > powerUps.Count - 1)
+                return;
+            PowerUp temp = powerUps[current];
+            powerUps[current] = powerUps[current + 1];
+            powerUps[current + 1] = temp;
+
+            inventoryUI.ChangeSlotsPosWithPrevious(current + 1);
+            current++;
         }
 
     }
