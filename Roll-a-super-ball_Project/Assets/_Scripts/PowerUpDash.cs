@@ -9,6 +9,8 @@ public class PowerUpDash : PowerUp
 
     public Projectile projectile;
 
+    public string soundName = "PUDash";
+
     private void Awake()
     {
         id = "dash";
@@ -42,6 +44,8 @@ public class PowerUpDash : PowerUp
 
 
         projectile.gameObject.SetActive(true);
+
+        AudioManager.instance.Play(soundName);
 
         yield return new WaitForSeconds(dashDuration);
 
