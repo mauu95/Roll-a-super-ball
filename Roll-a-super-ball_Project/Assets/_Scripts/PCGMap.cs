@@ -69,19 +69,6 @@ public class PCGMap : MonoBehaviour {
 
     }
 
-    private void CreateAgents()
-    {
-        for(int i = 0; i < nAgents; i++)
-        {
-            GameObject plat = platforms[iseed.Next(platforms.Count)];
-            Vector3 platPos = plat.transform.position;
-            int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
-            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim / 2, platPos.y - 2, platPos.z + iseed.Next(platDim) - platDim / 2);
-            GameObject agent = Instantiate(agentPrefab, pos, Quaternion.identity);
-            agent.GetComponent<Enemy>().SetPlatform(plat);
-        }
-    }
-
     private void CreateFloor() {
         for (int i = 0; i < Dimension; i++)
             PerformAction();
@@ -244,6 +231,19 @@ public class PCGMap : MonoBehaviour {
             int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
             Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim / 2, platPos.y + 1, platPos.z + iseed.Next(platDim) - platDim / 2);
             Create(objPrefab, pos, Quaternion.identity);
+        }
+    }
+
+    private void CreateAgents()
+    {
+        for (int i = 0; i < nAgents; i++)
+        {
+            GameObject plat = platforms[iseed.Next(platforms.Count)];
+            Vector3 platPos = plat.transform.position;
+            int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
+            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim / 2, platPos.y - 2, platPos.z + iseed.Next(platDim) - platDim / 2);
+            GameObject agent = Instantiate(agentPrefab, pos, Quaternion.identity);
+            agent.GetComponent<Enemy>().SetPlatform(plat);
         }
     }
 
