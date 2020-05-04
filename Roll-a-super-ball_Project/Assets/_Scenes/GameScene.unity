@@ -1676,6 +1676,9 @@ MonoBehaviour:
   nFloor: 2
   brigdeLength: 30
   nPickUps: 4
+  nAgents: 1
+  agentPrefab: {fileID: 30090898965481276, guid: 386c168dbdf965a4893ae5f89992fbb3,
+    type: 3}
   platformPrefabs:
   - {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a, type: 3}
   - {fileID: 835414953093068274, guid: 46a417f9a2a7a4e7190dce2dc36430d9, type: 3}

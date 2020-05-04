@@ -11,6 +11,8 @@ public class PCGMap : MonoBehaviour {
     public int nFloor = 1;
     public int brigdeLength = 25;
     public int nPickUps;
+    public int nAgents;
+    public GameObject agentPrefab;
     public GameObject[] platformPrefabs;
     public GameObject[] BrigdePrefab;
     public GameObject movingBrigdePrefab;
@@ -60,10 +62,24 @@ public class PCGMap : MonoBehaviour {
 
         CreatePortals();
         CreateMovingBridges();
+        CreateAgents();
 
         foreach (CoupleGameobjectInt el in elementToAddOnMap)
             PlaceOnMap(el.prefab, el.quantity);
 
+    }
+
+    private void CreateAgents()
+    {
+        for(int i = 0; i < nAgents; i++)
+        {
+            GameObject plat = platforms[iseed.Next(platforms.Count)];
+            Vector3 platPos = plat.transform.position;
+            int platDim = Mathf.FloorToInt(plat.transform.localScale.x);
+            Vector3 pos = new Vector3(platPos.x + iseed.Next(platDim) - platDim / 2, platPos.y - 2, platPos.z + iseed.Next(platDim) - platDim / 2);
+            GameObject agent = Instantiate(agentPrefab, pos, Quaternion.identity);
+            agent.GetComponent<Enemy>().SetPlatform(plat);
+        }
     }
 
     private void CreateFloor() {
