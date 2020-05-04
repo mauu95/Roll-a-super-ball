@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject Player;
     public int nPickUp = 4;
+    public bool IsPause;
 
     void Update()
     {
@@ -50,6 +51,24 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void TogglePause()
+    {
+        IsPause = !IsPause;
+        if (IsPause)
+        {
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
     }
 
 
