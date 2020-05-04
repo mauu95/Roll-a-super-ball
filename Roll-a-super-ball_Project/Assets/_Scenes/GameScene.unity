@@ -497,7 +497,7 @@ MonoBehaviour:
     loop: 0
   - name: NormalBridgeAlert
     clip: {fileID: 8300000, guid: a74fa00c3ee74b44fbc50e0fd6c2a072, type: 3}
-    volume: 0.4
+    volume: 0.01
     source: {fileID: 0}
     loop: 0
   - name: ovalMalus
