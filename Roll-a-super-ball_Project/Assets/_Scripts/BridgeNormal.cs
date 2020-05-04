@@ -60,5 +60,10 @@ public class BridgeNormal : Bridge {
         float distance = (end - start).magnitude;
         transform.localScale = new Vector3(scale.x, scale.y, scale.z * distance + 3f);
     }
+
+    public void isRed()
+    {
+        AudioManager.instance.Play("NormalBridgeAlert");
+    }
 }
 

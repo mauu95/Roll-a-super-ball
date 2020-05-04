@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e2f8039dfbf124094e726c43d836d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playTheme: 1
+  playTheme: 0
   defaultSound:
     name: default
     clip: {fileID: 8300000, guid: d923860589a0748e981a2145fbc32489, type: 3}
@@ -493,6 +493,11 @@ MonoBehaviour:
   - name: PUDash
     clip: {fileID: 8300000, guid: 83ea4cba509c263469258689266c66c9, type: 3}
     volume: 0.55
+    source: {fileID: 0}
+    loop: 0
+  - name: NormalBridgeAlert
+    clip: {fileID: 8300000, guid: a74fa00c3ee74b44fbc50e0fd6c2a072, type: 3}
+    volume: 0.4
     source: {fileID: 0}
     loop: 0
   - name: ovalMalus
@@ -894,7 +899,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &948407850
 GameObject:
@@ -1676,7 +1681,7 @@ MonoBehaviour:
   nFloor: 2
   brigdeLength: 30
   nPickUps: 4
-  nAgents: 1
+  nAgents: 0
   agentPrefab: {fileID: 30090898965481276, guid: 386c168dbdf965a4893ae5f89992fbb3,
     type: 3}
   platformPrefabs:
@@ -1926,7 +1931,7 @@ PrefabInstance:
     - target: {fileID: 3925770107503839676, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3925770107503839676, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
