@@ -625,7 +625,7 @@ MonoBehaviour:
     loop: 0
   - name: NormalBridgeAlert
     clip: {fileID: 8300000, guid: a74fa00c3ee74b44fbc50e0fd6c2a072, type: 3}
-    volume: 0.01
+    volume: 0.1
     source: {fileID: 0}
     loop: 0
   - name: ovalMalus
@@ -1392,7 +1392,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1058597626}
-  nPickUp: 4
   IsPause: 0
 --- !u!1 &1140959881
 GameObject:
@@ -1849,7 +1848,7 @@ MonoBehaviour:
   Dimension: 10
   nFloor: 2
   brigdeLength: 30
-  nPickUps: 4
+  nPickUps: 10
   nAgents: 0
   agentPrefab: {fileID: 30090898965481276, guid: 386c168dbdf965a4893ae5f89992fbb3,
     type: 3}
@@ -2468,6 +2467,11 @@ PrefabInstance:
       propertyPath: winText
       value: 
       objectReference: {fileID: 1538071975}
+    - target: {fileID: 3925770107503839677, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
+        type: 3}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 1473236726}
     - target: {fileID: 3925770107503839678, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
       propertyPath: crashThreshold

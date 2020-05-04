@@ -12,12 +12,15 @@ public class Inventory : MonoBehaviour {
 
     public TextMeshProUGUI countText;
     public Text winText;
+    public PCGMap map;
 
     private int current = -1;
+    private int totalPickUps;
 
     private void Start() {
         pickUps = 0;
-        countText.text = pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
+        totalPickUps = map.nPickUps;
+        countText.text = pickUps.ToString() + "/" + totalPickUps;
     }
 
     private void Update() {
@@ -59,11 +62,11 @@ public class Inventory : MonoBehaviour {
         if (other.gameObject.CompareTag("PickUp")) {
             other.gameObject.SetActive(false);
             pickUps++;
-            countText.text = pickUps.ToString() + "/" + GameManager.instance.nPickUp.ToString();
+            countText.text = pickUps.ToString() + "/" + totalPickUps;
             countText.GetComponent<Animator>().Play("BigToSmall");
             AudioManager.instance.Play("PickUpPicked");
 
-            if (pickUps == GameManager.instance.nPickUp)
+            if (pickUps == totalPickUps)
                 winText.gameObject.SetActive(true);
         }
     }

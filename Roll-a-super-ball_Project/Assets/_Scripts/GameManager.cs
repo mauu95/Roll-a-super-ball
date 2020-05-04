@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public GameObject Player;
-    public int nPickUp = 4;
     public bool IsPause;
 
     void Update()

@@ -34,7 +34,7 @@ public class PCGMap : MonoBehaviour {
 
     private void Start() {
         if (elementToAddOnMap.Length > 0)
-            if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = GameManager.instance.nPickUp;
+            if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = nPickUps;
         foreach (GameObject obj in platformPrefabs) {
             if (!obj.name.StartsWith("HoledPlatform", StringComparison.Ordinal)) {
                 normalPlatformPrefab = obj;
