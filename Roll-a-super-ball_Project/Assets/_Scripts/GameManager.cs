@@ -25,14 +25,26 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            LoadGameScene();
+            RealoadLevel();
         if (Player && Player.transform.position.y < 0)
-            LoadGameScene();
+            RealoadLevel();
     }
 
-    public void LoadGameScene()
+    public void RealoadLevel()
     {
-        SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitGame()
