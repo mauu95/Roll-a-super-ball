@@ -31,7 +31,7 @@ public class OvalPlayerMalus : MonoBehaviour {
 
         if (delta > soundTreshold)
         {
-            if (delta > Treshold)
+            if (delta > Treshold && transform.localScale == Vector3.one)
             {
                 transform.localScale = ovalSize;
                 target = ovalSize;
