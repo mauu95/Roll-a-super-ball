@@ -24,6 +24,9 @@ public class Inventory : MonoBehaviour {
     }
 
     private void Update() {
+        if (GameManager.instance.IsPause)
+            return;
+
         for (int i = 1; i < 10; i++)
             if (Input.GetKeyDown(i.ToString()))
                 ActivatePowerUp(i - 1);

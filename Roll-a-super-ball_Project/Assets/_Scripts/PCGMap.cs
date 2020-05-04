@@ -72,6 +72,9 @@ public class PCGMap : MonoBehaviour {
     private void CreateFloor() {
         for (int i = 0; i < Dimension; i++)
             PerformAction();
+
+        if (currentFloor.GetComponentsInChildren<Platform>().Length == 0)
+            GameManager.instance.RealoadLevel();
     }
 
     private void PerformAction() {
