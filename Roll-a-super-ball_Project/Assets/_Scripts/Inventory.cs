@@ -33,11 +33,10 @@ public class Inventory : MonoBehaviour {
 
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
-             ActivatePowerUp(current + (int)scroll);
+            ActivatePowerUp(current + (int)scroll);
 
 
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButtonDown(0)) {
             if (current - 1 < 0)
                 return;
             PowerUp temp = powerUps[current];
@@ -47,8 +46,7 @@ public class Inventory : MonoBehaviour {
             inventoryUI.ChangeSlotsPosWithPrevious(current);
             current--;
         }
-        if (Input.GetMouseButtonDown(1))
-        {
+        if (Input.GetMouseButtonDown(1)) {
             if (current + 1 > powerUps.Count - 1)
                 return;
             PowerUp temp = powerUps[current];
@@ -68,7 +66,7 @@ public class Inventory : MonoBehaviour {
             countText.text = pickUps.ToString() + "/" + totalPickUps;
             countText.GetComponent<Animator>().Play("BigToSmall");
             AudioManager.instance.Play("PickUpPicked");
-
+            GameManager.instance.PickedAPickUp(pickUps);
             if (pickUps == totalPickUps)
                 winText.gameObject.SetActive(true);
         }
@@ -80,16 +78,15 @@ public class Inventory : MonoBehaviour {
         UpdateUIAfterAdd();
         return true;
     }
-        
+
     public void UpdateUIAfterAdd() {
         inventoryUI.Add(powerUps[powerUps.Count - 1], (powerUps.Count).ToString());
-        if(current>=0)
+        if (current >= 0)
             inventoryUI.Highlight(current);
     }
 
     public void DeactivatePowerUp() {
-        foreach (PowerUp item in powerUps)
-        {
+        foreach (PowerUp item in powerUps) {
             item.ReturnToNormal();
             item.enabled = false;
         }

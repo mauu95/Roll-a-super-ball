@@ -9,12 +9,15 @@ class GameState {
     public int pickupTutorial;
     public int[] pickupLevels;
 
+    private int levels;
+
     public GameState(int levels) {
         pickupTutorial = PlayerPrefs.GetInt(PICKUP_TUTORIAL_KEY, 0);
         pickupLevels = new int[levels];
         for (int i = 0; i < levels; i++) {
             pickupLevels[i] = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + (i + 1), 0);
         }
+        this.levels = levels;
     }
 
     public void UpdateLevel(int level, int value) {
@@ -26,6 +29,7 @@ class GameState {
             CompareAndSave(pickupLevels[level - 1], value, PICKUP_LEVEL_KEY);
         }
     }
+
 
     private void CompareAndSave(int toSave, int toCompare, string key) {
         if (toSave == toCompare) {
@@ -68,6 +72,10 @@ public class GameManager : MonoBehaviour {
             RealoadLevel();
         if (Player && Player.transform.position.y < 0)
             RealoadLevel();
+    }
+
+    public void PickedAPickUp(int count) {
+        gameState.UpdateLevel(LevelPlaying, count);
     }
 
     public void RealoadLevel() {
