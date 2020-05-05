@@ -1517,7 +1517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1239878957
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2361,6 +2361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925770107503839296, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
+        type: 3}
+      propertyPath: playerControlInAir
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3925770107503839297, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}

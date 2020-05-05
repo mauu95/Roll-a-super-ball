@@ -14,7 +14,9 @@ public class PowerUpJump : PowerUp
         if (player.isGrounded || Physics.Raycast(transform.position, Vector3.down, howDistantFromTheGroundCanIBeInOrderToJumpAnywaEvenyIfImNotTouchingWithTheGround))
         {
             player.isGrounded = false;
-            player.GetComponent<Rigidbody>().AddForce(0f, JumpForce, 0f, ForceMode.Impulse);
+
+            Vector3 forward = GetComponent<PlayerController>().GetForwardDirection().normalized / 2;
+            player.GetComponent<Rigidbody>().AddForce(forward.x * JumpForce, JumpForce, forward.z*JumpForce, ForceMode.Impulse);
         }
     }
 
