@@ -151,6 +151,7 @@ MonoBehaviour:
   icons: {fileID: 0}
   countText: {fileID: 0}
   winText: {fileID: 0}
+  map: {fileID: 0}
 --- !u!114 &3925770107503839678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,9 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bbdb877396849a1890906729eac62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 1, y: 1.5, z: 0.5}
-  velocityNeeded: 3
-  duration: 20
+  ovalSize: {x: 1, y: 1.5, z: 0.5}
+  malusDuration: 5
+  Treshold: 16
+  soundTreshold: 8
+  impactSound: impactSound
 --- !u!114 &3925770107503839672
 MonoBehaviour:
   m_ObjectHideFlags: 0
