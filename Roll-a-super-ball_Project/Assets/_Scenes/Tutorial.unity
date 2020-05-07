@@ -5251,7 +5251,7 @@ MonoBehaviour:
   Dimension: 10
   nFloor: 2
   brigdeLength: 30
-  nPickUps: 10
+  nPickUps: 15
   nAgents: 0
   agentPrefab: {fileID: 30090898965481276, guid: 386c168dbdf965a4893ae5f89992fbb3,
     type: 3}
