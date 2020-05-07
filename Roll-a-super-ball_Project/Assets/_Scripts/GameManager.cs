@@ -3,7 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-class GameState {
+
+public class GameManager : MonoBehaviour
+{
+    #region Singleton
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of inventory found!");
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
+    const int LEVEL_COUNT = 5;
+    public int LevelPlaying { get; set; }
+    private GameState gameState;
+
+    private void Start()
+    {
+        // Load initial state
+        gameState = new GameState(LEVEL_COUNT);
+        LevelPlaying = 0;
+    }
+
+    public GameObject Player;
+    public bool IsPause;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            RealoadLevel();
+        if (Player && Player.transform.position.y < 0)
+            RealoadLevel();
+    }
+
+    public void PickedAPickUp(int count)
+    {
+        gameState.UpdateLevel(LevelPlaying, count);
+    }
+
+    public void RealoadLevel()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void TogglePause()
+    {
+        IsPause = !IsPause;
+        if (IsPause)
+        {
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+    }
+
+
+
+
+
+
+
+
+
+
+    class GameState {
     private const string PICKUP_TUTORIAL_KEY = "PickUpTutorial";
     private const string PICKUP_LEVEL_KEY = "PickUpLevel";
     public int pickupTutorial;
@@ -37,79 +131,5 @@ class GameState {
         }
     }
 
-}
-
-
-
-public class GameManager : MonoBehaviour {
-    #region Singleton
-    public static GameManager instance;
-
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogWarning("More than one instance of inventory found!");
-            return;
-        }
-        instance = this;
     }
-    #endregion
-
-    const int LEVEL_COUNT = 5;
-    public int LevelPlaying { get; set; }
-    private GameState gameState;
-
-    private void Start() {
-        // Load initial state
-        gameState = new GameState(LEVEL_COUNT);
-        LevelPlaying = 0;
-    }
-
-    public GameObject Player;
-    public bool IsPause;
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.R))
-            RealoadLevel();
-        if (Player && Player.transform.position.y < 0)
-            RealoadLevel();
-    }
-
-    public void PickedAPickUp(int count) {
-        gameState.UpdateLevel(LevelPlaying, count);
-    }
-
-    public void RealoadLevel() {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadMainMenu() {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void LoadNextLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void QuitGame() {
-        Application.Quit();
-    }
-
-    public void TogglePause() {
-        IsPause = !IsPause;
-        if (IsPause) {
-            Time.timeScale = 0;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        } else {
-            Time.timeScale = 1;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        GameObject myEventSystem = GameObject.Find("EventSystem");
-        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-    }
-
-
 }
