@@ -15,6 +15,14 @@ public class TutorialManager : MonoBehaviour
     public void Next()
     {
         popUps[popUpIndex].gameObject.SetActive(false);
-        popUps[++popUpIndex].gameObject.SetActive(true);
+        popUpIndex++;
+        if (popUpIndex >= popUps.Length)
+        {
+            print("Tutorial Complete");
+        }
+        else
+        {
+            popUps[popUpIndex].gameObject.SetActive(true);
+        }
     }
 }

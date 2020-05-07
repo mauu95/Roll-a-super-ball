@@ -38,6 +38,7 @@ public class TutPopMovement : TutorialPopUp
         }
 
         if (Wpressed && Apressed && Spressed && Dpressed)
-            GetComponentInParent<TutorialManager>().Next();
+            End();
+            
     }
 }
