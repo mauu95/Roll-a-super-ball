@@ -7,7 +7,6 @@ using TMPro;
 public class TutPopPickUps : TutorialPopUp
 {
     public GameObject pickUpPrefab;
-    public Inventory player;
     public GameObject ScoreUI;
     public TextMeshProUGUI pickUpCount;
 
@@ -22,8 +21,9 @@ public class TutPopPickUps : TutorialPopUp
 
     private void Update()
     {
-        pickUpCount.text = player.pickUps + "/" + 4;
-        if (player.pickUps == 4)
+        Inventory pinv = player.GetComponent<Inventory>();
+        pickUpCount.text = pinv.pickUps + "/" + 4;
+        if (pinv.pickUps == 4)
             End();
     }
 }

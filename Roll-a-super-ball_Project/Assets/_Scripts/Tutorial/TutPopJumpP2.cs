@@ -6,7 +6,6 @@ public class TutPopJumpP2 : TutorialPopUp
 {
     public GameObject map2;
     public GameObject inventoryUI;
-    public GameObject player;
 
     private void Start()
     {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class TutPopJump : TutorialPopUp
 {
     public GameObject pickableJumpPrefab;
-    public GameObject player;
 
     private void Start()
     {
