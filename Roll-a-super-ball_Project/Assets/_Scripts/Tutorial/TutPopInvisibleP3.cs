@@ -15,4 +15,10 @@ public class TutPopInvisibleP3 : TutorialPopUp
         navMesh.BuildNavMesh();
         plat.CreateEnemy();
     }
+
+    private void Update()
+    {
+        if (player.GetComponent<Inventory>().pickUps == 6)
+            End();
+    }
 }
