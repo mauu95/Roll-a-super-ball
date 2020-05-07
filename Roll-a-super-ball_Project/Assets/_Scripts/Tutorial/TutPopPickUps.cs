@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using TMPro;
 
 public class TutPopPickUps : TutorialPopUp
 {
     public GameObject pickUpPrefab;
     public Inventory player;
     public GameObject ScoreUI;
+    public TextMeshProUGUI pickUpCount;
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class TutPopPickUps : TutorialPopUp
 
     private void Update()
     {
+        pickUpCount.text = player.pickUps + "/" + 4;
         if (player.pickUps == 4)
             End();
     }
