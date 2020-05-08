@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void CursorOn()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void PickedAPickUp(int count)
     {
         gameState.UpdateLevel(LevelPlaying, count);
@@ -81,8 +87,7 @@ public class GameManager : MonoBehaviour
         if (IsPause)
         {
             Time.timeScale = 0;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            CursorOn();
         }
         else
         {
@@ -92,13 +97,6 @@ public class GameManager : MonoBehaviour
         GameObject myEventSystem = GameObject.Find("EventSystem");
         myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
     }
-
-
-
-
-
-
-
 
 
 

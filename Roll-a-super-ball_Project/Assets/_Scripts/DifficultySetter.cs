@@ -13,9 +13,21 @@ public class DifficultySetter : MonoBehaviour
     public Slider nFloorSlider;
     public Slider nEnemySlider;
 
+    private void Start()
+    {
+        GameManager.instance.CursorOn();
+    }
+
     public void StartLevel()
     {
-        mapCreator.Dimension = (int) sizeSlider.value;
+        int dim = (int)sizeSlider.value;
+        int nFloor = (int)nFloorSlider.value;
+
+        mapCreator.Dimension = dim;
+        mapCreator.nFloor = nFloor;
+        mapCreator.nAgents = (int)nEnemySlider.value;
+
+        mapCreator.nPickUps = (int)(dim * nFloor / 10);
 
         mapCreator.gameObject.SetActive(true);
         player.SetActive(true);
