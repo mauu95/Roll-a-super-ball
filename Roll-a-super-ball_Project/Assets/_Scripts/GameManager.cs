@@ -22,17 +22,17 @@ public class GameManager : MonoBehaviour
 
     const int LEVEL_COUNT = 5;
     public int LevelPlaying { get; set; }
+    public GameObject Player;
+    public bool IsPause;
+
+
     private GameState gameState;
 
     private void Start()
     {
-        // Load initial state
         gameState = new GameState(LEVEL_COUNT);
         LevelPlaying = 0;
     }
-
-    public GameObject Player;
-    public bool IsPause;
 
     void Update()
     {
@@ -40,6 +40,12 @@ public class GameManager : MonoBehaviour
             RealoadLevel();
         if (Player && Player.transform.position.y < 0)
             RealoadLevel();
+    }
+
+    public void CursorOff()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void PickedAPickUp(int count)
@@ -81,8 +87,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Time.timeScale = 1;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            CursorOff();
         }
         GameObject myEventSystem = GameObject.Find("EventSystem");
         myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
