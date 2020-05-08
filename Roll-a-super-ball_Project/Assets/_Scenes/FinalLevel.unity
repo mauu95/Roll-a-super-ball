@@ -518,6 +518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapCreator: {fileID: 1473236726}
+  inventoryUI: {fileID: 1387243493}
+  scoreUI: {fileID: 1140959881}
   player: {fileID: 1058597626}
   sizeSlider: {fileID: 1352258844}
   nFloorSlider: {fileID: 703211794}
@@ -2544,7 +2546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1140959882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3331,7 +3333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1387243494
 RectTransform:
   m_ObjectHideFlags: 0
