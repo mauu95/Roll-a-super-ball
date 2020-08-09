@@ -118,9 +118,15 @@ public class PCGMap : MonoBehaviour {
             PCGHistory.SearchPatternResult curr = bridges[i];
 
             GameObject platform1 = history.GetElement(curr.index).obj;
-            float scale1 = platform1.transform.localScale.x;
-
             GameObject platform2 = history.GetElement(curr.index + curr.match.Length - 1).obj;
+            
+            bool isHoled1 = platform1.GetComponent<PlatformHoled>() != null;
+            bool isHoled2 = platform2.GetComponent<PlatformHoled>() != null;
+
+            if (isHoled1 || isHoled2)
+                continue;
+
+            float scale1 = platform1.transform.localScale.x;
             float scale2 = platform2.transform.localScale.x;
 
             float distance = (platform2.transform.position - platform1.transform.position).magnitude - (scale1 + scale2) / 2;
