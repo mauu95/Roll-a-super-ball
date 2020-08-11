@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         if (instance != null)
         {
             Debug.LogWarning("More than one instance of inventory found!");
@@ -20,19 +23,20 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    const int LEVEL_COUNT = 5;
-    public int LevelPlaying { get; set; }
+    private const string PICKUP_LEVEL_KEY = "PickUpLevel";
+    public enum LevelState
+    {
+        LOCKED,
+        UNLOCKED,
+        COMPLETED
+    }
+
+    const int LEVEL_COUNT = 7;
+    public int currentLevel { get; set; }
+
+
     public GameObject Player;
     public bool IsPause;
-
-
-    private GameState gameState;
-
-    private void Start()
-    {
-        gameState = new GameState(LEVEL_COUNT);
-        LevelPlaying = 0;
-    }
 
     void Update()
     {
@@ -40,6 +44,26 @@ public class GameManager : MonoBehaviour
             RealoadLevel();
         if (Player && Player.transform.position.y < 0)
             RealoadLevel();
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            for(int i = 0; i< LEVEL_COUNT; i++)
+            {
+                int x = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + i, -1);
+                print(i + ": " + x);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            for (int i = 0; i < LEVEL_COUNT; i++)
+            {
+                PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + i, -1);
+            }
+
+            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + 0, 0);
+        }
+
+
     }
 
     public void CursorOff()
@@ -54,11 +78,6 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void PickedAPickUp(int count)
-    {
-        gameState.UpdateLevel(LevelPlaying, count);
-    }
-
     public void RealoadLevel()
     {
         Time.timeScale = 1;
@@ -69,6 +88,17 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadLevel(int n)
+    {
+        currentLevel = n;
+
+        if (n == 0)
+            SceneManager.LoadScene(1);
+        else
+            SceneManager.LoadScene(2);
+
     }
 
     public void LoadNextLevel()
@@ -98,41 +128,25 @@ public class GameManager : MonoBehaviour
         myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
     }
 
+    public void PickedAPickUp(int value)
+    {
+        int old = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + currentLevel, -1);
 
-
-    class GameState {
-    private const string PICKUP_TUTORIAL_KEY = "PickUpTutorial";
-    private const string PICKUP_LEVEL_KEY = "PickUpLevel";
-    public int pickupTutorial;
-    public int[] pickupLevels;
-
-    private int levels;
-
-    public GameState(int levels) {
-        pickupTutorial = PlayerPrefs.GetInt(PICKUP_TUTORIAL_KEY, 0);
-        pickupLevels = new int[levels];
-        for (int i = 0; i < levels; i++) {
-            pickupLevels[i] = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + (i + 1), 0);
-        }
-        this.levels = levels;
+        if (old < value)
+            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + currentLevel, value);  
     }
 
-    public void UpdateLevel(int level, int value) {
-        if (level == 0) {
-            pickupTutorial = Mathf.Max(pickupTutorial, value);
-            CompareAndSave(pickupTutorial, value, PICKUP_TUTORIAL_KEY);
-        } else {
-            pickupLevels[level - 1] = Mathf.Max(pickupLevels[level - 1], value);
-            CompareAndSave(pickupLevels[level - 1], value, PICKUP_LEVEL_KEY);
-        }
+    public int getPickUpsValue(int level)
+    {
+        return PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + level, -1);
     }
 
+    public void Unlock(int level)
+    {
+        int old = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + level, -1);
 
-    private void CompareAndSave(int toSave, int toCompare, string key) {
-        if (toSave == toCompare) {
-            PlayerPrefs.SetInt(key, toSave);
-        }
+        if (old < 0)
+            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + level, 0);
     }
 
-    }
 }
