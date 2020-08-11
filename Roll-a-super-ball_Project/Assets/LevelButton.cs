@@ -9,6 +9,7 @@ public class LevelButton : MonoBehaviour
     public string description;
     public Sprite locked;
     public Sprite unlocked;
+    public Sprite completed;
 
     private void Start()
     {
@@ -23,9 +24,14 @@ public class LevelButton : MonoBehaviour
         else
             ntotpick = level * 10;
 
-        description = "Level " + level + "\n" + npick + "/" + ntotpick; 
+        description = "Level " + level + "\n" + npick + "/" + ntotpick;
 
-        if (IsUnlocked())
+        if (level == 6)
+            description = "SPECIAL";
+
+        if(IsCompleted())
+            GetComponent<Image>().sprite = completed;
+        else if (IsUnlocked())
             GetComponent<Image>().sprite = unlocked;
         else
             GetComponent<Image>().sprite = locked;
@@ -34,6 +40,16 @@ public class LevelButton : MonoBehaviour
     public bool IsUnlocked()
     {
         return GameManager.instance.getPickUpsValue(level) >= 0;
+    }
+
+    public bool IsCompleted()
+    {
+        int npicks = GameManager.instance.getPickUpsValue(level);
+
+        if (level == 0)
+            return npicks == 15;
+        else
+            return npicks == level * 10;
     }
 
     

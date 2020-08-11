@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
 
         if (n == 0)
             SceneManager.LoadScene(1);
+        else if (n == 6)
+            SceneManager.LoadScene(3);
         else
             SceneManager.LoadScene(2);
 
