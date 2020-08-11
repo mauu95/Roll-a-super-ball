@@ -17,7 +17,15 @@ public abstract class PowerUp : MonoBehaviour {
     }
 
     protected void Update() {
-        if (!isCooldown && Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ActivatePowerUp();
+        
+    }
+
+    public void ActivatePowerUp()
+    {
+        if (!isCooldown)
+        {
             doStuff();
             if (onActivatePowerUpCallback != null)
                 onActivatePowerUpCallback.Invoke();

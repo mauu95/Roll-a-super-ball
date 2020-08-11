@@ -95,6 +95,12 @@ public class Inventory : MonoBehaviour {
     public void ActivatePowerUp(int i) {
         if (i < 0 || i > powerUps.Count - 1)
             return;
+
+        if(current == i)
+        {
+            powerUps[i].ActivatePowerUp();
+            return;
+        }
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
         powerUps[i].enabled = true;
