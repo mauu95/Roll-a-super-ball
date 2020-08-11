@@ -15,6 +15,16 @@ public class LevelButton : MonoBehaviour
         if (GameManager.instance.getPickUpsValue(level - 1) >= (level - 1) * 7)
             GameManager.instance.Unlock(level);
 
+        int npick = GameManager.instance.getPickUpsValue(level);
+        int ntotpick;
+
+        if (level == 0)
+            ntotpick = 15;
+        else
+            ntotpick = level * 10;
+
+        description = "Level " + level + "\n" + npick + "/" + ntotpick; 
+
         if (IsUnlocked())
             GetComponent<Image>().sprite = unlocked;
         else
