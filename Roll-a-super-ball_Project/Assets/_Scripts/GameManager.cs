@@ -87,6 +87,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int n)
     {
+        if (getPickUpsValue(n) < 0)
+            return;
         PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, n);
 
         if (n == 0)
