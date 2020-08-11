@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of inventory found!");
             return;
         }
         instance = this;

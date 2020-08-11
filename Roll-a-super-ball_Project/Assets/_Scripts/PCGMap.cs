@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class PCGMap : MonoBehaviour {
     public int seed;
@@ -31,6 +32,16 @@ public class PCGMap : MonoBehaviour {
     private int bridgeMinimumLength = 5;
     private GameObject normalPlatformPrefab;
     private GameObject currentFloor;
+
+
+    private void Awake()
+    {
+        int level = GameManager.instance.currentLevel;
+        Dimension = level * 10;
+        nFloor = level / 2 + 1;
+        nPickUps = level * 10;
+        nAgents = level;
+    }
 
     private void Start() {
         if (elementToAddOnMap.Length > 0)
@@ -70,6 +81,8 @@ public class PCGMap : MonoBehaviour {
     }
 
     private void CreateFloor() {
+        PerformAction(0);
+
         for (int i = 0; i < Dimension; i++)
             PerformAction();
 
@@ -77,18 +90,26 @@ public class PCGMap : MonoBehaviour {
             GameManager.instance.RealoadLevel();
     }
 
-    private void PerformAction() {
-        int action = iseed.Next(3);
-
-        if (action == 0) {
+    private void PerformAction(int action)
+    {
+        if (action == 0)
+        {
             GameObject plat = CreatePlatform();
             if (plat)
                 history.Add(action, plat);
-        } else if (action == 1) {
+        }
+        else if (action == 1)
+        {
             history.Add(action);
             ChangeDirection();
-        } else if (action == 2)
+        }
+        else if (action == 2)
             history.Add(action, CreateBridge());
+    }
+
+    private void PerformAction() {
+        int action = iseed.Next(3);
+        PerformAction(action);
     }
 
 
