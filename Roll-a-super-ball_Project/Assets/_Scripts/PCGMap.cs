@@ -36,7 +36,7 @@ public class PCGMap : MonoBehaviour {
 
     private void Awake()
     {
-        int level = GameManager.instance.currentLevel;
+        int level = GameManager.instance.getCurrentLevel();
         Dimension = level * 10;
         nFloor = level / 2 + 1;
         nPickUps = level * 10;

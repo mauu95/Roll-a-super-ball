@@ -12,17 +12,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         if (instance != null)
-        {
             return;
-        }
         instance = this;
     }
     #endregion
 
     private const string PICKUP_LEVEL_KEY = "PickUpLevel";
+    private const string CURRENT_LEVEL_KEY = "CurrentLevel";
+
     public enum LevelState
     {
         LOCKED,
@@ -31,8 +29,6 @@ public class GameManager : MonoBehaviour
     }
 
     const int LEVEL_COUNT = 7;
-    public int currentLevel { get; set; }
-
 
     public GameObject Player;
     public bool IsPause;
@@ -91,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int n)
     {
-        currentLevel = n;
+        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, n);
 
         if (n == 0)
             SceneManager.LoadScene(1);
@@ -129,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void PickedAPickUp(int value)
     {
+        int currentLevel = getCurrentLevel();
         int old = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + currentLevel, -1);
 
         if (old < value)
@@ -146,6 +143,11 @@ public class GameManager : MonoBehaviour
 
         if (old < 0)
             PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + level, 0);
+    }
+
+    public int getCurrentLevel()
+    {
+        return PlayerPrefs.GetInt(CURRENT_LEVEL_KEY, -1);
     }
 
 }
