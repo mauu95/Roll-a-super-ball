@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour {
     public TextMeshProUGUI countText;
     public Text winText;
     public PCGMap map;
+    public LevelCompleteBox winBox;
 
     private int current = -1;
     private int totalPickUps;
@@ -21,6 +22,7 @@ public class Inventory : MonoBehaviour {
         pickUps = 0;
         totalPickUps = map.nPickUps;
         countText.text = pickUps.ToString() + "/" + totalPickUps;
+        winBox = FindObjectOfType<LevelCompleteBox>();
     }
 
     private void Update() {
@@ -68,7 +70,12 @@ public class Inventory : MonoBehaviour {
             AudioManager.instance.Play("PickUpPicked");
             GameManager.instance.PickedAPickUp(pickUps);
             if (pickUps == totalPickUps)
-                winText.gameObject.SetActive(true);
+            {
+                //winText.gameObject.SetActive(true);
+                if (winBox)
+                    winBox.ToggleOnOff();
+            }
+                
         }
     }
 

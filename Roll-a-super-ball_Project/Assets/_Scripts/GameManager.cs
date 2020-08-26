@@ -91,9 +91,12 @@ public class GameManager : MonoBehaviour
             return;
         PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, n);
 
+        if (GameManager.instance.IsPause)
+            GameManager.instance.TogglePause();
+
         if (n == 0)
             SceneManager.LoadScene(1);
-        else if (n == 6)
+        else if (n >= 6)
             SceneManager.LoadScene(3);
         else
             SceneManager.LoadScene(2);
@@ -102,7 +105,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int currentLevel = GameManager.instance.getCurrentLevel();
+        LoadLevel(currentLevel + 1);
     }
 
     public void QuitGame()

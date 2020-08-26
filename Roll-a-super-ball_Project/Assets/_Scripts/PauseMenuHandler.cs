@@ -12,8 +12,6 @@ public class PauseMenuHandler : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
             ToggleOnOff();
-
-
     }
 
     private void ToggleOnOff()
