@@ -36,11 +36,26 @@ public class PCGMap : MonoBehaviour {
 
     private void Awake()
     {
+        if (!GameManager.instance.LoadLevelCalled)
+            return;
+
         int level = GameManager.instance.getCurrentLevel();
-        Dimension = level * 10;
-        nFloor = level / 2 + 1;
-        nPickUps = level * 10;
-        nAgents = level;
+
+        if(level == 6)
+        {
+            Dimension = PlayerPrefs.GetInt("sliderSizeInit");
+            nFloor = PlayerPrefs.GetInt("sliderNFloorInit");
+            nAgents = PlayerPrefs.GetInt("sliderNEnemyInit");
+            nPickUps = (int)(Dimension * nFloor / 10);
+        }
+        else
+        {
+            Dimension = level * 10;
+            nFloor = level / 2 + 1;
+            nPickUps = level * 10;
+            nAgents = level;
+        }
+
     }
 
     private void Start() {

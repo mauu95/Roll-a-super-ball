@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data.OleDb;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -20,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     private const string PICKUP_LEVEL_KEY = "PickUpLevel";
     private const string CURRENT_LEVEL_KEY = "CurrentLevel";
+    
+    public bool LoadLevelCalled;
 
     public enum LevelState
     {
@@ -93,6 +92,8 @@ public class GameManager : MonoBehaviour
 
         if (GameManager.instance.IsPause)
             GameManager.instance.TogglePause();
+
+        LoadLevelCalled = true;
 
         if (n == 0)
             SceneManager.LoadScene(1);

@@ -438,7 +438,7 @@ RectTransform:
   - {fileID: 109253628}
   - {fileID: 1146297343}
   m_Father: {fileID: 948407854}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1984,8 +1984,8 @@ RectTransform:
   - {fileID: 1140959882}
   - {fileID: 1538071974}
   - {fileID: 1387243494}
-  - {fileID: 1953285312}
   - {fileID: 387500313}
+  - {fileID: 1953285312}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2529,6 +2529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d3f8494b5921d4f8d2eb654888f348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadLevelCalled: 0
   Player: {fileID: 1058597626}
   IsPause: 0
 --- !u!1 &1140959881
@@ -4076,7 +4077,7 @@ PrefabInstance:
     - target: {fileID: 5929426228111623471, guid: 839e3f90ba79cb5499aabe79b9a67b95,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5929426228111623471, guid: 839e3f90ba79cb5499aabe79b9a67b95,
         type: 3}

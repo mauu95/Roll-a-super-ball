@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DifficultySetter : MonoBehaviour
 {
@@ -53,6 +54,9 @@ public class DifficultySetter : MonoBehaviour
 
         mapCreator.nPickUps = (int)(dim * nFloor / 10);
 
+        SceneManager.LoadScene(2);
+
+        /*
         mapCreator.gameObject.SetActive(true);
         player.SetActive(true);
         inventoryUI.SetActive(true);
@@ -61,5 +65,6 @@ public class DifficultySetter : MonoBehaviour
         GameManager.instance.CursorOff();
 
         gameObject.SetActive(false);
+        */
     }
 }
