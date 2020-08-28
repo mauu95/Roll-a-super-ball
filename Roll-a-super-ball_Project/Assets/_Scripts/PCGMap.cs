@@ -36,9 +36,6 @@ public class PCGMap : MonoBehaviour {
 
     private void Awake()
     {
-        if (!GameManager.instance.LoadLevelCalled)
-            return;
-
         int level = GameManager.instance.getCurrentLevel();
 
         if(level == 6)

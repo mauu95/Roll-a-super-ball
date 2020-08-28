@@ -22,6 +22,7 @@ public class OvalPlayerMalus : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         target = normalSize;
+        GameManager.instance.CursorOff();
     }
 
     private void OnCollisionEnter(Collision collision)

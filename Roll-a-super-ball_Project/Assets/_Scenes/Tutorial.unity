@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 33cb03ac551802542981d1f6f83bfc04,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1058597626}
-  pickableJumpPrefab: {fileID: 7933657235353603616, guid: a6a69546302581843a8d534c80ef5510,
+  pickableJumpPrefab: {fileID: 288945934466724316, guid: 8c44ae37d5dd76447a36500fe025a6b7,
     type: 3}
 --- !u!95 &575117902
 Animator:
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  magnetPrefab: {fileID: 8614235011776224205, guid: 6d726b14a4b305647ae98bd4bf5781a7,
+  magnetPrefab: {fileID: 288945934466724316, guid: ab54095c28a38f84d9bd91b9db23cf06,
     type: 3}
 --- !u!95 &644768133
 Animator:
@@ -2724,7 +2724,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5621,7 +5621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  pickableInvisiblePrefab: {fileID: 1694597253681835275, guid: c1e354b73de5e0f44b4ccd9a368d798c,
+  pickableInvisiblePrefab: {fileID: 288945934466724316, guid: 1aa9869afd7fa704a806bc9faae3cbdb,
     type: 3}
 --- !u!95 &1489829938
 Animator:
