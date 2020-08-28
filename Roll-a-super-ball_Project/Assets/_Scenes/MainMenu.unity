@@ -795,6 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c214e753d9f0c342a39ec512a981e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.1
 --- !u!1001 &624248815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2335,6 +2336,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MapCreator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072927511509371082, guid: 6c86f8f061bc7ba4ebc2b1404c2ab064,
+        type: 3}
+      propertyPath: nFloor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072927511509371082, guid: 6c86f8f061bc7ba4ebc2b1404c2ab064,
+        type: 3}
+      propertyPath: Dimension
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7072927511509371083, guid: 6c86f8f061bc7ba4ebc2b1404c2ab064,
         type: 3}

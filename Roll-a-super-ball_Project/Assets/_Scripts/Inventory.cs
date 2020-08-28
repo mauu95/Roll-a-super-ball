@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class Inventory : MonoBehaviour {
 
     private void Start() {
         pickUps = 0;
-        totalPickUps = map.nPickUps;
+        totalPickUps = GameManager.instance.getCurrentLevel() * 10;
         countText.text = pickUps.ToString() + "/" + totalPickUps;
         winBox = FindObjectOfType<LevelCompleteBox>();
     }

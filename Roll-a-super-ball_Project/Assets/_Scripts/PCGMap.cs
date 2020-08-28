@@ -33,25 +33,29 @@ public class PCGMap : MonoBehaviour {
     private GameObject normalPlatformPrefab;
     private GameObject currentFloor;
 
+
+
     private void Start() {
         int level = GameManager.instance.getCurrentLevel();
 
-        if (level == 6)
+        if(SceneManager.GetActiveScene().buildIndex != 0)
         {
-            Dimension = PlayerPrefs.GetInt("sliderSizeInit");
-            nFloor = PlayerPrefs.GetInt("sliderNFloorInit");
-            nAgents = PlayerPrefs.GetInt("sliderNEnemyInit");
-            nPickUps = (int)(Dimension * nFloor / 10);
+            if (level == 6)
+            {
+                Dimension = PlayerPrefs.GetInt("sliderSizeInit");
+                nFloor = PlayerPrefs.GetInt("sliderNFloorInit");
+                nAgents = PlayerPrefs.GetInt("sliderNEnemyInit");
+                //nPickUps = (int)(Dimension * nFloor / 10);
+                nPickUps = level * level;
+            }
+            else
+            {
+                Dimension = level * 10;
+                nFloor = level / 2 + 1;
+                nPickUps = level * 10;
+                nAgents = level * level;
+            }
         }
-        else
-        {
-            Dimension = level * 10;
-            nFloor = level / 2 + 1;
-            nPickUps = level * 10;
-            nAgents = level * level;
-        }
-
-
 
         if (elementToAddOnMap.Length > 0)
             if (elementToAddOnMap[0].prefab.name == "PickUp") elementToAddOnMap[0].quantity = nPickUps;
