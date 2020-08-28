@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7072927511509371081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7072927511509371083}
+  - component: {fileID: 7072927511509371082}
+  m_Layer: 0
+  m_Name: MapCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7072927511509371083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072927511509371081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7072927511509371082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072927511509371081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba984c38f3358d4c9c4091eabeae2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  Dimension: 10
+  nFloor: 1
+  brigdeLength: 30
+  nPickUps: 10
+  nAgents: 0
+  agentPrefab: {fileID: 30090898965481276, guid: 386c168dbdf965a4893ae5f89992fbb3,
+    type: 3}
+  platformPrefabs:
+  - {fileID: 705363302453291048, guid: 49b68ad3731ec56448e69d0cfd837f5a, type: 3}
+  - {fileID: 835414953093068274, guid: 46a417f9a2a7a4e7190dce2dc36430d9, type: 3}
+  BrigdePrefab:
+  - {fileID: 7634364700533989109, guid: 93de3b660eebbcd41a08ff2b49b724ef, type: 3}
+  movingBrigdePrefab: {fileID: 5871951374542988705, guid: 12b0c0114ece638429999a977ff3d94b,
+    type: 3}
+  bridgeDestroyerPrefab: {fileID: 7976263262975569517, guid: 1e2d1997e65fee546bedb1cf8ebd5f15,
+    type: 3}
+  elementToAddOnMap:
+  - prefab: {fileID: 4570386290049064973, guid: fee94271ba1dc0141aadcd5ce07fcf8d,
+      type: 3}
+    quantity: 4
+  - prefab: {fileID: 288945934466724316, guid: 6e0ffaa19c7674795ab2b40163914c15, type: 3}
+    quantity: 1
+  - prefab: {fileID: 288945934466724316, guid: 8c44ae37d5dd76447a36500fe025a6b7, type: 3}
+    quantity: 1
+  - prefab: {fileID: 288945934466724316, guid: ab54095c28a38f84d9bd91b9db23cf06, type: 3}
+    quantity: 1
+  - prefab: {fileID: 288945934466724316, guid: 1aa9869afd7fa704a806bc9faae3cbdb, type: 3}
+    quantity: 1
+  portalPrefab: {fileID: 8244281864264474788, guid: 5a84e8b9619f4ca4fa9a36b1c2258a46,
+    type: 3}
+  history: {fileID: 0}
