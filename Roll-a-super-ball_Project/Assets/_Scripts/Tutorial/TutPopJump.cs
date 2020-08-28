@@ -8,7 +8,7 @@ public class TutPopJump : TutorialPopUp
 
     private void Start()
     {
-        Instantiate(pickableJumpPrefab, Vector3.zero, Quaternion.identity);
+        Instantiate(pickableJumpPrefab, new Vector3(0f, .8f, 0f), Quaternion.identity);
     }
 
     private void Update()

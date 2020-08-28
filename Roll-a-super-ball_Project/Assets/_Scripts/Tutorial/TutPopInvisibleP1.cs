@@ -8,7 +8,7 @@ public class TutPopInvisibleP1 : TutorialPopUp
 
     private void Start()
     {
-        Instantiate(pickableInvisiblePrefab, new Vector3(5f, 0.5f, 25f), Quaternion.identity);
+        Instantiate(pickableInvisiblePrefab, new Vector3(5f, 0.8f, 25f), Quaternion.identity);
     }
 
     private void Update()
