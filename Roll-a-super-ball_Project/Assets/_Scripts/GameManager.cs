@@ -89,8 +89,8 @@ public class GameManager : MonoBehaviour
             
         PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, n);
 
-        if (GameManager.instance.IsPause)
-            GameManager.instance.TogglePause();
+        if (IsPause)
+            TogglePause();
 
         if (n == 0)
             SceneManager.LoadScene(1);
@@ -101,9 +101,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadSpecialLevel()
+    {
+        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, 6);
+        SceneManager.LoadScene(2);
+    }
+
     public void LoadNextLevel()
     {
-        int currentLevel = GameManager.instance.getCurrentLevel();
+        int currentLevel = getCurrentLevel();
 
         int npick = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY+currentLevel);
         if (npick >= currentLevel * 7)

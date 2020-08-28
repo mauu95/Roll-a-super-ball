@@ -7,11 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class DifficultySetter : MonoBehaviour
 {
-    public PCGMap mapCreator;
-    public GameObject inventoryUI;
-    public GameObject scoreUI;
-    public GameObject player;
-
     public Slider sizeSlider;
     public Slider nFloorSlider;
     public Slider nEnemySlider;
@@ -48,23 +43,6 @@ public class DifficultySetter : MonoBehaviour
         PlayerPrefs.SetInt("sliderNFloorInit", nFloor);
         PlayerPrefs.SetInt("sliderNEnemyInit", nAgents);
 
-        mapCreator.Dimension = dim;
-        mapCreator.nFloor = nFloor;
-        mapCreator.nAgents = nAgents;
-
-        mapCreator.nPickUps = (int)(dim * nFloor / 10);
-
-        SceneManager.LoadScene(2);
-
-        /*
-        mapCreator.gameObject.SetActive(true);
-        player.SetActive(true);
-        inventoryUI.SetActive(true);
-        scoreUI.SetActive(true);
-
-        GameManager.instance.CursorOff();
-
-        gameObject.SetActive(false);
-        */
+        GameManager.instance.LoadSpecialLevel();
     }
 }
