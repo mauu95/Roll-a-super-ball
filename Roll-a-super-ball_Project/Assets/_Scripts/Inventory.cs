@@ -21,7 +21,13 @@ public class Inventory : MonoBehaviour {
 
     private void Start() {
         pickUps = 0;
-        totalPickUps = GameManager.instance.getCurrentLevel() * 10;
+
+        int currentLevel = GameManager.instance.getCurrentLevel();
+
+        if (currentLevel == 0)
+            totalPickUps = 15;
+        else
+            totalPickUps = GameManager.instance.getCurrentLevel() * 10;
         countText.text = pickUps.ToString() + "/" + totalPickUps;
         winBox = FindObjectOfType<LevelCompleteBox>();
     }

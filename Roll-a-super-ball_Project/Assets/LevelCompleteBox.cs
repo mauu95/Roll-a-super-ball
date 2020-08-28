@@ -13,7 +13,6 @@ public class LevelCompleteBox : MonoBehaviour
 
     public void ToggleOnOff()
     {
-        GameManager.instance.TogglePause();
         animator.SetBool("show", true);
     }
 }
