@@ -47,6 +47,8 @@ public class PCGMap : MonoBehaviour {
                 nAgents = PlayerPrefs.GetInt("sliderNEnemyInit");
                 //nPickUps = (int)(Dimension * nFloor / 10);
                 nPickUps = level * level;
+                if (level == 0)
+                    nPickUps = 15;
             }
             else
             {

@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int n)
     {
+        if (getPickUpsValue(n) < 0)
+            return;
+            
         PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, n);
 
         if (GameManager.instance.IsPause)
@@ -101,6 +104,11 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         int currentLevel = GameManager.instance.getCurrentLevel();
+
+        int npick = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY+currentLevel);
+        if (npick >= currentLevel * 7)
+            Unlock(currentLevel + 1);
+        
         LoadLevel(currentLevel + 1);
     }
 
