@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
     {
         int level = GameManager.instance.getCurrentLevel();
         Sound theme;
-        print(level);
+
         if (level >= 0 && level < GameManager.LEVEL_COUNT)
         {
             theme = themes[GameManager.instance.getCurrentLevel()];

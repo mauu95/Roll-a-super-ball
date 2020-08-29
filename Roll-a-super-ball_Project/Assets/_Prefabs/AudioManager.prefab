@@ -109,7 +109,7 @@ MonoBehaviour:
   themes:
   - name: 
     clip: {fileID: 8300000, guid: 67d76f92632de6847aec7da4be55e720, type: 3}
-    volume: 0.3
+    volume: 0.15
     source: {fileID: 0}
     loop: 1
   - name: 
@@ -119,12 +119,12 @@ MonoBehaviour:
     loop: 1
   - name: 
     clip: {fileID: 8300000, guid: 4a6d72b0c16e02a4689b4d3d34d874fa, type: 3}
-    volume: 0.3
+    volume: 0.2
     source: {fileID: 0}
     loop: 1
   - name: 
     clip: {fileID: 8300000, guid: 736bf7ecafb096e41baa21f1a5ad3f23, type: 3}
-    volume: 0.3
+    volume: 0.2
     source: {fileID: 0}
     loop: 1
   - name: 
@@ -134,6 +134,6 @@ MonoBehaviour:
     loop: 0
   - name: 
     clip: {fileID: 8300000, guid: d54eb98e1c32a9441862445455684237, type: 3}
-    volume: 0.3
+    volume: 0.15
     source: {fileID: 0}
     loop: 1
