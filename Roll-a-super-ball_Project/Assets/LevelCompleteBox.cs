@@ -13,6 +13,7 @@ public class LevelCompleteBox : MonoBehaviour
 
     public void ToggleOn()
     {
+        AudioManager.instance.Play("LevelComplete");
         GameManager.instance.CursorOn();
         animator.SetBool("show", true);
     }
