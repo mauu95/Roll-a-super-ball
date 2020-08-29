@@ -8,7 +8,7 @@ public class TutPopMagnetP1 : TutorialPopUp
 
     private void Start()
     {
-        Instantiate(magnetPrefab, new Vector3(0f, .8f, 20f), Quaternion.identity);
+        Instantiate(magnetPrefab, new Vector3(0f, .8f, 40f), Quaternion.identity);
     }
 
     private void Update()
