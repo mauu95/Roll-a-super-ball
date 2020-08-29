@@ -21,13 +21,19 @@ public class Inventory : MonoBehaviour {
 
     private void Start() {
         pickUps = 0;
+        StartCoroutine(LateStart(0.1f));
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
 
         int currentLevel = GameManager.instance.getCurrentLevel();
 
         if (currentLevel == 0)
             totalPickUps = 15;
         else
-            totalPickUps = GameManager.instance.getCurrentLevel() * 10;
+            totalPickUps = map.nPickUps;
         countText.text = pickUps.ToString() + "/" + totalPickUps;
         winBox = FindObjectOfType<LevelCompleteBox>();
     }

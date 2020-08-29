@@ -43,16 +43,28 @@ public class GameManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.B))
+            ResetLevels();
+        if (Input.GetKeyDown(KeyCode.N))
+            UnlockAllLevels();
+
+
+    }
+
+    private void UnlockAllLevels()
+    {
+        for (int i = 0; i < LEVEL_COUNT; i++)
         {
-            for (int i = 0; i < LEVEL_COUNT; i++)
-            {
-                PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + i, -1);
-            }
-
-            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + 0, 0);
+            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + i, 100);
         }
+    }
 
-
+    private void ResetLevels()
+    {
+        for (int i = 0; i < LEVEL_COUNT; i++)
+        {
+            PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + i, -1);
+        }
+        PlayerPrefs.SetInt(PICKUP_LEVEL_KEY + 0, 0);
     }
 
     public void CursorOff()

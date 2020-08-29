@@ -45,8 +45,7 @@ public class PCGMap : MonoBehaviour {
                 Dimension = PlayerPrefs.GetInt("sliderSizeInit");
                 nFloor = PlayerPrefs.GetInt("sliderNFloorInit");
                 nAgents = PlayerPrefs.GetInt("sliderNEnemyInit");
-                //nPickUps = (int)(Dimension * nFloor / 10);
-                nPickUps = level * level;
+                nPickUps = (int)(Dimension * nFloor / 10);
                 if (level == 0)
                     nPickUps = 15;
             }
@@ -56,6 +55,11 @@ public class PCGMap : MonoBehaviour {
                 nFloor = level / 2 + 1;
                 nPickUps = level * 10;
                 nAgents = level * level;
+            }
+
+            if(level == 1)
+            {
+                nAgents = 0;
             }
         }
 

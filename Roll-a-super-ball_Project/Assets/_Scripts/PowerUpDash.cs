@@ -14,7 +14,7 @@ public class PowerUpDash : PowerUp
     private void Awake()
     {
         id = "dash";
-        cooldownTime = 0.5f;
+        cooldownTime = 2f;
 
         projectile = Instantiate(PrefabManager.instance.projectile);
         projectile.player = transform;

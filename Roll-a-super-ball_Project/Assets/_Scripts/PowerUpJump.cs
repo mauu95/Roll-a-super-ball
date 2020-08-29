@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpJump : PowerUp
 {
-    public float JumpForce = 100f;
+    public float JumpForce = 120f;
 
     public override void doStuff()
     {
@@ -15,7 +15,7 @@ public class PowerUpJump : PowerUp
         {
             player.isGrounded = false;
 
-            Vector3 forward = GetComponent<PlayerController>().GetForwardDirection().normalized / 2;
+            Vector3 forward = GetComponent<PlayerController>().GetForwardDirection().normalized / 3;
             player.GetComponent<Rigidbody>().AddForce(forward.x * JumpForce, JumpForce, forward.z*JumpForce, ForceMode.Impulse);
         }
     }
@@ -28,7 +28,7 @@ public class PowerUpJump : PowerUp
     private void Awake()
     {
         id = "jump";
-        cooldownTime = 5f;
+        cooldownTime = 2f;
     }
 
 
