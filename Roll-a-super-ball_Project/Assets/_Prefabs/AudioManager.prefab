@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7138220540043377977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7138220540043377983}
+  - component: {fileID: 7138220540043377982}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7138220540043377983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138220540043377977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7138220540043377982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138220540043377977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e2f8039dfbf124094e726c43d836d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playTheme: 0
+  defaultSound:
+    name: default
+    clip: {fileID: 8300000, guid: d923860589a0748e981a2145fbc32489, type: 3}
+    volume: 1
+    source: {fileID: 0}
+    loop: 0
+  sounds:
+  - name: PickUpPicked
+    clip: {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
+    volume: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: PowerUpPicked
+    clip: {fileID: 8300000, guid: 92c40ab7ca7374d3786d834d6da04585, type: 3}
+    volume: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Theme
+    clip: {fileID: 8300000, guid: 3c34aff793d05794fbc69da29b9daa2f, type: 3}
+    volume: 0.05
+    source: {fileID: 0}
+    loop: 1
+  - name: PUInvisibility
+    clip: {fileID: 8300000, guid: e4bf4ce2d54b6ba4699496cff80b34c1, type: 3}
+    volume: 0.45
+    source: {fileID: 0}
+    loop: 0
+  - name: Smaterialization
+    clip: {fileID: 8300000, guid: e2a9ba086951a024e860f923779672f4, type: 3}
+    volume: 0.2
+    source: {fileID: 0}
+    loop: 0
+  - name: PUMagnet
+    clip: {fileID: 8300000, guid: c4f8ebd7901e7a849a79eb1ffc50041f, type: 3}
+    volume: 0
+    source: {fileID: 0}
+    loop: 1
+  - name: impactSound
+    clip: {fileID: 8300000, guid: 53287a0949003eb44a10fb1075fb906c, type: 3}
+    volume: 0.55
+    source: {fileID: 0}
+    loop: 0
+  - name: PUDash
+    clip: {fileID: 8300000, guid: 83ea4cba509c263469258689266c66c9, type: 3}
+    volume: 0.55
+    source: {fileID: 0}
+    loop: 0
+  - name: NormalBridgeAlert
+    clip: {fileID: 8300000, guid: a74fa00c3ee74b44fbc50e0fd6c2a072, type: 3}
+    volume: 0.1
+    source: {fileID: 0}
+    loop: 0
+  - name: ovalMalus
+    clip: {fileID: 8300000, guid: cb09135da9c35c84ba09721c50c0a2dc, type: 3}
+    volume: 0.55
+    source: {fileID: 0}
+    loop: 0
+  - name: LevelComplete
+    clip: {fileID: 8300000, guid: 0d18c46d0335f7146a65730abfefc5ce, type: 3}
+    volume: 0.615
+    source: {fileID: 0}
+    loop: 0
+  themes:
+  - name: 
+    clip: {fileID: 8300000, guid: 67d76f92632de6847aec7da4be55e720, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 1
+  - name: 
+    clip: {fileID: 8300000, guid: d54eb98e1c32a9441862445455684237, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 1
+  - name: 
+    clip: {fileID: 8300000, guid: 4a6d72b0c16e02a4689b4d3d34d874fa, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 1
+  - name: 
+    clip: {fileID: 8300000, guid: 736bf7ecafb096e41baa21f1a5ad3f23, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 1
+  - name: 
+    clip: {fileID: 8300000, guid: 71fbdd8a03b73aa48a8976a3d5e3cb08, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 0
+  - name: 
+    clip: {fileID: 8300000, guid: 628b22a698a89c947992d5d2c1acbab3, type: 3}
+    volume: 0.3
+    source: {fileID: 0}
+    loop: 1

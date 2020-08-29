@@ -32,14 +32,27 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.loop = s.loop;
         }
+
+        foreach (Sound s in themes)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.loop = s.loop;
+        }
     }
 
     private void Start()
     {
-        Sound theme = AudioManager.instance.GetSound("Theme");
+        int level = GameManager.instance.getCurrentLevel();
+        Sound theme;
 
-        if (playTheme && theme != null)
-            theme.Play();
+        if (level >= 0 && level < GameManager.LEVEL_COUNT)
+        {
+            theme = themes[GameManager.instance.getCurrentLevel()];
+            theme.source.Play();
+        }
+
     }
 
     public void Play(string name)
