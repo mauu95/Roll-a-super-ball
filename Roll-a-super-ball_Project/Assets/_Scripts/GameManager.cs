@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        return;
         if (Input.GetKeyDown(KeyCode.R))
             RealoadLevel();
 

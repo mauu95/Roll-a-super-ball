@@ -6871,8 +6871,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1058597626}
-  MouseHorizontalSpeed: 2
-  MouseVerticalSpeed: 2
+  MouseHorizontalSpeed: 200
+  MouseVerticalSpeed: 200
 --- !u!4 &1768813618
 Transform:
   m_ObjectHideFlags: 0

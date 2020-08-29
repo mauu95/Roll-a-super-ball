@@ -6,8 +6,8 @@ public class CameraPivotController : MonoBehaviour
 {
     public GameObject player;
 
-    public float MouseHorizontalSpeed = 2.0f;
-    public float MouseVerticalSpeed = 2.0f;
+    public float MouseHorizontalSpeed = 200f;
+    public float MouseVerticalSpeed = 200f;
 
     private float yaw = 0.0f;
     private float pitch = 0.0f;
@@ -20,8 +20,8 @@ public class CameraPivotController : MonoBehaviour
         
         transform.position = smoothedPosition;
 
-        yaw += MouseHorizontalSpeed * Input.GetAxis("Mouse X");
-        pitch -= MouseVerticalSpeed * Input.GetAxis("Mouse Y");
+        yaw += Time.deltaTime * MouseHorizontalSpeed * Input.GetAxis("Mouse X");
+        pitch -= Time.deltaTime * MouseVerticalSpeed * Input.GetAxis("Mouse Y");
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
