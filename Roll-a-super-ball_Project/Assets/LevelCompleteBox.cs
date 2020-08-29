@@ -11,8 +11,9 @@ public class LevelCompleteBox : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void ToggleOnOff()
+    public void ToggleOn()
     {
+        GameManager.instance.CursorOn();
         animator.SetBool("show", true);
     }
 }

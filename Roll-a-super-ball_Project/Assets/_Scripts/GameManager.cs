@@ -26,16 +26,13 @@ public class GameManager : MonoBehaviour
     }
 
     const int LEVEL_COUNT = 7;
-
-    public GameObject Player;
     public bool IsPause;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
             RealoadLevel();
-        if (Player && Player.transform.position.y < 0)
-            RealoadLevel();
+
         if (Input.GetKeyDown(KeyCode.G))
         {
             for(int i = 0; i< LEVEL_COUNT; i++)

@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        if (rb.position.y < -5f)
+            GameManager.instance.RealoadLevel();
+    }
+
     private void FixedUpdate() {
         Vector3 forward = GetForwardDirection();
         Vector3 lateral = Vector3.Cross(forward, Vector3.up).normalized * -10;

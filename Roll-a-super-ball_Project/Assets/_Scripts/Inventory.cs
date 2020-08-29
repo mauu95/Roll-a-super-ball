@@ -80,7 +80,7 @@ public class Inventory : MonoBehaviour {
             {
                 //winText.gameObject.SetActive(true);
                 if (winBox)
-                    winBox.ToggleOnOff();
+                    winBox.ToggleOn();
             }
                 
         }
