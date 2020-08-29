@@ -29,7 +29,7 @@ public class PowerUpMagnet : PowerUp {
 
     private void LateUpdate()
     {
-        AudioManager.instance.GetSound(soundName).source.volume = ( forceField.transform.localScale.x/range ) * 0.2f;
+        AudioManager.instance.GetSound(soundName).source.volume = ( forceField.transform.localScale.x/range ) * 0.1f;
     }
 
     public override void doStuff() {

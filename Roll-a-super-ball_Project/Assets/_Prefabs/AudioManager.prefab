@@ -113,8 +113,8 @@ MonoBehaviour:
     source: {fileID: 0}
     loop: 1
   - name: 
-    clip: {fileID: 8300000, guid: d54eb98e1c32a9441862445455684237, type: 3}
-    volume: 0.3
+    clip: {fileID: 8300000, guid: 628b22a698a89c947992d5d2c1acbab3, type: 3}
+    volume: 0.08
     source: {fileID: 0}
     loop: 1
   - name: 
@@ -133,7 +133,7 @@ MonoBehaviour:
     source: {fileID: 0}
     loop: 0
   - name: 
-    clip: {fileID: 8300000, guid: 628b22a698a89c947992d5d2c1acbab3, type: 3}
+    clip: {fileID: 8300000, guid: d54eb98e1c32a9441862445455684237, type: 3}
     volume: 0.3
     source: {fileID: 0}
     loop: 1

@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSpecialLevel()
     {
-        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, LEVEL_COUNT);
+        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, LEVEL_COUNT - 1);
         SceneManager.LoadScene(2);
     }
 
