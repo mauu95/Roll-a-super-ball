@@ -4215,8 +4215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d3f8494b5921d4f8d2eb654888f348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadLevelCalled: 0
-  Player: {fileID: 1058597626}
   IsPause: 0
 --- !u!1 &1131859734
 GameObject:
@@ -7607,7 +7605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 961a5a0a92b4f5041b40b26a2c09d6fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea4ff801916d51b4691d28403564d54b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

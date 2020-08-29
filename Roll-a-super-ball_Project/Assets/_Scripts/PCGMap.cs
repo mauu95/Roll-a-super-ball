@@ -40,7 +40,7 @@ public class PCGMap : MonoBehaviour {
 
         if(SceneManager.GetActiveScene().buildIndex != 0)
         {
-            if (level >= 6)
+            if (level >= GameManager.LEVEL_COUNT - 1)
             {
                 Dimension = PlayerPrefs.GetInt("sliderSizeInit");
                 nFloor = PlayerPrefs.GetInt("sliderNFloorInit");

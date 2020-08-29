@@ -24,10 +24,8 @@ public class LevelButton : MonoBehaviour
         else
             ntotpick = level * 10;
 
-        description = "Level " + level + "\n" + npick + "/" + ntotpick;
-
-        if (level == 6)
-            description = "SPECIAL";
+        if (level != GameManager.LEVEL_COUNT - 1)
+            description = "Level " + level + "\n" + npick + "/" + ntotpick;
 
         if(IsCompleted())
             GetComponent<Image>().sprite = completed;

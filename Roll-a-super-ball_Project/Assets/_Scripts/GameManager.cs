@@ -18,14 +18,7 @@ public class GameManager : MonoBehaviour
     private const string PICKUP_LEVEL_KEY = "PickUpLevel";
     private const string CURRENT_LEVEL_KEY = "CurrentLevel";
 
-    public enum LevelState
-    {
-        LOCKED,
-        UNLOCKED,
-        COMPLETED
-    }
-
-    const int LEVEL_COUNT = 7;
+    public const int LEVEL_COUNT = 6;
     public bool IsPause;
 
     void Update()
@@ -103,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         if (n == 0)
             SceneManager.LoadScene(1);
-        else if (n >= 6)
+        else if (n >= LEVEL_COUNT - 1)
             SceneManager.LoadScene(3);
         else
             SceneManager.LoadScene(2);
@@ -112,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSpecialLevel()
     {
-        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, 6);
+        PlayerPrefs.SetInt(CURRENT_LEVEL_KEY, LEVEL_COUNT);
         SceneManager.LoadScene(2);
     }
 
