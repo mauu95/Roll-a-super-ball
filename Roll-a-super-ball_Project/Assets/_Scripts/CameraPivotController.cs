@@ -6,8 +6,8 @@ public class CameraPivotController : MonoBehaviour
 {
     public GameObject player;
 
-    public float MouseHorizontalSpeed = 200f;
-    public float MouseVerticalSpeed = 200f;
+    float MouseHorizontalSpeed = 100f;
+    float MouseVerticalSpeed = 100f;
 
     private float yaw = 0.0f;
     private float pitch = 0.0f;

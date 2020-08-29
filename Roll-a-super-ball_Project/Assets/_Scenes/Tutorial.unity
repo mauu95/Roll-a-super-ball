@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 33cb03ac551802542981d1f6f83bfc04,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5906,7 +5906,7 @@ PrefabInstance:
     - target: {fileID: 2317678062622791276, guid: 997fe7452138f7345b672967c138fc47,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 2317678062622791276, guid: 997fe7452138f7345b672967c138fc47,
         type: 3}
@@ -6871,8 +6871,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1058597626}
-  MouseHorizontalSpeed: 200
-  MouseVerticalSpeed: 200
 --- !u!4 &1768813618
 Transform:
   m_ObjectHideFlags: 0
@@ -7111,7 +7109,7 @@ PrefabInstance:
     - target: {fileID: 5929426228111623471, guid: 839e3f90ba79cb5499aabe79b9a67b95,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 5929426228111623471, guid: 839e3f90ba79cb5499aabe79b9a67b95,
         type: 3}
