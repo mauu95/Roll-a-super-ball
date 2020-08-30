@@ -159,4 +159,9 @@ public class GameManager : MonoBehaviour
         return PlayerPrefs.GetInt(CURRENT_LEVEL_KEY, -1);
     }
 
+    public bool IsCompleted(int level)
+    {
+        return getPickUpsValue(level) == level * 10;
+    }
+
 }

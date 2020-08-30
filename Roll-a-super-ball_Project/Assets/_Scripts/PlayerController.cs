@@ -23,7 +23,14 @@ public class PlayerController : MonoBehaviour {
     private void Update()
     {
         if (rb.position.y < -5f)
-            GameManager.instance.RealoadLevel();
+        {
+            GameManager gm = GameManager.instance;
+            if (gm.IsCompleted(gm.getCurrentLevel()))
+                gm.LoadNextLevel();
+            else
+                gm.RealoadLevel();
+        }
+            
     }
 
     private void FixedUpdate() {
