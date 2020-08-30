@@ -23,22 +23,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        return;
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.R))
             RealoadLevel();
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            for(int i = 0; i< LEVEL_COUNT; i++)
-            {
-                int x = PlayerPrefs.GetInt(PICKUP_LEVEL_KEY + i, -1);
-                print(i + ": " + x);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Z))
             ResetLevels();
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.X))
             UnlockAllLevels();
 
 
