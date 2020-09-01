@@ -7,7 +7,7 @@ public class OvalPlayerMalus : MonoBehaviour {
     public float malusDuration = 10f;
     public float Treshold = 16f;
 
-    public float soundTreshold = 8f;
+    float soundTreshold = 20f;
     public string impactSound = "impactSound";
 
     private Rigidbody rb;
