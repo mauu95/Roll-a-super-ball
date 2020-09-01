@@ -44,11 +44,15 @@ public class Inventory : MonoBehaviour {
 
         for (int i = 1; i < 10; i++)
             if (Input.GetKeyDown(i.ToString()))
-                ActivatePowerUp(i - 1);
+            {
+                SelectPowerUp(i - 1);
+                //ActivatePowerUp();
+            }
+                
 
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
-            ActivatePowerUp(current + (int)scroll);
+            SelectPowerUp(current + (int)scroll);
 
 
         if (Input.GetMouseButtonDown(0)) {
@@ -93,10 +97,13 @@ public class Inventory : MonoBehaviour {
     }
 
 
-    public bool AddPowerUp(PowerUp item) {
+    public void AddPowerUp(PowerUp item) {
         powerUps.Add(item);
         UpdateUIAfterAdd();
-        return true;
+
+        if (powerUps.Count == 1)
+            SelectPowerUp(0);
+
     }
 
     public void UpdateUIAfterAdd() {
@@ -112,19 +119,19 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    public void ActivatePowerUp(int i) {
+    public void SelectPowerUp(int i) {
         if (i < 0 || i > powerUps.Count - 1)
             return;
 
-        if(current == i)
-        {
-            powerUps[i].ActivatePowerUp();
-            return;
-        }
         DeactivatePowerUp();
         inventoryUI.Highlight(i);
         powerUps[i].enabled = true;
         current = i;
+    }
+
+    public void ActivatePowerUp()
+    {
+        powerUps[current].ActivatePowerUp();
     }
 
 }
