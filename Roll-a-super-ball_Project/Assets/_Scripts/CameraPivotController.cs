@@ -13,6 +13,17 @@ public class CameraPivotController : MonoBehaviour
     private float pitch = 0.0f;
     private float smoothSpeed = 0.125f;
 
+    private void Start()
+    {
+        StartCoroutine(ResetPitch());
+    }
+
+    private IEnumerator ResetPitch()
+    {
+        yield return new WaitForSeconds(0.2f);
+        pitch = 0;
+    }
+
     private void FixedUpdate()
     {
         Vector3 desiredPosition = player.transform.position;
