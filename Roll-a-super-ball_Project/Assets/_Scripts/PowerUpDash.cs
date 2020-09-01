@@ -14,7 +14,7 @@ public class PowerUpDash : PowerUp
     private void Awake()
     {
         id = "dash";
-        cooldownTime = 2f;
+        cooldownTime = 1f;
 
         projectile = Instantiate(PrefabManager.instance.projectile);
         projectile.player = transform;
@@ -49,12 +49,15 @@ public class PowerUpDash : PowerUp
 
         yield return new WaitForSeconds(dashDuration);
 
-        projectile.gameObject.SetActive(false);
-
-        p_rb.constraints = RigidbodyConstraints.None;
         Vector3 newvel = p.GetComponent<Rigidbody>().velocity;
         newvel.y = 0;
         p.SetVelocity(newvel.normalized * 10);
+        projectile.gameObject.SetActive(false);
+
+        yield return new WaitForFixedUpdate();
+        p_rb.constraints = RigidbodyConstraints.None;
+        
+        
     }
 
     public override void ReturnToNormal()
