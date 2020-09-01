@@ -41,12 +41,13 @@ public class Inventory : MonoBehaviour {
     private void Update() {
         if (GameManager.instance.IsPause)
             return;
+            
 
         for (int i = 1; i < 10; i++)
             if (Input.GetKeyDown(i.ToString()))
             {
                 SelectPowerUp(i - 1);
-                //ActivatePowerUp();
+                ActivatePowerUp();
             }
                 
 
@@ -103,6 +104,14 @@ public class Inventory : MonoBehaviour {
 
         if (powerUps.Count == 1)
             SelectPowerUp(0);
+
+        StartCoroutine(InitializeCurrent());
+    }
+
+    private IEnumerator InitializeCurrent()
+    {
+        yield return new WaitForEndOfFrame();
+        powerUps[current].enabled = true;
 
     }
 

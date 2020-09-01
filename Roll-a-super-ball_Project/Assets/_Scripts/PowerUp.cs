@@ -24,6 +24,9 @@ public abstract class PowerUp : MonoBehaviour {
 
     public void ActivatePowerUp()
     {
+        if (!player)
+            player = GetComponent<PlayerController>();
+
         if (!isCooldown)
         {
             doStuff();

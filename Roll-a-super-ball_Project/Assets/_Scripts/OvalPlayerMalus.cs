@@ -5,9 +5,9 @@ using UnityEngine;
 public class OvalPlayerMalus : MonoBehaviour {
     public Vector3 ovalSize = new Vector3(1, 1.5f, 0.5f);
     public float malusDuration = 10f;
-    public float Treshold = 16f;
+    float Treshold = 16f;
 
-    float soundTreshold = 20f;
+    float soundTreshold = 10f;
     public string impactSound = "impactSound";
 
     private Rigidbody rb;
