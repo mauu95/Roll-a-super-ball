@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour {
 
         int currentLevel = GameManager.instance.getCurrentLevel();
 
+
         if (currentLevel == 0)
             totalPickUps = 15;
         else
@@ -47,9 +48,7 @@ public class Inventory : MonoBehaviour {
             if (Input.GetKeyDown(i.ToString()))
             {
                 if(current != i - 1)
-                {
                     SelectPowerUp(i - 1);
-                }
                 ActivatePowerUp();
             }
                 
@@ -143,7 +142,8 @@ public class Inventory : MonoBehaviour {
 
     public void ActivatePowerUp()
     {
-        powerUps[current].ActivatePowerUp();
+        if(current >= 0)
+            powerUps[current].ActivatePowerUp();
     }
 
 }
