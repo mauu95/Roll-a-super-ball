@@ -24,11 +24,19 @@ public class PlayerController : MonoBehaviour {
     {
         if (rb.position.y < -5f)
         {
-            GameManager gm = GameManager.instance;
-            if (gm.IsCompleted(gm.getCurrentLevel()))
-                gm.LoadNextLevel();
+            DeathBox deathbox = FindObjectOfType<DeathBox>();
+            
+            if (deathbox)
+                deathbox.FadeIn();
             else
-                gm.RealoadLevel();
+            {
+                GameManager gm = GameManager.instance;
+                if (gm.IsCompleted(gm.getCurrentLevel()))
+                    gm.LoadNextLevel();
+                else
+                    gm.RealoadLevel();
+            }
+
         }
             
     }

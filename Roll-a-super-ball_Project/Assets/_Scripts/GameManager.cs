@@ -164,4 +164,10 @@ public class GameManager : MonoBehaviour
         return getPickUpsValue(level) == level * 10;
     }
 
+    public bool IsCurrentLevelPassed()
+    {
+        int currentLevel = getCurrentLevel();
+        return getPickUpsValue(currentLevel) >= currentLevel * 7;
+    }
+
 }
