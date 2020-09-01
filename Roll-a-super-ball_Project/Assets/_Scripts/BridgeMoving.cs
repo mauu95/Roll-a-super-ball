@@ -25,7 +25,7 @@ public class BridgeMoving : Bridge
         start = temp;
         stop = true;
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1f);
         stop = false;
     }
 

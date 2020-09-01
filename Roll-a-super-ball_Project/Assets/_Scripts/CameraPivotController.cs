@@ -6,8 +6,8 @@ public class CameraPivotController : MonoBehaviour
 {
     public GameObject player;
 
-    float MouseHorizontalSpeed = 20f; // 100 default 18 per webgl
-    float MouseVerticalSpeed = 20f;   // 100 default 18 per webgl
+    float MouseHorizontalSpeed = 200f; // 100 default 18 per webgl
+    float MouseVerticalSpeed = 200f;   // 100 default 18 per webgl
 
     private float yaw = 0.0f;
     private float pitch = 0.0f;
