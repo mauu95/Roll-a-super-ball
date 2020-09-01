@@ -37,11 +37,13 @@ public class BridgeMoving : Bridge
 
     private void OnCollisionStay(Collision collision)
     {
-        GameObject p = collision.gameObject;
-        if (p.name != "Player")
-            return;
-
-        p.GetComponent<Rigidbody>().AddForce((target-start).normalized *100);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+            float bridgeMovingInertiaForce = Time.deltaTime * speed * (rb.mass + 1) * 100;
+            rb.AddForce((target - start).normalized * bridgeMovingInertiaForce);
+        }
+        
 
     }
 
