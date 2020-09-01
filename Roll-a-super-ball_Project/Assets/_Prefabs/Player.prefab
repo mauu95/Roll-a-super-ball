@@ -18,6 +18,9 @@ GameObject:
   - component: {fileID: 3925770107503839678}
   - component: {fileID: 3925770107503839672}
   - component: {fileID: 3925770107503839679}
+  - component: {fileID: 1058597637}
+  - component: {fileID: 1058597638}
+  - component: {fileID: 1058597639}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -65,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1f54107d31374bb43a1536acad7c093c, type: 2}
+  - {fileID: 2100000, guid: 7b485560139f30f4f8bee61989949c5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1c6445fac0e17469004e92c0293c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  playerControlInAir: 0.5
+  speed: 7.5
+  playerControlInAir: 0.25
   maxSpeed: 30
   isGrounded: 1
   MainCamera: {fileID: 0}
@@ -152,6 +155,7 @@ MonoBehaviour:
   countText: {fileID: 0}
   winText: {fileID: 0}
   map: {fileID: 0}
+  winBox: {fileID: 0}
 --- !u!114 &3925770107503839678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +200,45 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1058597637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925770107503839302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b36f329adbda847a091887507f8d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 2
+--- !u!114 &1058597638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925770107503839302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecac32b937eb8447bdb229fc32fc695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibility: 0
+  fadeTime: 0.8
+  isFading: 0
+--- !u!114 &1058597639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925770107503839302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c2b9c3d675916458b92c881cbc1997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniMagnet: {fileID: 4307631452183724271, guid: 32572f5a4f8bd654c829c53f8f2ad662,
+    type: 3}

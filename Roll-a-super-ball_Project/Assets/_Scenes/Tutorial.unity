@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 33cb03ac551802542981d1f6f83bfc04,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3750,7 +3750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b36f329adbda847a091887507f8d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 2
+  gravityScale: 0.5
 --- !u!114 &1058597638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8954,6 +8954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925770107503839303, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3925770107503839676, guid: 9e70dbd2ed7e1c14a97cc4f277c1366a,
         type: 3}
