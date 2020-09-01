@@ -46,7 +46,10 @@ public class Inventory : MonoBehaviour {
         for (int i = 1; i < 10; i++)
             if (Input.GetKeyDown(i.ToString()))
             {
-                SelectPowerUp(i - 1);
+                if(current != i - 1)
+                {
+                    SelectPowerUp(i - 1);
+                }
                 ActivatePowerUp();
             }
                 

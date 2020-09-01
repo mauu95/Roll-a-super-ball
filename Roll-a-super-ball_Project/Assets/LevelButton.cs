@@ -24,7 +24,7 @@ public class LevelButton : MonoBehaviour
         else
             ntotpick = level * 10;
 
-        if (level != GameManager.LEVEL_COUNT - 1)
+        if (!(level == GameManager.LEVEL_COUNT - 1 || level == 0))
             description = "Level " + level + "\n" + npick + "/" + ntotpick;
 
         if(IsCompleted())
