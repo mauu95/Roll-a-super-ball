@@ -13,6 +13,8 @@ public class CameraPivotController : MonoBehaviour
     private float pitch = 0.0f;
     private float smoothSpeed = 0.125f;
 
+    private bool mouseMovementEnabled;
+
     private void Start()
     {
         StartCoroutine(ResetPitch());
@@ -22,10 +24,14 @@ public class CameraPivotController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         pitch = 0;
+        mouseMovementEnabled = true;
     }
 
     private void FixedUpdate()
     {
+        if (!mouseMovementEnabled)
+            return;
+
         Vector3 desiredPosition = player.transform.position;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         

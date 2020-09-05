@@ -7,8 +7,13 @@ public class DeathBox : MonoBehaviour
     public GameObject nextLevelButton;
     public GameObject[] child;
 
+    public LevelCompleteBox winBox;
+
     public void FadeIn()
     {
+        if (winBox.isOn())
+            return;
+
         foreach(GameObject c in child)
             c.SetActive(true);
 

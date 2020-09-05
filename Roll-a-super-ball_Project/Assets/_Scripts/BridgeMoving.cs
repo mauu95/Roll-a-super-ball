@@ -8,7 +8,6 @@ public class BridgeMoving : Bridge
     private Vector3 target;
     private Vector3 start;
     private bool stop;
-    private bool swappingDirection;
 
     void Update()
     {
@@ -26,9 +25,7 @@ public class BridgeMoving : Bridge
         start = temp;
         stop = true;
 
-        swappingDirection = true;
         yield return new WaitForSeconds(1f);
-        swappingDirection = false;
 
         stop = false;
     }
@@ -41,7 +38,7 @@ public class BridgeMoving : Bridge
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !swappingDirection)
+        if (collision.gameObject.CompareTag("Player") && !stop)
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
             float bridgeMovingInertiaForce = Time.deltaTime * speed * (rb.mass + 1) * 100;

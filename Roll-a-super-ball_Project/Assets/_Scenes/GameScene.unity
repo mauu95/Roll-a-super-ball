@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 33cb03ac551802542981d1f6f83bfc04,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1477,6 +1477,7 @@ MonoBehaviour:
   - {fileID: 196932130}
   - {fileID: 6065437446392736996}
   - {fileID: 6065437446317119877}
+  winBox: {fileID: 9178210904365269306}
 --- !u!1 &1768813616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,3 +3045,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 997fe7452138f7345b672967c138fc47, type: 3}
+--- !u!114 &9178210904365269306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2317678062622791265, guid: 997fe7452138f7345b672967c138fc47,
+    type: 3}
+  m_PrefabInstance: {fileID: 9178210904365269305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b137e4ed77b66c34a86eeef3e79f88ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

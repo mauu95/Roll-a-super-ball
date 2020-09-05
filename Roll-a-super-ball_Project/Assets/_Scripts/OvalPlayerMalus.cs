@@ -16,6 +16,8 @@ public class OvalPlayerMalus : MonoBehaviour {
     private Vector3 target;
     private Vector3 normalSize = new Vector3(1f, 1f, 1f);
 
+    private bool malusEnabled = true;
+
     //So che stai leggendo cosa ho fatto... non l'ho capito nemmeno io. Se capisci, spiegamelo.. Grazie. 
 
     private void Start()
@@ -32,7 +34,7 @@ public class OvalPlayerMalus : MonoBehaviour {
 
         if (delta > soundTreshold)
         {
-            if (delta > Treshold && transform.localScale == Vector3.one)
+            if (malusEnabled && delta > Treshold && transform.localScale == Vector3.one)
             {
                 transform.localScale = ovalSize;
                 target = ovalSize;
@@ -58,4 +60,13 @@ public class OvalPlayerMalus : MonoBehaviour {
         target = normalSize;
     }
 
+    public void DisableMalus()
+    {
+        malusEnabled = false;
+    }
+
+    public void EnableMalus()
+    {
+        malusEnabled = true;
+    }
 }

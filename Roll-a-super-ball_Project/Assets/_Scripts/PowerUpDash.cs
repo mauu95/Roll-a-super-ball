@@ -39,6 +39,7 @@ public class PowerUpDash : PowerUp
         PlayerController p = player.GetComponent<PlayerController>();
         Rigidbody p_rb = player.GetComponent<Rigidbody>();
 
+        GetComponent<OvalPlayerMalus>().DisableMalus();
         p_rb.constraints = RigidbodyConstraints.FreezePositionY;
         p_rb.AddForce(direction * DashForce, ForceMode.Impulse);
 
@@ -47,17 +48,19 @@ public class PowerUpDash : PowerUp
 
         AudioManager.instance.Play(soundName);
 
+
         yield return new WaitForSeconds(dashDuration);
+
+
 
         Vector3 newvel = p.GetComponent<Rigidbody>().velocity;
         newvel.y = 0;
         p.SetVelocity(newvel.normalized * 10);
         projectile.gameObject.SetActive(false);
 
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
         p_rb.constraints = RigidbodyConstraints.None;
-        
-        
+        GetComponent<OvalPlayerMalus>().EnableMalus();
     }
 
     public override void ReturnToNormal()
